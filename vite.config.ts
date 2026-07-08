@@ -1,7 +1,8 @@
 import { defineConfig } from 'vitest/config';
 import { playwright } from '@vitest/browser-playwright';
-import adapter from '@joshthomas/sveltekit-adapter-cloudflare';
+import adapter from '@sveltejs/adapter-cloudflare';
 import { sveltekit } from '@sveltejs/kit/vite';
+import { addWorkerExports } from '@oselvar/sveltekit-add-worker-exports';
 
 export default defineConfig({
 	plugins: [
@@ -11,7 +12,10 @@ export default defineConfig({
 				runes: ({ filename }) =>
 					filename.split(/[/\\]/).includes('node_modules') ? undefined : true
 			},
-			adapter: adapter({ platform: 'src/platform.cloudflare.ts' })
+			adapter: adapter()
+		}),
+		addWorkerExports({
+			entryPoint: 'src/workflows/video_generator.ts'
 		})
 	],
 	test: {
