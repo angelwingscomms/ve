@@ -7,7 +7,7 @@
 
 # Rules for software/web dev projects/folders
 
-## Code Style
+##  Code Style
 
 - Naming: always snake_case for vars/functions; make db payload, type defs, request JSON and page load return value keys always single letters.
 - DB/Qdrant: Multi-tenancy, single collection 'i'; tenant-id on payload field `s`

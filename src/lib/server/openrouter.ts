@@ -2,7 +2,8 @@ export interface VideoModel {
 	id: string;
 	name: string;
 	description?: string;
-	pricing?: { hourly?: number; per_video?: number };
+	pricing_skus?: Record<string, string>;
+	supported_resolutions?: string[];
 }
 
 const cache = new Map<string, { models: VideoModel[]; ts: number }>();

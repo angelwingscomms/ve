@@ -1,12 +1,52 @@
 <script lang="ts">
+	import type { VideoModel } from '$lib/server/openrouter';
 	let { data } = $props();
+	let models = $state(data.models);
 	let prompt = $state('');
 	let model = $state('');
+	let resolution = $state('');
 	let period = $state('86400000');
+	let duration = $state('');
 	let key = $state('');
 	let key_msg = $state('');
 	let create_msg = $state('');
 	let use_custom = $state(false);
+	let video_url = $state('');
+	let generating = $state(false);
+	let sort_by = $state('cost');
+	let sort_dir = $state('asc');
+
+	function min_cost(m: VideoModel): number {
+		if (!m.pricing_skus) return Infinity;
+		const vals = Object.entries(m.pricing_skus)
+			.filter(([k]) => k.includes('second'))
+			.map(([, v]) => Number(v))
+			.filter(v => Number.isFinite(v));
+		return vals.length ? Math.min(...vals) : Infinity;
+	}
+
+	function model_cost(m: VideoModel): string {
+		const c = min_cost(m);
+		if (!Number.isFinite(c)) return '';
+		const s = c < 0.01 ? c.toFixed(4) : c < 1 ? c.toFixed(3) : c.toFixed(2);
+		return `$${s}/s`;
+	}
+
+	function sorted_models(): VideoModel[] {
+		if (!models) return [];
+		const dir = sort_dir === 'asc' ? 1 : -1;
+		return [...models].sort((a, b) => {
+			if (sort_by === 'cost') {
+				const ca = min_cost(a), cb = min_cost(b);
+				if (ca !== cb) return (ca - cb) * dir;
+			}
+			return a.name.localeCompare(b.name) * dir;
+		});
+	}
+
+	function selected_model(): VideoModel | undefined {
+		return models?.find((m: VideoModel) => m.id === model);
+	}
 
 	function fmt(t: number) {
 		const d = Date.now() - t;
@@ -27,19 +67,43 @@
 		else key_msg = 'Failed to save';
 	}
 
-	async function create_vid(e: Event) {
+	async function create_ve(e: Event) {
 		e.preventDefault();
-		const r = await fetch('/api/vids', {
+		const body: Record<string, unknown> = { id: crypto.randomUUID(), p: prompt, m: model, r: parseInt(period) };
+		if (duration) body.g = parseInt(duration);
+		if (resolution) body.z = resolution;
+		const r = await fetch('/api/ves', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ id: crypto.randomUUID(), p: prompt, m: model, r: parseInt(period) })
+			body: JSON.stringify(body)
 		});
-		if (r.ok) { create_msg = 'Created!'; prompt = ''; model = ''; setTimeout(() => location.reload(), 300); }
+		if (r.ok) { create_msg = 'Created!'; prompt = ''; model = ''; duration = ''; resolution = ''; setTimeout(() => location.reload(), 300); }
 		else create_msg = 'Failed to create';
 	}
 
+	async function create_sample() {
+		if (!prompt || !model) return;
+		generating = true;
+		video_url = '';
+		create_msg = '';
+		const body: Record<string, unknown> = { p: prompt, m: model };
+		if (duration) body.g = parseInt(duration);
+		if (resolution) body.z = resolution;
+		const r = await fetch('/api/ves/sample', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+		if (r.ok) {
+			const data = await r.json();
+			video_url = data.url || '';
+			if (video_url) create_msg = 'Sample video ready!';
+			else create_msg = 'Generation failed';
+		} else {
+			const err = await r.json();
+			create_msg = err?.error || 'Failed';
+		}
+		generating = false;
+	}
+
 	async function del(id: string) {
-		await fetch('/api/vids', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id }) });
+		await fetch('/api/ves', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id }) });
 		location.reload();
 	}
 </script>
@@ -62,22 +126,47 @@
 	{/if}
 
 	<section class="card">
-		<h2>Create a vid</h2>
-		<form onsubmit={create_vid}>
+		<h2>Create a ve</h2>
+		<form onsubmit={create_ve}>
 			<label for="p">Prompt</label>
-			<textarea id="p" bind:value={prompt} class="input" rows={3} placeholder="Describe the video you want to generate..." required></textarea>
+			<textarea id="p" bind:value={prompt} class="input" rows={3} placeholder="Describe the video..." required></textarea>
 
-			<label for="m">Model</label>
+			<label for="m">Model
+				{#if data.models?.length}
+					<span class="sort-tabs">
+						<button type="button" class={sort_by === 'cost' ? 'st-active' : 'st'} onclick={() => sort_by = 'cost'}>cost</button>
+						<button type="button" class={sort_by === 'name' ? 'st-active' : 'st'} onclick={() => sort_by = 'name'}>name</button>
+						<button type="button" class="st" onclick={() => sort_dir = sort_dir === 'asc' ? 'desc' : 'asc'}>{sort_dir === 'asc' ? '↑' : '↓'}</button>
+					</span>
+				{/if}
+			</label>
 			{#if data.models?.length}
 				<select id="m" bind:value={model} class="input" required>
 					<option value="">Select a model...</option>
-					{#each data.models as m}
-						<option value={m.id}>{m.name}</option>
+					{#each sorted_models() as m}
+						<option value={m.id}>{m.name}{model_cost(m) ? ` — ${model_cost(m)}` : ''}</option>
 					{/each}
 				</select>
 			{:else}
-				<input bind:value={model} class="input" placeholder="Model ID (e.g. openai/4o-video)" required />
+				<input id="m" bind:value={model} class="input" placeholder="Model ID (e.g. openai/4o-video)" required />
 			{/if}
+
+			{#if model}
+				<label for="z">Resolution</label>
+				{#if selected_model()?.supported_resolutions?.length}
+					<select id="z" bind:value={resolution} class="input">
+						<option value="">Auto</option>
+						{#each selected_model()!.supported_resolutions! as r}
+							<option value={r}>{r}</option>
+						{/each}
+					</select>
+				{:else}
+					<input id="z" bind:value={resolution} class="input" placeholder="e.g. 720p" />
+				{/if}
+			{/if}
+
+			<label for="g">Duration (seconds, optional)</label>
+			<input id="g" type="number" bind:value={duration} class="input" placeholder="e.g. 30" min="1" />
 
 			<label>Schedule</label>
 			<div class="periods">
@@ -90,22 +179,30 @@
 				<input type="number" bind:value={period} class="input" placeholder="Period in ms" />
 			{/if}
 
-			<button type="submit" class="btn" disabled={!prompt || !model}>Create</button>
+			<div class="form-actions">
+				<button type="submit" class="btn" disabled={!prompt || !model}>Create</button>
+				<button type="button" class="btn-ghost" onclick={create_sample} disabled={generating}>{generating ? 'Generating…' : 'Create sample'}</button>
+			</div>
 			{#if create_msg}<p class="msg">{create_msg}</p>{/if}
+			{#if video_url}
+				<div class="sample-video">
+					<video src={video_url} controls class="video-player"></video>
+				</div>
+			{/if}
 		</form>
 	</section>
 
 	<section class="card">
-		<h2>My vids</h2>
-		{#if data.vids?.length}
-			<div class="vids">
-				{#each data.vids as v}
-					<div class="vid-row">
-						<div class="vid-info">
-							<span class="vid-prompt">{v.p.slice(0, 60)}{v.p.length > 60 ? '…' : ''}</span>
-							<span class="vid-meta">{v.m} · {fmt(v.d)}</span>
+		<h2>My ves</h2>
+		{#if data.ves?.length}
+			<div class="ves">
+				{#each data.ves as v}
+					<div class="ve-row">
+						<div class="ve-info">
+							<span class="ve-prompt">{v.p.slice(0, 60)}{v.p.length > 60 ? '…' : ''}</span>
+							<span class="ve-meta">{v.m}{v.g ? ` · ${v.g}s` : ''} · {fmt(v.d)}</span>
 						</div>
-						<div class="vid-right">
+						<div class="ve-right">
 							<span class="badge badge-{v.c || 'pending'}">{v.c || 'pending'}</span>
 							<button onclick={() => del(v.i)} class="btn-ghost-sm">×</button>
 						</div>
@@ -113,7 +210,7 @@
 				{/each}
 			</div>
 		{:else}
-			<p class="empty">No vids yet. Create one above.</p>
+			<p class="empty">No ves yet. Create one above.</p>
 		{/if}
 	</section>
 </main>
@@ -141,7 +238,36 @@
 		box-sizing: border-box;
 	}
 	.input:focus { outline: none; border-color: #111; }
-	label { font-size: 0.8125rem; font-weight: 600; display: block; margin-bottom: 0.25rem; color: #555; }
+	label { font-size: 0.8125rem; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem; color: #555; }
+	.sort-tabs { display: inline-flex; gap: 0; font-weight: 400; }
+	.st, .st-active {
+		font-size: 0.6875rem;
+		padding: 0.125rem 0.375rem;
+		border: 1px solid #e5e7eb;
+		background: #fff;
+		cursor: pointer;
+		font-family: inherit;
+		color: #999;
+	}
+	.st-active { background: #f3f4f6; color: #333; border-color: #d1d5db; }
+	.st:first-child, .st-active:first-child { border-radius: 4px 0 0 4px; }
+	.st:last-child, .st-active:last-child { border-radius: 0 4px 4px 0; margin-left: -1px; }
+	.form-actions { display: flex; gap: 0.5rem; align-items: center; }
+	.btn-ghost {
+		display: inline-flex;
+		align-items: center;
+		height: 38px;
+		padding: 0 1.25rem;
+		font-size: 0.875rem;
+		font-weight: 600;
+		color: #555;
+		background: #fff;
+		border: 1px solid #e5e7eb;
+		border-radius: 8px;
+		cursor: pointer;
+		font-family: inherit;
+	}
+	.btn-ghost:hover { background: #f9fafb; border-color: #d1d5db; }
 	.btn {
 		display: inline-flex;
 		align-items: center;
@@ -169,8 +295,8 @@
 	}
 	.btn-active { background: #111; color: #fff; border-color: #111; }
 	.msg { font-size: 0.8125rem; color: #059669; margin-top: 0.5rem; }
-	.vids { display: flex; flex-direction: column; gap: 0.5rem; }
-	.vid-row {
+	.ves { display: flex; flex-direction: column; gap: 0.5rem; }
+	.ve-row {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -178,10 +304,10 @@
 		border: 1px solid #f3f4f6;
 		border-radius: 8px;
 	}
-	.vid-info { display: flex; flex-direction: column; gap: 0.125rem; }
-	.vid-prompt { font-size: 0.875rem; font-weight: 500; }
-	.vid-meta { font-size: 0.75rem; color: #999; }
-	.vid-right { display: flex; align-items: center; gap: 0.5rem; }
+	.ve-info { display: flex; flex-direction: column; gap: 0.125rem; }
+	.ve-prompt { font-size: 0.875rem; font-weight: 500; }
+	.ve-meta { font-size: 0.75rem; color: #999; }
+	.ve-right { display: flex; align-items: center; gap: 0.5rem; }
 	.badge {
 		font-size: 0.6875rem;
 		padding: 0.125rem 0.5rem;
@@ -204,4 +330,6 @@
 	}
 	.btn-ghost-sm:hover { background: #f3f4f6; color: #dc2626; }
 	.empty { color: #999; font-size: 0.875rem; }
+	.sample-video { margin-top: 0.75rem; }
+	.video-player { width: 100%; max-height: 400px; border-radius: 8px; }
 </style>

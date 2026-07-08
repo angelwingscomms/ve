@@ -3,15 +3,15 @@ import type { Handle } from '@sveltejs/kit';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	if (event.platform?.cron) {
-		const { list_vids, update_vid_status, increment_vid_retries } = await import('$lib/server/vid');
+		const { list_ves, update_ve_status, increment_ve_retries } = await import('$lib/server/ve');
 		const { get_user } = await import('$lib/server/user');
-		const vids = await list_vids();
+		const ves = await list_ves();
 		const now = Date.now();
 		const results: Promise<void>[] = [];
 
-		for (const v of vids) {
+		for (const v of ves) {
 			if (v.c === 'active' || (v.l && now - v.l < v.r)) continue;
-			await update_vid_status(v.i, 'active');
+			await update_ve_status(v.i, 'active');
 
 			const u = await get_user({}, v.u);
 			const api_key = u?.a?.o;
@@ -19,19 +19,22 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 			results.push(
 				(async () => {
+					const body: Record<string, unknown> = { model: v.m, prompt: v.p };
+					if (v.g) body.duration = v.g;
+					if (v.z) body.resolution = v.z;
 					for (let att = 1; att <= 5; att++) {
 						try {
-							const r = await fetch('https://openrouter.ai/api/v1/video', {
+							const r = await fetch('https://openrouter.ai/api/v1/videos', {
 								method: 'POST',
 								headers: { Authorization: `Bearer ${api_key}`, 'Content-Type': 'application/json' },
-								body: JSON.stringify({ model: v.m, prompt: v.p })
+								body: JSON.stringify(body)
 							});
 							if (r.ok) {
-								await update_vid_status(v.i, 'done');
+								await update_ve_status(v.i, 'done');
 								return;
 							}
 							if (r.status < 500 && r.status !== 429) {
-								await update_vid_status(v.i, 'failed');
+								await update_ve_status(v.i, 'failed');
 								return;
 							}
 						} catch {}
@@ -40,8 +43,8 @@ export const handle: Handle = async ({ event, resolve }) => {
 								setTimeout(r, Math.min(2000 * 2 ** (att - 1) + Math.random() * 1000, 60000))
 							);
 					}
-					await update_vid_status(v.i, 'failed');
-					await increment_vid_retries(v.i);
+					await update_ve_status(v.i, 'failed');
+					await increment_ve_retries(v.i);
 				})()
 			);
 		}

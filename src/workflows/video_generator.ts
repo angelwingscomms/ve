@@ -1,38 +1,41 @@
 import { WorkflowEntrypoint } from 'cloudflare:workers';
 import type { WorkflowEvent, WorkflowStep } from 'cloudflare:workers';
 
-type P = { vid_id: string; user_id: string; prompt: string; model: string };
+type P = { ve_id: string; user_id: string; prompt: string; model: string; duration?: number };
 
 export class VideoGeneratorWorkflow extends WorkflowEntrypoint<Env, P> {
 	async run(event: WorkflowEvent<P>, step: WorkflowStep) {
-		const { vid_id } = event.payload;
+		const { ve_id } = event.payload;
 
 		await step.do('generate', async () => {
-			await this.status(vid_id, 'active');
+			await this.status(ve_id, 'active');
+
+			const body: Record<string, unknown> = { model: event.payload.model, prompt: event.payload.prompt };
+			if (event.payload.duration) body.duration = event.payload.duration;
 
 			for (let attempt = 1; attempt <= 5; attempt++) {
 				try {
-					const r = await fetch('https://openrouter.ai/api/v1/video', {
+					const r = await fetch('https://openrouter.ai/api/v1/videos', {
 						method: 'POST',
 						headers: {
 							Authorization: `Bearer ${this.env.OPENROUTER_KEY}`,
 							'Content-Type': 'application/json'
 						},
-						body: JSON.stringify({ model: event.payload.model, prompt: event.payload.prompt })
+						body: JSON.stringify(body)
 					});
 
 					if (!r.ok) {
-						const body = await r.text();
-						if (r.status === 429 || r.status >= 500) throw new Error(body);
-						throw new NonRetryableError(body);
+						const bodyText = await r.text();
+						if (r.status === 429 || r.status >= 500) throw new Error(bodyText);
+						throw new NonRetryableError(bodyText);
 					}
 
-					await this.status(vid_id, 'done');
+					await this.status(ve_id, 'done');
 					return;
 				} catch (e) {
 					if (e instanceof NonRetryableError || attempt === 5) {
-						await this.status(vid_id, 'failed');
-						await this.retries(vid_id);
+						await this.status(ve_id, 'failed');
+						await this.retries(ve_id);
 						throw e;
 					}
 					const delay = Math.min(2000 * Math.pow(2, attempt - 1) + Math.random() * 1000, 60000);
@@ -43,7 +46,7 @@ export class VideoGeneratorWorkflow extends WorkflowEntrypoint<Env, P> {
 	}
 
 	private async status(id: string, c: string) {
-		await fetch(`${this.env.ORIGIN}/api/vids/status`, {
+		await fetch(`${this.env.ORIGIN}/api/ves/status`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json', 'x-internal-key': this.env.INTERNAL_KEY },
 			body: JSON.stringify({ id, c })
@@ -51,7 +54,7 @@ export class VideoGeneratorWorkflow extends WorkflowEntrypoint<Env, P> {
 	}
 
 	private async retries(id: string) {
-		await fetch(`${this.env.ORIGIN}/api/vids/retries`, {
+		await fetch(`${this.env.ORIGIN}/api/ves/retries`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json', 'x-internal-key': this.env.INTERNAL_KEY },
 			body: JSON.stringify({ id })
