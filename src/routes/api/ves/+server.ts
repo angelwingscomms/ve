@@ -4,6 +4,12 @@ import { save_ve, list_ves, delete_ve, get_ve } from '$lib/server/ve';
 
 export async function GET(event: RequestEvent): Promise<Response> {
 	if (!event.locals.user) return json({ error: 'unauthorized' }, { status: 401 });
+	const id = event.url.searchParams.get('id');
+	if (id) {
+		const v = await get_ve(id);
+		if (!v || v.u !== event.locals.user.id) return json({ error: 'not found' }, { status: 404 });
+		return json({ ve: v });
+	}
 	const ves = await list_ves(event.locals.user.id);
 	return json({ ves });
 }

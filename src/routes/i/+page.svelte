@@ -1,7 +1,9 @@
 <script lang="ts">
 	import type { VideoModel } from '$lib/server/openrouter';
+	import type { Ve } from '$lib/types/ve';
 	let { data } = $props();
 	let models = $state(data.models);
+	let ves = $state(data.ves as Ve[]);
 	let prompt = $state('');
 	let model = $state('');
 	let resolution = $state('');
@@ -15,6 +17,24 @@
 	let generating = $state(false);
 	let sort_by = $state('cost');
 	let sort_dir = $state('asc');
+
+	function has_sampling() {
+		return ves.some((v: Ve) => v.c === 'sampling');
+	}
+
+	let poll = $state(0);
+	$effect(() => {
+		if (!has_sampling()) return;
+		const i = setInterval(async () => {
+			const r = await fetch('/api/ves');
+			if (r.ok) {
+				const d = await r.json();
+				ves = d.ves;
+				if (!has_sampling()) clearInterval(i);
+			}
+		}, 3000);
+		return () => clearInterval(i);
+	});
 
 	function min_cost(m: VideoModel): number {
 		if (!m.pricing_skus) return Infinity;
@@ -186,9 +206,9 @@
 
 	<section class="card">
 		<h2>My ves</h2>
-		{#if data.ves?.length}
+		{#if ves.length}
 			<div class="ves">
-				{#each data.ves as v}
+				{#each ves as v}
 					<div class="ve-row">
 						<div class="ve-top">
 							<div class="ve-info">

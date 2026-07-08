@@ -1,8 +1,7 @@
 import { json } from '@sveltejs/kit';
 import type { RequestEvent } from '@sveltejs/kit';
-import { v4 } from 'uuid';
 import { get_user } from '$lib/server/user';
-import { save_ve } from '$lib/server/ve';
+import { save_ve, update_ve_video_url, update_ve_status } from '$lib/server/ve';
 
 export async function POST(event: RequestEvent): Promise<Response> {
 	if (!event.locals.user) return json({ error: 'unauthorized' }, { status: 401 });
@@ -33,5 +32,32 @@ export async function POST(event: RequestEvent): Promise<Response> {
 	const ve_id = crypto.randomUUID();
 	await save_ve(ve_id, event.locals.user.id, body.p, body.m, 0, body.g, body.z, job.id);
 
+	poll_until_done(ve_id, job, api_key);
+
 	return json({ id: ve_id });
+}
+
+async function poll_until_done(ve_id: string, job: { polling_url?: string; id: string }, api_key: string) {
+	const polling_url = job.polling_url || `https://openrouter.ai/api/v1/videos/${job.id}`;
+	const max_wait = 300_000;
+	const start = Date.now();
+	while (Date.now() - start < max_wait) {
+		await new Promise(r => setTimeout(r, 3000));
+		try {
+			const r = await fetch(polling_url, {
+				headers: { Authorization: `Bearer ${api_key}` }
+			});
+			if (!r.ok) continue;
+			const s = await r.json();
+			if (s.status === 'completed') {
+				await update_ve_video_url(ve_id, s.unsigned_urls?.[0] || '');
+				return;
+			}
+			if (s.status === 'failed' || s.status === 'expired' || s.status === 'cancelled') {
+				await update_ve_status(ve_id, 'failed');
+				return;
+			}
+		} catch {}
+	}
+	await update_ve_status(ve_id, 'failed');
 }

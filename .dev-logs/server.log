@@ -551,3 +551,133 @@ https://svelte.dev/e/a11y_media_has_caption
 7:49:17 PM [vite] (client) page reload .svelte-kit/generated/root.js
 7:49:17 PM [vite] (ssr) page reload .svelte-kit/generated/root.js
 7:49:17 PM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
+8:09:17 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+8:09:17 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+8:09:17 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/2.js
+8:09:17 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/5.js
+8:09:17 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/6.js
+8:09:17 PM [vite] (client) page reload .svelte-kit/generated/client/app.js
+8:09:17 PM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+8:09:17 PM [vite] (ssr) page reload .svelte-kit/generated/shared/error-template.js
+8:09:17 PM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+8:09:17 PM [vite] (client) page reload .svelte-kit/generated/root.js
+8:09:17 PM [vite] (ssr) page reload .svelte-kit/generated/root.js
+8:09:17 PM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
+8:09:21 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+8:09:21 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+8:09:21 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/2.js
+8:09:21 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/5.js
+8:09:21 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/6.js
+8:09:21 PM [vite] (client) page reload .svelte-kit/generated/client/app.js
+8:09:21 PM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+8:09:21 PM [vite] (ssr) page reload .svelte-kit/generated/shared/error-template.js
+8:09:21 PM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+8:09:21 PM [vite] (client) page reload .svelte-kit/generated/root.js
+8:09:21 PM [vite] (ssr) page reload .svelte-kit/generated/root.js
+8:09:21 PM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
+8:09:24 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+8:09:24 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+8:09:25 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/2.js
+8:09:25 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/5.js
+8:09:25 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/6.js
+8:09:25 PM [vite] (client) page reload .svelte-kit/generated/client/app.js
+8:09:25 PM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+8:09:25 PM [vite] (ssr) page reload .svelte-kit/generated/shared/error-template.js
+8:09:25 PM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+8:09:25 PM [vite] (client) page reload .svelte-kit/generated/root.js
+8:09:25 PM [vite] (ssr) page reload .svelte-kit/generated/root.js
+8:09:25 PM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
+8:10:00 PM [vite] (ssr) page reload src/hooks.server.ts
+8:10:12 PM [vite] (ssr) page reload src/routes/api/ves/sample/+server.ts
+8:10:44 PM [vite-plugin-svelte] src/routes/i/+page.svelte:5:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:10:44 PM [vite-plugin-svelte] src/routes/i/+page.svelte:6:18 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:10:44 PM [vite-plugin-svelte] src/routes/i/+page.svelte:188:3 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:10:44 PM [vite-plugin-svelte] src/routes/i/+page.svelte:225:8 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+8:10:44 PM [vite] (client) hmr update /src/routes/i/+page.svelte
+8:10:44 PM [vite] (ssr) page reload src/routes/i/+page.svelte
+8:10:44 PM [vite-plugin-svelte] src/routes/i/+page.svelte:5:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:10:44 PM [vite-plugin-svelte] src/routes/i/+page.svelte:6:18 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:10:44 PM [vite-plugin-svelte] src/routes/i/+page.svelte:188:3 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:10:44 PM [vite-plugin-svelte] src/routes/i/+page.svelte:225:8 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+8:10:48 PM [vite-plugin-svelte] src/routes/i/+page.svelte:5:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:10:48 PM [vite-plugin-svelte] src/routes/i/+page.svelte:6:18 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:10:48 PM [vite-plugin-svelte] src/routes/i/+page.svelte:188:3 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:10:48 PM [vite-plugin-svelte] src/routes/i/+page.svelte:225:8 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+8:10:48 PM [vite] (client) hmr update /src/routes/i/+page.svelte
+8:10:48 PM [vite] (ssr) page reload src/routes/i/+page.svelte
+8:10:48 PM [vite-plugin-svelte] src/routes/i/+page.svelte:5:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:10:48 PM [vite-plugin-svelte] src/routes/i/+page.svelte:6:18 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:10:48 PM [vite-plugin-svelte] src/routes/i/+page.svelte:188:3 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:10:48 PM [vite-plugin-svelte] src/routes/i/+page.svelte:225:8 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+8:11:05 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+8:11:05 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+8:11:05 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/2.js
+8:11:05 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/5.js
+8:11:05 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/6.js
+8:11:05 PM [vite] (client) page reload .svelte-kit/generated/client/app.js
+8:11:05 PM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+8:11:05 PM [vite] (ssr) page reload .svelte-kit/generated/shared/error-template.js
+8:11:05 PM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+8:11:05 PM [vite] (client) page reload .svelte-kit/generated/root.js
+8:11:05 PM [vite] (ssr) page reload .svelte-kit/generated/root.js
+8:11:05 PM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
+8:11:06 PM [vite-plugin-svelte] src/routes/i/+page.svelte:5:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:11:06 PM [vite-plugin-svelte] src/routes/i/+page.svelte:6:18 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+8:11:06 PM [vite-plugin-svelte] src/routes/i/+page.svelte:188:3 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+8:11:06 PM [vite-plugin-svelte] src/routes/i/+page.svelte:225:8 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+8:11:17 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+8:11:17 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+8:11:17 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/2.js
+8:11:17 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/5.js
+8:11:17 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/6.js
+8:11:17 PM [vite] (client) page reload .svelte-kit/generated/client/app.js
+8:11:17 PM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+8:11:17 PM [vite] (ssr) page reload .svelte-kit/generated/shared/error-template.js
+8:11:17 PM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+8:11:17 PM [vite] (client) page reload .svelte-kit/generated/root.js
+8:11:17 PM [vite] (ssr) page reload .svelte-kit/generated/root.js
+8:11:17 PM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
+8:11:20 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+8:11:20 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+8:11:20 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/2.js
+8:11:20 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/5.js
+8:11:20 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/6.js
+8:11:20 PM [vite] (client) page reload .svelte-kit/generated/client/app.js
+8:11:20 PM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+8:11:20 PM [vite] (ssr) page reload .svelte-kit/generated/shared/error-template.js
+8:11:20 PM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+8:11:20 PM [vite] (client) page reload .svelte-kit/generated/root.js
+8:11:20 PM [vite] (ssr) page reload .svelte-kit/generated/root.js
+8:11:20 PM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
+8:11:23 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+8:11:23 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+8:11:23 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/2.js
+8:11:23 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/5.js
+8:11:23 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/6.js
+8:11:23 PM [vite] (client) page reload .svelte-kit/generated/client/app.js
+8:11:23 PM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+8:11:23 PM [vite] (ssr) page reload .svelte-kit/generated/shared/error-template.js
+8:11:23 PM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+8:11:23 PM [vite] (client) page reload .svelte-kit/generated/root.js
+8:11:23 PM [vite] (ssr) page reload .svelte-kit/generated/root.js
+8:11:23 PM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
