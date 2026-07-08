@@ -222,7 +222,7 @@
 						</div>
 						{#if v.w}
 							<div class="ve-video">
-								<video src={v.w} controls class="video-player"></video>
+								<video src="/api/ves/{v.i}/video" controls class="video-player"></video>
 							</div>
 						{/if}
 					</div>
