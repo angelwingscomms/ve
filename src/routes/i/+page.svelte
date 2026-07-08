@@ -250,7 +250,7 @@
 
 	{#if data.user_data?.a?.y}
 		<section class="card yt-card">
-			<p class="yt-ok">YouTube connected ✓ <a href="/api/yt/auth" class="yt-reconnect">reconnect</a></p>
+			<p class="yt-ok">YouTube connected ✓</p>
 		</section>
 	{:else}
 		<section class="card yt-card">
@@ -387,7 +387,6 @@
 	.yt-card { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; text-align: center; }
 	.yt-btn { display: inline-block; padding: 0.5rem 1.25rem; background: #ff0000; color: #fff; border-radius: 8px; text-decoration: none; font-weight: 600; }
 	.yt-ok { color: #059669; font-size: 0.875rem; }
-	.yt-reconnect { color: #999; font-size: 0.75rem; }
 	.yt-link { font-size: 0.6875rem; padding: 0.125rem 0.375rem; background: #ff0000; color: #fff; border-radius: 4px; text-decoration: none; font-weight: 600; }
 	.badge-yt-uploading { background: #fef3c7; color: #b45309; }
 	.badge-yt-live { background: #d1fae5; color: #059669; }

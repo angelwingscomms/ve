@@ -959,3 +959,60 @@ https://svelte.dev/e/a11y_media_has_caption
 8:57:39 PM [vite] (client) page reload .svelte-kit/generated/root.js
 8:57:39 PM [vite] (ssr) page reload .svelte-kit/generated/root.js
 8:57:39 PM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
+9:26:19 PM [vite-plugin-svelte] src/routes/i/+page.svelte:5:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+9:26:19 PM [vite-plugin-svelte] src/routes/i/+page.svelte:6:18 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+9:26:19 PM [vite-plugin-svelte] src/routes/i/+page.svelte:197:3 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+9:26:19 PM [vite-plugin-svelte] src/routes/i/+page.svelte:240:8 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+9:26:19 PM [vite] (client) hmr update /src/routes/i/+page.svelte
+9:26:19 PM [vite] (ssr) page reload src/routes/i/+page.svelte
+9:26:19 PM [vite-plugin-svelte] src/routes/i/+page.svelte:5:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+9:26:19 PM [vite-plugin-svelte] src/routes/i/+page.svelte:6:18 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+9:26:19 PM [vite-plugin-svelte] src/routes/i/+page.svelte:197:3 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+9:26:19 PM [vite-plugin-svelte] src/routes/i/+page.svelte:240:8 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+9:26:32 PM [vite-plugin-svelte] src/routes/i/+page.svelte:5:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+9:26:32 PM [vite-plugin-svelte] src/routes/i/+page.svelte:6:18 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+9:26:32 PM [vite-plugin-svelte] src/routes/i/+page.svelte:197:3 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+9:26:32 PM [vite-plugin-svelte] src/routes/i/+page.svelte:240:8 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+9:26:32 PM [vite] (client) hmr update /src/routes/i/+page.svelte?svelte&type=style&lang.css
+9:26:32 PM [vite] (ssr) page reload src/routes/i/+page.svelte
+9:27:47 PM [vite] .env changed, restarting server...
+9:27:47 PM [vite] server restarted.
+Using secrets defined in .env
+9:27:51 PM [vite-plugin-svelte] src/routes/i/+page.svelte:5:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+9:27:51 PM [vite-plugin-svelte] src/routes/i/+page.svelte:6:18 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+9:27:51 PM [vite-plugin-svelte] src/routes/i/+page.svelte:197:3 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+9:27:51 PM [vite-plugin-svelte] src/routes/i/+page.svelte:240:8 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+9:27:53 PM [vite-plugin-svelte] src/routes/i/+page.svelte:5:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+9:27:53 PM [vite-plugin-svelte] src/routes/i/+page.svelte:6:18 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+9:27:53 PM [vite-plugin-svelte] src/routes/i/+page.svelte:197:3 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+9:27:53 PM [vite-plugin-svelte] src/routes/i/+page.svelte:240:8 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+9:28:25 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+9:28:25 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+9:28:25 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/5.js
+9:28:25 PM [vite] (client) page reload .svelte-kit/generated/client/app.js
+9:28:25 PM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+9:28:25 PM [vite] (ssr) page reload .svelte-kit/generated/shared/error-template.js
+9:28:25 PM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+9:28:25 PM [vite] (client) page reload .svelte-kit/generated/root.js
+9:28:25 PM [vite] (ssr) page reload .svelte-kit/generated/root.js
+9:28:25 PM [vite] (ssr) page reload .svelte-kit/generated/root.svelte

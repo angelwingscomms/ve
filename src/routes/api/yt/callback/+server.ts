@@ -1,6 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 import type { RequestEvent } from '@sveltejs/kit';
-import { YT_GOOGLE_ID, YT_GOOGLE_SECRET, ORIGIN } from '$env/static/private';
+import { GOOGLE_ID, GOOGLE_SECRET, ORIGIN } from '$env/static/private';
 import { get_user } from '$lib/server/user';
 
 export async function GET(event: RequestEvent): Promise<Response> {
@@ -13,8 +13,8 @@ export async function GET(event: RequestEvent): Promise<Response> {
 		headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 		body: new URLSearchParams({
 			code,
-			client_id: YT_GOOGLE_ID,
-			client_secret: YT_GOOGLE_SECRET,
+			client_id: GOOGLE_ID,
+			client_secret: GOOGLE_SECRET,
 			redirect_uri: `${ORIGIN}/api/yt/callback`,
 			grant_type: 'authorization_code'
 		})
