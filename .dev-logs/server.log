@@ -1,0 +1,39 @@
+Lockfile is up to date, resolution step is skipped
+Already up to date
+
+. prepare$ svelte-kit sync || echo ''
+. prepare: Done
+Done in 8s using pnpm v11.5.2
+$ vite dev --port 5472
+9:58:00 AM [vite] (client) Re-optimizing dependencies because vite config has changed
+9:58:00 AM [vite] (ssr) Re-optimizing dependencies because vite config has changed
+
+  VITE v8.1.3  ready in 3635 ms
+
+  ➜  Local:   http://localhost:5472/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+Using secrets defined in .dev.vars
+
+[1;31m[404] GET /favicon.png[0m
+1:00:11 PM [vite] (client) hmr update /src/routes/+layout.svelte
+1:00:11 PM [vite] (ssr) page reload src/routes/+layout.svelte
+1:00:27 PM [vite] (client) hmr update /src/routes/login/+page.svelte, /src/routes/login/+page.svelte?svelte&type=style&lang.css
+1:00:27 PM [vite] (ssr) page reload src/routes/login/+page.svelte
+1:01:09 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+1:01:09 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+1:01:09 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/5.js
+1:01:09 PM [vite] (client) page reload .svelte-kit/generated/client/app.js
+1:01:09 PM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+1:01:09 PM [vite] (ssr) page reload .svelte-kit/generated/shared/error-template.js
+1:01:09 PM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+1:01:09 PM [vite] (client) page reload .svelte-kit/generated/root.js
+1:01:09 PM [vite] (ssr) page reload .svelte-kit/generated/root.js
+1:01:09 PM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
+1:01:37 PM [vite] (ssr) page reload src/hooks.server.ts
+1:01:37 PM [vite] (ssr) page reload src/lib/server/session.ts
+1:01:37 PM [vite] (ssr) page reload src/lib/server/user.ts
+1:01:38 PM [vite] (client) hmr update /src/routes/+layout.svelte, /src/routes/+layout.svelte?svelte&type=style&lang.css
+1:01:38 PM [vite] (ssr) page reload src/routes/+layout.svelte
+1:01:38 PM [vite] (client) hmr update /src/routes/login/+page.svelte?svelte&type=style&lang.css
+1:01:38 PM [vite] (ssr) page reload src/routes/login/+page.svelte
