@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-	<title>Sign in — vids</title>
+	<title>Sign in — ve</title>
 </svelte:head>
 
 <main class="page">

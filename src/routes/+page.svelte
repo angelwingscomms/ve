@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-	<title>vids — YouTube automation</title>
+	<title>ve — YouTube automation</title>
 </svelte:head>
 
 <main class="hero">
@@ -14,7 +14,7 @@
 		</p>
 
 		{#if data?.user}
-			<p class="welcome">Welcome back, {data.user.name}!</p>
+			<a href="/i" class="btn-primary">Go to dashboard →</a>
 		{:else}
 			<a href="/login" class="btn-primary">Sign in with Google →</a>
 		{/if}
@@ -40,11 +40,6 @@
 		color: #666;
 		margin-top: 1rem;
 		line-height: 1.7;
-	}
-	.welcome {
-		margin-top: 2rem;
-		font-size: 1.125rem;
-		color: #333;
 	}
 	.btn-primary {
 		display: inline-flex;

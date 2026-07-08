@@ -14,9 +14,10 @@
 
 <nav>
 	<div class="nav-inner">
-		<a href="/" class="logo">vids</a>
+		<a href="/" class="logo">ve</a>
 		<div class="nav-right">
 			{#if data?.user}
+				<a href="/i" class="nav-link">Dashboard</a>
 				<span class="user-name">{data.user.name}</span>
 				<form action="/logout" method="post"><button class="btn-ghost">Sign out</button></form>
 			{:else}
@@ -97,6 +98,12 @@
 		align-items: center;
 		gap: 1rem;
 	}
+	.nav-link {
+		font-size: 0.875rem;
+		font-weight: 500;
+		color: #555;
+	}
+	.nav-link:hover { color: #111; text-decoration: none; }
 	.user-name {
 		font-size: 0.875rem;
 		color: #666;
