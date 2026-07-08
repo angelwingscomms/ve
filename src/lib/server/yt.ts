@@ -1,4 +1,4 @@
-import { GOOGLE_ID, GOOGLE_SECRET } from '$env/static/private';
+import { YT_GOOGLE_ID, YT_GOOGLE_SECRET } from '$env/static/private';
 
 async function get_access_token(refresh_token: string): Promise<string> {
 	const r = await fetch('https://oauth2.googleapis.com/token', {
@@ -6,8 +6,8 @@ async function get_access_token(refresh_token: string): Promise<string> {
 		headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 		body: new URLSearchParams({
 			refresh_token,
-			client_id: GOOGLE_ID,
-			client_secret: GOOGLE_SECRET,
+			client_id: YT_GOOGLE_ID,
+			client_secret: YT_GOOGLE_SECRET,
 			grant_type: 'refresh_token'
 		})
 	});

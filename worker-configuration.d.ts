@@ -6,6 +6,8 @@ interface __BaseEnv_Env {
 	SECRET: string;
 	GOOGLE_ID: string;
 	GOOGLE_SECRET: string;
+	YT_GOOGLE_ID: string;
+	YT_GOOGLE_SECRET: string;
 	QDRANT_URL: string;
 	QDRANT_KEY: string;
 	INTERNAL_KEY: string;
