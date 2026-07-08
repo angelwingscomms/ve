@@ -10,7 +10,11 @@
 	},
 	"workers_dev": true,
 	"preview_urls": true,
-	"triggers": {
-		"crons": ["* * * * *"]
-	}
+	"workflows": [
+		{
+			"name": "video-generator",
+			"binding": "VIDEO_WORKFLOW",
+			"class_name": "VideoGeneratorWorkflow"
+		}
+	]
 }

@@ -12,7 +12,7 @@ async function get_access_token(refresh_token: string): Promise<string> {
 		})
 	});
 	if (!r.ok) throw new Error('token refresh failed');
-	const t = await r.json();
+	const t = (await r.json()) as { access_token: string };
 	return t.access_token;
 }
 
@@ -20,7 +20,8 @@ export async function upload_to_youtube(
 	refresh_token: string,
 	video_url: string,
 	title: string,
-	description: string
+	description: string,
+	or_key?: string
 ): Promise<string> {
 	const token = await get_access_token(refresh_token);
 
@@ -48,9 +49,7 @@ export async function upload_to_youtube(
 	const upload_url = r0.headers.get('Location');
 	if (!upload_url) throw new Error('no Location header');
 
-	const v = await fetch(video_url, {
-		headers: { Authorization: `Bearer ${refresh_token}` }
-	});
+	const v = await fetch(video_url, or_key ? { headers: { Authorization: `Bearer ${or_key}` } } : {});
 	if (!v.ok) throw new Error('fetch video failed');
 	const buf = await v.arrayBuffer();
 
@@ -68,6 +67,6 @@ export async function upload_to_youtube(
 		throw new Error(`upload failed: ${e}`);
 	}
 
-	const result = await r1.json();
+	const result = (await r1.json()) as { id: string };
 	return result.id;
 }
