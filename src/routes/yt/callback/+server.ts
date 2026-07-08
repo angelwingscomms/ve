@@ -15,7 +15,7 @@ export async function GET(event: RequestEvent): Promise<Response> {
 			code,
 			client_id: GOOGLE_ID,
 			client_secret: GOOGLE_SECRET,
-			redirect_uri: `${ORIGIN}/api/yt/callback`,
+			redirect_uri: `${ORIGIN}/yt/callback`,
 			grant_type: 'authorization_code'
 		})
 	});

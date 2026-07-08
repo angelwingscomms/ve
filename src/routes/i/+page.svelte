@@ -256,7 +256,7 @@
 		<section class="card yt-card">
 			<h2>YouTube</h2>
 			<p>Connect your YouTube channel to automatically upload videos when they're generated.</p>
-			<a href="/api/yt/auth" class="btn yt-btn">Connect YouTube</a>
+			<a href="/yt/auth" class="btn yt-btn">Connect YouTube</a>
 		</section>
 	{/if}
 </main>
