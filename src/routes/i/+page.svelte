@@ -11,7 +11,7 @@
 	let key_msg = $state('');
 	let create_msg = $state('');
 	let use_custom = $state(false);
-	let video_url = $state('');
+	
 	let generating = $state(false);
 	let sort_by = $state('cost');
 	let sort_dir = $state('asc');
@@ -84,17 +84,14 @@
 	async function create_sample() {
 		if (!prompt || !model) return;
 		generating = true;
-		video_url = '';
 		create_msg = '';
 		const body: Record<string, unknown> = { p: prompt, m: model };
 		if (duration) body.g = parseInt(duration);
 		if (resolution) body.z = resolution;
 		const r = await fetch('/api/ves/sample', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
 		if (r.ok) {
-			const data = await r.json();
-			video_url = data.url || '';
-			if (video_url) create_msg = 'Sample video ready!';
-			else create_msg = 'Generation failed';
+			create_msg = 'Sample queued! It will appear below once ready.';
+			setTimeout(() => location.reload(), 1000);
 		} else {
 			const err = await r.json();
 			create_msg = err?.error || 'Failed';
@@ -184,11 +181,6 @@
 				<button type="button" class="btn-ghost" onclick={create_sample} disabled={generating}>{generating ? 'Generating…' : 'Create sample'}</button>
 			</div>
 			{#if create_msg}<p class="msg">{create_msg}</p>{/if}
-			{#if video_url}
-				<div class="sample-video">
-					<video src={video_url} controls class="video-player"></video>
-				</div>
-			{/if}
 		</form>
 	</section>
 
@@ -198,14 +190,21 @@
 			<div class="ves">
 				{#each data.ves as v}
 					<div class="ve-row">
-						<div class="ve-info">
-							<span class="ve-prompt">{v.p.slice(0, 60)}{v.p.length > 60 ? '…' : ''}</span>
-							<span class="ve-meta">{v.m}{v.g ? ` · ${v.g}s` : ''} · {fmt(v.d)}</span>
+						<div class="ve-top">
+							<div class="ve-info">
+								<span class="ve-prompt">{v.p.slice(0, 60)}{v.p.length > 60 ? '…' : ''}</span>
+								<span class="ve-meta">{v.m}{v.g ? ` · ${v.g}s` : ''}{v.r === 0 ? ' · sample' : ''} · {fmt(v.d)}</span>
+							</div>
+							<div class="ve-right">
+								<span class="badge badge-{v.c || 'pending'}">{v.c || 'pending'}</span>
+								<button onclick={() => del(v.i)} class="btn-ghost-sm">×</button>
+							</div>
 						</div>
-						<div class="ve-right">
-							<span class="badge badge-{v.c || 'pending'}">{v.c || 'pending'}</span>
-							<button onclick={() => del(v.i)} class="btn-ghost-sm">×</button>
-						</div>
+						{#if v.w}
+							<div class="ve-video">
+								<video src={v.w} controls class="video-player"></video>
+							</div>
+						{/if}
 					</div>
 				{/each}
 			</div>
@@ -297,12 +296,14 @@
 	.msg { font-size: 0.8125rem; color: #059669; margin-top: 0.5rem; }
 	.ves { display: flex; flex-direction: column; gap: 0.5rem; }
 	.ve-row {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
 		padding: 0.75rem;
 		border: 1px solid #f3f4f6;
 		border-radius: 8px;
+	}
+	.ve-top {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 	}
 	.ve-info { display: flex; flex-direction: column; gap: 0.125rem; }
 	.ve-prompt { font-size: 0.875rem; font-weight: 500; }
@@ -330,6 +331,8 @@
 	}
 	.btn-ghost-sm:hover { background: #f3f4f6; color: #dc2626; }
 	.empty { color: #999; font-size: 0.875rem; }
+	.ve-video { grid-column: 1 / -1; margin-top: 0.5rem; }
+	.ve-video video { width: 100%; max-height: 300px; border-radius: 8px; }
 	.sample-video { margin-top: 0.75rem; }
 	.video-player { width: 100%; max-height: 400px; border-radius: 8px; }
 </style>

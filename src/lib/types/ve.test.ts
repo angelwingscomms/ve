@@ -4,7 +4,7 @@ import type { Ve } from './ve';
 describe('Ve type', () => {
 	it('has single-letter keys', () => {
 		const v: Ve = { s: 'e', i: '1', u: 'u1', p: 'prompt', m: 'model', r: 86400000, t: 0, d: 0 };
-		expect(Object.keys(v).every((k) => k.length === 1)).toBe(true);
+		expect(Object.keys(v).filter(k => k !== 'j' && k !== 'w').every((k) => k.length === 1)).toBe(true);
 	});
 
 	it('has correct fields', () => {
@@ -28,5 +28,19 @@ describe('Ve type', () => {
 		expect(v.r).toBe(3600000);
 		expect(v.t).toBe(2);
 		expect(v.c).toBe('active');
+	});
+
+	it('supports sample fields j and w', () => {
+		const v: Ve = {
+			s: 'e', i: 's1', u: 'u1', p: 'test', m: 'or/model',
+			r: 0, t: 0, d: 0, c: 'sampling', j: 'or-job-123'
+		};
+		expect(v.j).toBe('or-job-123');
+		expect(v.c).toBe('sampling');
+
+		v.w = 'https://example.com/video.mp4';
+		v.c = 'done';
+		expect(v.w).toContain('video.mp4');
+		expect(v.c).toBe('done');
 	});
 });

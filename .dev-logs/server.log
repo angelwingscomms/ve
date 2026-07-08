@@ -391,3 +391,163 @@ https://svelte.dev/e/state_referenced_locally
 https://svelte.dev/e/a11y_label_has_associated_control
 7:37:48 PM [vite-plugin-svelte] src/routes/i/+page.svelte:189:5 `<video>` elements must have a `<track kind="captions">`
 https://svelte.dev/e/a11y_media_has_caption
+7:47:47 PM [vite] (ssr) page reload src/lib/server/ve.ts
+7:47:52 PM [vite] (ssr) page reload src/lib/server/ve.ts
+7:47:58 PM [vite] (ssr) page reload src/routes/api/ves/sample/+server.ts
+7:48:12 PM [vite] (ssr) page reload src/hooks.server.ts
+7:48:23 PM [vite-plugin-svelte] src/routes/i/+page.svelte:4:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:48:23 PM [vite-plugin-svelte] src/routes/i/+page.svelte:168:3 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+7:48:23 PM [vite-plugin-svelte] src/routes/i/+page.svelte:186:5 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+7:48:23 PM [vite] (client) hmr update /src/routes/i/+page.svelte
+7:48:23 PM [vite] (ssr) page reload src/routes/i/+page.svelte
+7:48:24 PM [vite-plugin-svelte] src/routes/i/+page.svelte:4:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:48:24 PM [vite-plugin-svelte] src/routes/i/+page.svelte:168:3 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+7:48:24 PM [vite-plugin-svelte] src/routes/i/+page.svelte:186:5 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+7:48:29 PM [vite-plugin-svelte] src/routes/i/+page.svelte:4:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:48:29 PM [vite-plugin-svelte] src/routes/i/+page.svelte:168:3 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+7:48:29 PM [vite-plugin-svelte] src/routes/i/+page.svelte:186:5 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+7:48:29 PM [vite-plugin-svelte] src/routes/i/+page.svelte:208:8 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+7:48:29 PM [vite] (client) hmr update /src/routes/i/+page.svelte
+7:48:29 PM [vite] (ssr) page reload src/routes/i/+page.svelte
+7:48:30 PM [vite-plugin-svelte] src/routes/i/+page.svelte:4:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:48:30 PM [vite-plugin-svelte] src/routes/i/+page.svelte:168:3 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+7:48:30 PM [vite-plugin-svelte] src/routes/i/+page.svelte:186:5 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+7:48:30 PM [vite-plugin-svelte] src/routes/i/+page.svelte:208:8 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+7:48:36 PM [vite-plugin-svelte] src/routes/i/+page.svelte:4:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:48:36 PM [vite-plugin-svelte] src/routes/i/+page.svelte:168:3 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+7:48:36 PM [vite-plugin-svelte] src/routes/i/+page.svelte:186:5 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+7:48:36 PM [vite-plugin-svelte] src/routes/i/+page.svelte:208:8 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+7:48:36 PM [vite] (client) hmr update /src/routes/i/+page.svelte?svelte&type=style&lang.css
+7:48:36 PM [vite] (ssr) page reload src/routes/i/+page.svelte
+7:48:43 PM [vite-plugin-svelte] src/routes/i/+page.svelte:4:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:48:43 PM [vite-plugin-svelte] src/routes/i/+page.svelte:168:3 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+7:48:43 PM [vite-plugin-svelte] src/routes/i/+page.svelte:186:5 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+7:48:43 PM [vite-plugin-svelte] src/routes/i/+page.svelte:210:8 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+7:48:43 PM [vite] (client) hmr update /src/routes/i/+page.svelte
+7:48:43 PM [vite] (ssr) page reload src/routes/i/+page.svelte
+7:48:43 PM [vite-plugin-svelte] src/routes/i/+page.svelte:4:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:48:43 PM [vite-plugin-svelte] src/routes/i/+page.svelte:168:3 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+7:48:43 PM [vite-plugin-svelte] src/routes/i/+page.svelte:186:5 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+7:48:43 PM [vite-plugin-svelte] src/routes/i/+page.svelte:210:8 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+7:48:48 PM [vite-plugin-svelte] src/routes/i/+page.svelte:4:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:48:48 PM [vite-plugin-svelte] src/routes/i/+page.svelte:168:3 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+7:48:48 PM [vite-plugin-svelte] src/routes/i/+page.svelte:186:5 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+7:48:48 PM [vite-plugin-svelte] src/routes/i/+page.svelte:210:8 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+7:48:48 PM [vite] (client) hmr update /src/routes/i/+page.svelte?svelte&type=style&lang.css
+7:48:48 PM [vite] (ssr) page reload src/routes/i/+page.svelte
+7:48:51 PM [vite-plugin-svelte] src/routes/i/+page.svelte:4:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:48:51 PM [vite-plugin-svelte] src/routes/i/+page.svelte:168:3 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+7:48:51 PM [vite-plugin-svelte] src/routes/i/+page.svelte:186:5 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+7:48:51 PM [vite-plugin-svelte] src/routes/i/+page.svelte:210:8 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+7:48:51 PM [vite] (client) hmr update /src/routes/i/+page.svelte
+7:48:51 PM [vite] (ssr) page reload src/routes/i/+page.svelte
+7:48:51 PM [vite-plugin-svelte] src/routes/i/+page.svelte:4:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:48:51 PM [vite-plugin-svelte] src/routes/i/+page.svelte:168:3 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+7:48:51 PM [vite-plugin-svelte] src/routes/i/+page.svelte:186:5 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+7:48:51 PM [vite-plugin-svelte] src/routes/i/+page.svelte:210:8 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+7:48:55 PM [vite-plugin-svelte] src/routes/i/+page.svelte:4:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:48:55 PM [vite-plugin-svelte] src/routes/i/+page.svelte:168:3 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+7:48:55 PM [vite-plugin-svelte] src/routes/i/+page.svelte:205:8 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+7:48:55 PM [vite] (client) hmr update /src/routes/i/+page.svelte
+7:48:55 PM [vite] (ssr) page reload src/routes/i/+page.svelte
+7:48:55 PM [vite-plugin-svelte] src/routes/i/+page.svelte:4:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:48:55 PM [vite-plugin-svelte] src/routes/i/+page.svelte:168:3 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+7:48:55 PM [vite-plugin-svelte] src/routes/i/+page.svelte:205:8 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+7:49:02 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+7:49:02 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+7:49:02 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/2.js
+7:49:02 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/5.js
+7:49:02 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/6.js
+7:49:02 PM [vite] (client) page reload .svelte-kit/generated/client/app.js
+7:49:02 PM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+7:49:02 PM [vite] (ssr) page reload .svelte-kit/generated/shared/error-template.js
+7:49:02 PM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+7:49:02 PM [vite] (client) page reload .svelte-kit/generated/root.js
+7:49:02 PM [vite] (ssr) page reload .svelte-kit/generated/root.js
+7:49:02 PM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
+7:49:04 PM [vite-plugin-svelte] src/routes/i/+page.svelte:4:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+7:49:04 PM [vite-plugin-svelte] src/routes/i/+page.svelte:168:3 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+7:49:04 PM [vite-plugin-svelte] src/routes/i/+page.svelte:205:8 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+7:49:11 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+7:49:11 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+7:49:11 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/2.js
+7:49:11 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/5.js
+7:49:11 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/6.js
+7:49:11 PM [vite] (client) page reload .svelte-kit/generated/client/app.js
+7:49:11 PM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+7:49:11 PM [vite] (ssr) page reload .svelte-kit/generated/shared/error-template.js
+7:49:11 PM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+7:49:11 PM [vite] (client) page reload .svelte-kit/generated/root.js
+7:49:11 PM [vite] (ssr) page reload .svelte-kit/generated/root.js
+7:49:11 PM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
+7:49:14 PM [vite] (ssr) page reload .svelte-kit/generated/shared/error-template.js
+7:49:14 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/5.js
+7:49:14 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/6.js
+7:49:14 PM [vite] (client) page reload .svelte-kit/generated/client/app.js
+7:49:14 PM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+7:49:14 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+7:49:14 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+7:49:14 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/2.js
+7:49:14 PM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+7:49:14 PM [vite] (client) page reload .svelte-kit/generated/root.js
+7:49:14 PM [vite] (ssr) page reload .svelte-kit/generated/root.js
+7:49:14 PM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
+7:49:17 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+7:49:17 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+7:49:17 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/2.js
+7:49:17 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/5.js
+7:49:17 PM [vite] (client) page reload .svelte-kit/generated/client/nodes/6.js
+7:49:17 PM [vite] (client) page reload .svelte-kit/generated/client/app.js
+7:49:17 PM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+7:49:17 PM [vite] (ssr) page reload .svelte-kit/generated/shared/error-template.js
+7:49:17 PM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+7:49:17 PM [vite] (client) page reload .svelte-kit/generated/root.js
+7:49:17 PM [vite] (ssr) page reload .svelte-kit/generated/root.js
+7:49:17 PM [vite] (ssr) page reload .svelte-kit/generated/root.svelte

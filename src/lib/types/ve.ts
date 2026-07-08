@@ -6,9 +6,11 @@ export interface Ve {
 	m: string    // model id (from OpenRouter)
 	g?: number   // video duration in seconds
 	z?: string   // resolution
-	r: number    // period (ms between generates)
+	r: number    // period (ms between generates, 0 = sample)
 	t: number    // retries count
-	c?: string   // current_task_status: 'active' | 'done' | 'failed'
+	c?: string   // status: 'sampling' | 'active' | 'done' | 'failed'
 	l?: number   // last_run timestamp (epoch ms)
+	j?: string   // OpenRouter job id (for samples being polled)
+	w?: string   // video url (for completed samples)
 	d: number    // created timestamp
 }
