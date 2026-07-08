@@ -17,6 +17,7 @@
 	let generating = $state(false);
 	let sort_by = $state('cost');
 	let sort_dir = $state('asc');
+	let yt_upload = $state(false);
 
 	function has_sampling() {
 		return ves.some((v: Ve) => v.c === 'sampling');
@@ -92,6 +93,7 @@
 		const body: Record<string, unknown> = { id: crypto.randomUUID(), p: prompt, m: model, r: parseInt(period) };
 		if (duration) body.g = parseInt(duration);
 		if (resolution) body.z = resolution;
+		if (yt_upload) body.y = 1;
 		const r = await fetch('/api/ves', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
@@ -185,6 +187,13 @@
 			<label for="g">Duration (seconds, optional)</label>
 			<input id="g" type="number" bind:value={duration} class="input" placeholder="e.g. 30" min="1" />
 
+			{#if data.user_data?.a?.y}
+				<label class="chk-lbl">
+					<input type="checkbox" bind:checked={yt_upload} class="chk" />
+					Upload to YouTube when done
+				</label>
+			{/if}
+
 			<label>Schedule</label>
 			<div class="periods">
 				<button type="button" class={period === '3600000' ? 'btn-active' : 'btn-opt'} onclick={() => { period = '3600000'; use_custom = false; }}>Every hour</button>
@@ -217,6 +226,12 @@
 							</div>
 							<div class="ve-right">
 								<span class="badge badge-{v.c || 'pending'}">{v.c || 'pending'}</span>
+								{#if v.ys}
+									<span class="badge badge-yt-{v.ys}">{v.ys}</span>
+								{/if}
+								{#if v.yv}
+									<a href="https://youtube.com/watch?v={v.yv}" target="_blank" class="yt-link">yt</a>
+								{/if}
 								<button onclick={() => del(v.i)} class="btn-ghost-sm">×</button>
 							</div>
 						</div>
@@ -232,6 +247,18 @@
 			<p class="empty">No ves yet. Create one above.</p>
 		{/if}
 	</section>
+
+	{#if data.user_data?.a?.y}
+		<section class="card yt-card">
+			<p class="yt-ok">YouTube connected ✓ <a href="/api/yt/auth" class="yt-reconnect">reconnect</a></p>
+		</section>
+	{:else}
+		<section class="card yt-card">
+			<h2>YouTube</h2>
+			<p>Connect your YouTube channel to automatically upload videos when they're generated.</p>
+			<a href="/api/yt/auth" class="btn yt-btn">Connect YouTube</a>
+		</section>
+	{/if}
 </main>
 
 <style>
@@ -355,4 +382,15 @@
 	.ve-video video { width: 100%; max-height: 300px; border-radius: 8px; }
 	.sample-video { margin-top: 0.75rem; }
 	.video-player { width: 100%; max-height: 400px; border-radius: 8px; }
+	.chk-lbl { display: flex; align-items: center; gap: 0.5rem; font-weight: 400; color: #333; margin-bottom: 0.75rem; }
+	.chk { width: 1rem; height: 1rem; }
+	.yt-card { background: #fff; border: 1px solid #eee; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; text-align: center; }
+	.yt-btn { display: inline-block; padding: 0.5rem 1.25rem; background: #ff0000; color: #fff; border-radius: 8px; text-decoration: none; font-weight: 600; }
+	.yt-ok { color: #059669; font-size: 0.875rem; }
+	.yt-reconnect { color: #999; font-size: 0.75rem; }
+	.yt-link { font-size: 0.6875rem; padding: 0.125rem 0.375rem; background: #ff0000; color: #fff; border-radius: 4px; text-decoration: none; font-weight: 600; }
+	.badge-yt-uploading { background: #fef3c7; color: #b45309; }
+	.badge-yt-live { background: #d1fae5; color: #059669; }
+	.badge-yt-yt_failed { background: #fee2e2; color: #dc2626; }
+	.badge-yt-pending { background: #f3f4f6; color: #6b7280; }
 </style>
