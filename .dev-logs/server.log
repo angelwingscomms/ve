@@ -303,3 +303,223 @@ env.ORIGIN ("(hidden)")                          Environment Variable      local
         ╵ [32m^[0m
 
 
+4:22:12 AM [vite] vite.config.ts changed, restarting server...
+Using secrets defined in .env
+Your Worker has access to the following bindings:
+Binding                                           Resource                  Mode
+env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)       Workflow                  local
+env.TEST_WORKFLOW (VideoUploadTestWorkflow)       Workflow                  local
+env.TEST_BUCKET (ve-test)                         R2 Bucket                 local
+env.SECRET ("(hidden)")                           Environment Variable      local
+env.GOOGLE_ID ("(hidden)")                        Environment Variable      local
+env.GOOGLE_SECRET ("(hidden)")                    Environment Variable      local
+env.QDRANT_URL ("(hidden)")                       Environment Variable      local
+env.QDRANT_KEY ("(hidden)")                       Environment Variable      local
+env.INTERNAL_KEY ("(hidden)")                     Environment Variable      local
+env.OPENROUTER_KEY ("(hidden)")                   Environment Variable      local
+env.ORIGIN ("(hidden)")                           Environment Variable      local
+
+Using secrets defined in .env
+Your Worker has access to the following bindings:
+Binding                                           Resource                  Mode
+env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)       Workflow                  local
+env.TEST_WORKFLOW (VideoUploadTestWorkflow)       Workflow                  local
+env.TEST_BUCKET (ve-test)                         R2 Bucket                 local
+env.SECRET ("(hidden)")                           Environment Variable      local
+env.GOOGLE_ID ("(hidden)")                        Environment Variable      local
+env.GOOGLE_SECRET ("(hidden)")                    Environment Variable      local
+env.QDRANT_URL ("(hidden)")                       Environment Variable      local
+env.QDRANT_KEY ("(hidden)")                       Environment Variable      local
+env.INTERNAL_KEY ("(hidden)")                     Environment Variable      local
+env.OPENROUTER_KEY ("(hidden)")                   Environment Variable      local
+env.ORIGIN ("(hidden)")                           Environment Variable      local
+
+❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
+❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
+Using secrets defined in .env
+Your Worker has access to the following bindings:
+Binding                                           Resource                  Mode
+env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)       Workflow                  local
+env.TEST_WORKFLOW (VideoUploadTestWorkflow)       Workflow                  local
+env.TEST_BUCKET (ve-test)                         R2 Bucket                 local
+env.SECRET ("(hidden)")                           Environment Variable      local
+env.GOOGLE_ID ("(hidden)")                        Environment Variable      local
+env.GOOGLE_SECRET ("(hidden)")                    Environment Variable      local
+env.QDRANT_URL ("(hidden)")                       Environment Variable      local
+env.QDRANT_KEY ("(hidden)")                       Environment Variable      local
+env.INTERNAL_KEY ("(hidden)")                     Environment Variable      local
+env.OPENROUTER_KEY ("(hidden)")                   Environment Variable      local
+env.ORIGIN ("(hidden)")                           Environment Variable      local
+
+Using secrets defined in .env
+Your Worker has access to the following bindings:
+Binding                                           Resource                  Mode
+env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)       Workflow                  local
+env.TEST_WORKFLOW (VideoUploadTestWorkflow)       Workflow                  local
+env.TEST_BUCKET (ve-test)                         R2 Bucket                 local
+env.SECRET ("(hidden)")                           Environment Variable      local
+env.GOOGLE_ID ("(hidden)")                        Environment Variable      local
+env.GOOGLE_SECRET ("(hidden)")                    Environment Variable      local
+env.QDRANT_URL ("(hidden)")                       Environment Variable      local
+env.QDRANT_KEY ("(hidden)")                       Environment Variable      local
+env.INTERNAL_KEY ("(hidden)")                     Environment Variable      local
+env.OPENROUTER_KEY ("(hidden)")                   Environment Variable      local
+env.ORIGIN ("(hidden)")                           Environment Variable      local
+
+❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
+❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
+Using secrets defined in .env
+Your Worker has access to the following bindings:
+Binding                                           Resource                  Mode
+env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)       Workflow                  local
+env.TEST_WORKFLOW (VideoUploadTestWorkflow)       Workflow                  local
+env.TEST_BUCKET (ve-test)                         R2 Bucket                 local
+env.SECRET ("(hidden)")                           Environment Variable      local
+env.GOOGLE_ID ("(hidden)")                        Environment Variable      local
+env.GOOGLE_SECRET ("(hidden)")                    Environment Variable      local
+env.QDRANT_URL ("(hidden)")                       Environment Variable      local
+env.QDRANT_KEY ("(hidden)")                       Environment Variable      local
+env.INTERNAL_KEY ("(hidden)")                     Environment Variable      local
+env.OPENROUTER_KEY ("(hidden)")                   Environment Variable      local
+env.ORIGIN ("(hidden)")                           Environment Variable      local
+
+❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
+⎔ Shutting down local server...
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mYour Worker depends on the following Workflows, which are not exported in your entrypoint file: VideoUploadTestWorkflow.[0m
+
+  You should export these objects from your entrypoint, src/workflows/video_generator.ts.
+
+
+4:22:13 AM [vite] (client) Re-optimizing dependencies because vite config has changed
+4:22:13 AM [vite] (ssr) Re-optimizing dependencies because vite config has changed
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mYour Worker depends on the following Workflows, which are not exported in your entrypoint file: VideoGeneratorWorkflow.[0m
+
+  You should export these objects from your entrypoint, src/workflows/video_upload_test.ts.
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mYour Worker depends on the following Workflows, which are not exported in your entrypoint file: VideoGeneratorWorkflow.[0m
+
+  You should export these objects from your entrypoint, src/workflows/video_upload_test.ts.
+
+
+*** Fatal uncaught kj::Exception: kj/async-io-unix.c++:941: failed: ::bind(sockfd, &addr.generic, addrlen): Address already in use; toString() = 127.0.0.1:9229
+stack: /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.1/node_modules/@cloudflare/workerd-linux-64/bin/workerd@53d8306 /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.1/node_modules/@cloudflare/workerd-linux-64/bin/workerd@53d80d9 /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.1/node_modules/@cloudflare/workerd-linux-64/bin/workerd@53d642c /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.1/node_modules/@cloudflare/workerd-linux-64/bin/workerd@2050b9c /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.1/node_modules/@cloudflare/workerd-linux-64/bin/workerd@2051501 /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.1/node_modules/@cloudflare/workerd-linux-64/bin/workerd@205202d /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.1/node_modules/@cloudflare/workerd-linux-64/bin/workerd@20536aa /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.1/node_modules/@cloudflare/workerd-linux-64/bin/workerd@1f99339 /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.1/node_modules/@cloudflare/workerd-linux-64/bin/workerd@540d085 /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.1/node_modules/@cloudflare/workerd-linux-64/bin/workerd@540d5a8 /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.1/node_modules/@cloudflare/workerd-linux-64/bin/workerd@540b05e /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.1/node_modules/@cloudflare/workerd-linux-64/bin/workerd@540ae5e /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.1/node_modules/@cloudflare/workerd-linux-64/bin/workerd@1f80d17 /usr/lib/libc.so.6@2abfb /usr/lib/libc.so.6@2acb4 /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.1/node_modules/@cloudflare/workerd-linux-64/bin/workerd@1f80024
+4:22:14 AM [vite] (ssr) [optimizer] bundling dependencies...
+4:22:14 AM [vite] server restarted.
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mCould not read entrypoint "/home/ed/i/ve/.wrangler/tmp/dev-ukOOEX/video_generator.js": ENOENT: no such file or directory, open '/home/ed/i/ve/.wrangler/tmp/dev-ukOOEX/video_generator.js'[0m
+
+
+⎔ Starting local server...
+Using secrets defined in .env
+Your Worker has access to the following bindings:
+Binding                                           Resource                  Mode
+env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)       Workflow                  local
+env.TEST_WORKFLOW (VideoUploadTestWorkflow)       Workflow                  local
+env.TEST_BUCKET (ve-test)                         R2 Bucket                 local
+env.SECRET ("(hidden)")                           Environment Variable      local
+env.GOOGLE_ID ("(hidden)")                        Environment Variable      local
+env.GOOGLE_SECRET ("(hidden)")                    Environment Variable      local
+env.QDRANT_URL ("(hidden)")                       Environment Variable      local
+env.QDRANT_KEY ("(hidden)")                       Environment Variable      local
+env.INTERNAL_KEY ("(hidden)")                     Environment Variable      local
+env.OPENROUTER_KEY ("(hidden)")                   Environment Variable      local
+env.ORIGIN ("(hidden)")                           Environment Variable      local
+
+❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
+Using secrets defined in .env
+Your Worker has access to the following bindings:
+Binding                                           Resource                  Mode
+env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)       Workflow                  local
+env.TEST_WORKFLOW (VideoUploadTestWorkflow)       Workflow                  local
+env.TEST_BUCKET (ve-test)                         R2 Bucket                 local
+env.SECRET ("(hidden)")                           Environment Variable      local
+env.GOOGLE_ID ("(hidden)")                        Environment Variable      local
+env.GOOGLE_SECRET ("(hidden)")                    Environment Variable      local
+env.QDRANT_URL ("(hidden)")                       Environment Variable      local
+env.QDRANT_KEY ("(hidden)")                       Environment Variable      local
+env.INTERNAL_KEY ("(hidden)")                     Environment Variable      local
+env.OPENROUTER_KEY ("(hidden)")                   Environment Variable      local
+env.ORIGIN ("(hidden)")                           Environment Variable      local
+
+❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mYour Worker depends on the following Workflows, which are not exported in your entrypoint file: VideoGeneratorWorkflow.[0m
+
+  You should export these objects from your entrypoint, src/workflows/video_upload_test.ts.
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mYour Worker depends on the following Workflows, which are not exported in your entrypoint file: VideoGeneratorWorkflow.[0m
+
+  You should export these objects from your entrypoint, src/workflows/video_upload_test.ts.
+
+
+[ve-dev-worker] Worker "workflows:video-upload-test"'s binding "USER_WORKFLOW" refers to service "core:user:ve-dev-worker" with a named entrypoint "VideoUploadTestWorkflow", but "core:user:ve-dev-worker" has no such named entrypoint.
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mValueExpected[0m
+
+    /home/ed/i/ve/.dev-worker-wrangler.jsonc:1:0:
+[37m      1 │ [32m[37m
+        ╵ [32m^[0m
+
+
+Using secrets defined in .env
+Your Worker has access to the following bindings:
+Binding                                           Resource                  Mode
+env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)       Workflow                  local
+env.TEST_WORKFLOW (VideoUploadTestWorkflow)       Workflow                  local
+env.TEST_BUCKET (ve-test)                         R2 Bucket                 local
+env.SECRET ("(hidden)")                           Environment Variable      local
+env.GOOGLE_ID ("(hidden)")                        Environment Variable      local
+env.GOOGLE_SECRET ("(hidden)")                    Environment Variable      local
+env.QDRANT_URL ("(hidden)")                       Environment Variable      local
+env.QDRANT_KEY ("(hidden)")                       Environment Variable      local
+env.INTERNAL_KEY ("(hidden)")                     Environment Variable      local
+env.OPENROUTER_KEY ("(hidden)")                   Environment Variable      local
+env.ORIGIN ("(hidden)")                           Environment Variable      local
+
+❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mYour Worker depends on the following Workflows, which are not exported in your entrypoint file: VideoUploadTestWorkflow.[0m
+
+  You should export these objects from your entrypoint, src/workflows/video_generator.ts.
+
+
+Using secrets defined in .env
+Your Worker has access to the following bindings:
+Binding                                           Resource                  Mode
+env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)       Workflow                  local
+env.TEST_WORKFLOW (VideoUploadTestWorkflow)       Workflow                  local
+env.TEST_BUCKET (ve-test)                         R2 Bucket                 local
+env.SECRET ("(hidden)")                           Environment Variable      local
+env.GOOGLE_ID ("(hidden)")                        Environment Variable      local
+env.GOOGLE_SECRET ("(hidden)")                    Environment Variable      local
+env.QDRANT_URL ("(hidden)")                       Environment Variable      local
+env.QDRANT_KEY ("(hidden)")                       Environment Variable      local
+env.INTERNAL_KEY ("(hidden)")                     Environment Variable      local
+env.OPENROUTER_KEY ("(hidden)")                   Environment Variable      local
+env.ORIGIN ("(hidden)")                           Environment Variable      local
+
+Using secrets defined in .env
+Your Worker has access to the following bindings:
+Binding                                           Resource                  Mode
+env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)       Workflow                  local
+env.TEST_WORKFLOW (VideoUploadTestWorkflow)       Workflow                  local
+env.TEST_BUCKET (ve-test)                         R2 Bucket                 local
+env.SECRET ("(hidden)")                           Environment Variable      local
+env.GOOGLE_ID ("(hidden)")                        Environment Variable      local
+env.GOOGLE_SECRET ("(hidden)")                    Environment Variable      local
+env.QDRANT_URL ("(hidden)")                       Environment Variable      local
+env.QDRANT_KEY ("(hidden)")                       Environment Variable      local
+env.INTERNAL_KEY ("(hidden)")                     Environment Variable      local
+env.OPENROUTER_KEY ("(hidden)")                   Environment Variable      local
+env.ORIGIN ("(hidden)")                           Environment Variable      local
+
+❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
+❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mYour Worker depends on the following Workflows, which are not exported in your entrypoint file: VideoGeneratorWorkflow.[0m
+
+  You should export these objects from your entrypoint, src/workflows/video_upload_test.ts.
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mYour Worker depends on the following Workflows, which are not exported in your entrypoint file: VideoGeneratorWorkflow.[0m
+
+  You should export these objects from your entrypoint, src/workflows/video_upload_test.ts.
+
+

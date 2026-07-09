@@ -5,7 +5,7 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import { addWorkerExports } from '@oselvar/sveltekit-add-worker-exports';
 
 export default defineConfig({
-	plugins: [
+		plugins: [
 		sveltekit({
 			compilerOptions: {
 				// Force runes mode for the project, except for libraries. Can be removed in svelte 6.
@@ -20,6 +20,9 @@ export default defineConfig({
 		}),
 		addWorkerExports({
 			entryPoint: 'src/workflows/video_generator.ts'
+		}),
+		addWorkerExports({
+			entryPoint: 'src/workflows/video_upload_test.ts'
 		})
 	],
 	test: {

@@ -11,11 +11,22 @@
 	},
 	"workers_dev": true,
 	"preview_urls": true,
+	"r2_buckets": [
+		{
+			"binding": "TEST_BUCKET",
+			"bucket_name": "ve-test"
+		}
+	],
 	"workflows": [
 		{
 			"name": "video-generator",
 			"binding": "VIDEO_WORKFLOW",
 			"class_name": "VideoGeneratorWorkflow"
+		},
+		{
+			"name": "video-upload-test",
+			"binding": "TEST_WORKFLOW",
+			"class_name": "VideoUploadTestWorkflow"
 		}
 	]
 }

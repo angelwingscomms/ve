@@ -18,6 +18,7 @@
 		<div class="nav-right">
 			{#if data?.user}
 				<a href="/i" class="nav-link">Dashboard</a>
+				<a href="/test" class="nav-link">Test</a>
 				<span class="user-name">{data.user.name}</span>
 				<form action="/logout" method="post"><button class="btn-ghost">Sign out</button></form>
 			{:else}
