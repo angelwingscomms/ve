@@ -23,10 +23,5 @@
 			"binding": "VIDEO_WORKFLOW",
 			"class_name": "VideoGeneratorWorkflow"
 		},
-		{
-			"name": "video-upload-test",
-			"binding": "TEST_WORKFLOW",
-			"class_name": "VideoUploadTestWorkflow"
-		}
 	]
 }

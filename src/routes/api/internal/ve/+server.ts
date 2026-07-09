@@ -10,5 +10,5 @@ export async function GET(event: RequestEvent): Promise<Response> {
 	if (!i) return json({ error: 'missing id' }, { status: 400 });
 	const v = await get_ve(i);
 	if (!v) return json({ error: 'not found' }, { status: 404 });
-	return json({ p: v.p, m: v.m, g: v.g, z: v.z, r: v.r, y: v.y });
+	return json({ p: v.p, m: v.m, g: v.g, z: v.z, r: v.r, y: v.y, x: v.x, j: v.j });
 }

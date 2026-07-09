@@ -9,8 +9,12 @@ vi.mock('$lib/server/user', () => ({
 	get_user: vi.fn(),
 }));
 
+vi.mock('$lib/server/ve', () => ({
+	save_ve: vi.fn(),
+}));
+
 import { get_user } from '$lib/server/user';
-import { upload_bytes_to_youtube } from '$lib/server/yt';
+import { save_ve } from '$lib/server/ve';
 
 const mockUser = (yt_token?: string) => ({
 	s: 'u', n: 'Test', d: Date.now(),
@@ -39,7 +43,7 @@ function mockEvent(opts?: {
 	const platform = opts?.platform ?? {
 		env: {
 			TEST_BUCKET: { put: vi.fn().mockResolvedValue(undefined) },
-			TEST_WORKFLOW: { create: vi.fn().mockResolvedValue({ id: 'wf123' }) },
+			VIDEO_WORKFLOW: { create: vi.fn().mockResolvedValue({ id: 'wf123' }) },
 			ORIGIN: 'http://localhost',
 		},
 		ctx: {} as any,
@@ -99,12 +103,10 @@ describe('POST /api/test', () => {
 		expect(b.error).toBe('no video');
 	});
 
-	it('uploads to yt and returns yv for one-shot', async () => {
+	it('creates VE and returns ve_id for one-shot', async () => {
 		vi.mocked(get_user).mockResolvedValue(mockUser(mockToken()) as any);
-		vi.mocked(upload_bytes_to_youtube).mockResolvedValue('yt12345');
 		const fd = makeForm({
 			video: { name: 'test.mp4', type: 'video/mp4', data: new Uint8Array([0, 1, 2]) },
-			title: 'My test',
 		});
 		const event = mockEvent({ formData: fd });
 		const { POST } = await import('./+server');
@@ -112,14 +114,13 @@ describe('POST /api/test', () => {
 		expect(r.status).toBe(200);
 		const b = await r.json();
 		expect(b.ok).toBe(true);
-		expect(b.yv).toBe('yt12345');
+		expect(b.ve_id).toBeTruthy();
 		expect(b.workflow_id).toBeUndefined();
-		expect(upload_bytes_to_youtube).toHaveBeenCalled();
+		expect(save_ve).toHaveBeenCalledWith(expect.any(String), 'user1', 'test upload', '', 0, undefined, undefined, expect.any(String), undefined, 1);
 	});
 
-	it('starts workflow when period set', async () => {
+	it('creates VE and starts workflow when period set', async () => {
 		vi.mocked(get_user).mockResolvedValue(mockUser(mockToken()) as any);
-		vi.mocked(upload_bytes_to_youtube).mockResolvedValue('yt67890');
 		const fd = makeForm({
 			video: { name: 'test.mp4', type: 'video/mp4', data: new Uint8Array([3, 4, 5]) },
 			period: '3600000',
@@ -130,19 +131,7 @@ describe('POST /api/test', () => {
 		expect(r.status).toBe(200);
 		const b = await r.json();
 		expect(b.ok).toBe(true);
-		expect(b.yv).toBe('yt67890');
+		expect(b.ve_id).toBeTruthy();
 		expect(b.workflow_id).toBe('wf123');
-		expect(b.next_upload_at).toBeGreaterThan(Date.now() - 1000);
-	});
-
-	it('throws on upload error', async () => {
-		vi.mocked(get_user).mockResolvedValue(mockUser(mockToken()) as any);
-		vi.mocked(upload_bytes_to_youtube).mockRejectedValue(new Error('yt upload failed'));
-		const fd = makeForm({
-			video: { name: 'test.mp4', type: 'video/mp4', data: new Uint8Array([1]) },
-		});
-		const event = mockEvent({ formData: fd });
-		const { POST } = await import('./+server');
-		await expect(POST(event)).rejects.toThrow('yt upload failed');
 	});
 });

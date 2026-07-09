@@ -15,6 +15,7 @@ export interface Ve {
 	n?: string   // current workflow instance id (for termination on delete)
 	h?: number   // holds original r when paused (restored on resume)
 	y?: number   // youtube upload enabled: 1
+	x?: number   // test mode: 1 = skip OR gen, upload user video to yt instead
 	ys?: string  // youtube upload status: 'pending' | 'uploading' | 'live' | 'yt_failed'
 	yv?: string  // youtube video id
 	d: number    // created timestamp

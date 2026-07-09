@@ -21,9 +21,6 @@ export default defineConfig({
 		addWorkerExports({
 			entryPoint: 'src/workflows/video_generator.ts'
 		}),
-		addWorkerExports({
-			entryPoint: 'src/workflows/video_upload_test.ts'
-		})
 	],
 	test: {
 		expect: { requireAssertions: true },

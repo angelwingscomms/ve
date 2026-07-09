@@ -117,5 +117,26 @@ describe('VideoGeneratorWorkflow pause behavior', () => {
 		}
 	}, 30_000);
 
-	
+	it('runs test_yt step when cfg.x is set', async () => {
+		const global = await introspectWorkflow(env.VIDEO_WORKFLOW);
+		const instance = await introspectWorkflowInstance(env.VIDEO_WORKFLOW, 'test-x-1');
+		try {
+			await instance.modify(async (m) => {
+				await m.disableSleeps();
+				await m.mockStepResult({ name: 'load' }, { p: 'test', m: '', r: 60000, y: 0, x: 1, j: 'test/key' });
+				await m.mockStepResult({ name: 'test_yt' }, true);
+				await m.mockStepResult({ name: 'recheck' }, null);
+			});
+
+			await env.VIDEO_WORKFLOW.create({ id: 'test-x-1', params: { ve_id: 'test-x-1' } });
+			await instance.waitForStatus('complete');
+
+			const instances = await global.get();
+			const chained = instances.filter(i => i.id !== 'test-x-1');
+			expect(chained.length).toBe(1);
+		} finally {
+			await instance.dispose();
+			await global.dispose();
+		}
+	}, 30_000);
 });

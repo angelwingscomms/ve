@@ -3,7 +3,7 @@ import { NonRetryableError } from 'cloudflare:workflows';
 
 type Params = { ve_id: string };
 
-type Cfg = { p: string; m: string; g?: number; z?: string; r: number; y?: number };
+type Cfg = { p: string; m: string; g?: number; z?: string; r: number; y?: number; x?: number; j?: string };
 
 export class VideoGeneratorWorkflow extends WorkflowEntrypoint<Env, Params> {
 	async run(event: WorkflowEvent<Params>, step: WorkflowStep) {
@@ -16,7 +16,8 @@ export class VideoGeneratorWorkflow extends WorkflowEntrypoint<Env, Params> {
 			if (!r.ok) return null;
 			return (await r.json()) as Cfg;
 		});
-		if (!cfg || !cfg.r || cfg.r <= 0) return;
+		if (!cfg) return;
+		if (!cfg.r && !cfg.x) return;
 
 		try {
 			await step.do('active', async () => {
@@ -27,63 +28,74 @@ export class VideoGeneratorWorkflow extends WorkflowEntrypoint<Env, Params> {
 				});
 			});
 
-			const job = await step.do('submit', async () => {
-				const key = await this.or_key(ve_id);
-				if (!key) throw new NonRetryableError('no openrouter key');
-				const body: Record<string, unknown> = { model: cfg.m, prompt: cfg.p };
-				if (cfg.g) body.duration = cfg.g;
-				if (cfg.z) body.resolution = cfg.z;
-				const r = await fetch('https://openrouter.ai/api/v1/videos', {
-					method: 'POST',
-					headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
-					body: JSON.stringify(body)
-				});
-				if (!r.ok) {
-					const t = await r.text();
-					if (r.status === 429 || r.status >= 500) throw new Error(t);
-					throw new NonRetryableError(t);
-				}
-				return (await r.json()) as { id: string; polling_url?: string };
-			});
-
-			const w = await step.do('poll', async () => {
-				const key = await this.or_key(ve_id);
-				if (!key) throw new NonRetryableError('no openrouter key');
-				const url = job.polling_url || `https://openrouter.ai/api/v1/videos/${job.id}`;
-				let n = 0;
-				while (n < 35) {
-					n++;
-					await new Promise((res) => setTimeout(res, 60_000));
-					try {
-						const r = await fetch(url, { headers: { Authorization: `Bearer ${key}` } });
-						if (!r.ok) continue;
-						const s = (await r.json()) as { status?: string; unsigned_urls?: string[] };
-						if (s.status === 'completed') return (s.unsigned_urls?.[0] as string) || '';
-						if (s.status === 'failed' || s.status === 'expired' || s.status === 'cancelled')
-							throw new Error(`gen ${s.status}`);
-					} catch (e) {
-						if (e instanceof NonRetryableError) throw e;
-					}
-				}
-				throw new Error('poll timeout');
-			});
-
-			await step.do('save', async () => {
-				await fetch(`${this.env.ORIGIN}/api/internal/ve/done`, {
-					method: 'POST',
-					headers: { 'Content-Type': 'application/json', 'x-internal-key': this.env.INTERNAL_KEY },
-					body: JSON.stringify({ i: ve_id, w })
-				});
-			});
-
-			if (cfg.y) {
-				await step.do('yt', async () => {
-					await fetch(`${this.env.ORIGIN}/api/internal/ve/yt`, {
+			if (cfg.x) {
+				await step.do('test_yt', async () => {
+					const r = await fetch(`${this.env.ORIGIN}/api/internal/ve/test_yt`, {
 						method: 'POST',
 						headers: { 'Content-Type': 'application/json', 'x-internal-key': this.env.INTERNAL_KEY },
 						body: JSON.stringify({ i: ve_id })
 					});
+					if (!r.ok) throw new Error('test yt upload failed');
 				});
+			} else {
+				const job = await step.do('submit', async () => {
+					const key = await this.or_key(ve_id);
+					if (!key) throw new NonRetryableError('no openrouter key');
+					const body: Record<string, unknown> = { model: cfg.m, prompt: cfg.p };
+					if (cfg.g) body.duration = cfg.g;
+					if (cfg.z) body.resolution = cfg.z;
+					const r = await fetch('https://openrouter.ai/api/v1/videos', {
+						method: 'POST',
+						headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
+						body: JSON.stringify(body)
+					});
+					if (!r.ok) {
+						const t = await r.text();
+						if (r.status === 429 || r.status >= 500) throw new Error(t);
+						throw new NonRetryableError(t);
+					}
+					return (await r.json()) as { id: string; polling_url?: string };
+				});
+
+				const w = await step.do('poll', async () => {
+					const key = await this.or_key(ve_id);
+					if (!key) throw new NonRetryableError('no openrouter key');
+					const url = job.polling_url || `https://openrouter.ai/api/v1/videos/${job.id}`;
+					let n = 0;
+					while (n < 35) {
+						n++;
+						await new Promise((res) => setTimeout(res, 60_000));
+						try {
+							const r = await fetch(url, { headers: { Authorization: `Bearer ${key}` } });
+							if (!r.ok) continue;
+							const s = (await r.json()) as { status?: string; unsigned_urls?: string[] };
+							if (s.status === 'completed') return (s.unsigned_urls?.[0] as string) || '';
+							if (s.status === 'failed' || s.status === 'expired' || s.status === 'cancelled')
+								throw new Error(`gen ${s.status}`);
+						} catch (e) {
+							if (e instanceof NonRetryableError) throw e;
+						}
+					}
+					throw new Error('poll timeout');
+				});
+
+				await step.do('save', async () => {
+					await fetch(`${this.env.ORIGIN}/api/internal/ve/done`, {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json', 'x-internal-key': this.env.INTERNAL_KEY },
+						body: JSON.stringify({ i: ve_id, w })
+					});
+				});
+
+				if (cfg.y) {
+					await step.do('yt', async () => {
+						await fetch(`${this.env.ORIGIN}/api/internal/ve/yt`, {
+							method: 'POST',
+							headers: { 'Content-Type': 'application/json', 'x-internal-key': this.env.INTERNAL_KEY },
+							body: JSON.stringify({ i: ve_id })
+						});
+					});
+				}
 			}
 		} catch (e) {
 			console.error('ve generation failed', ve_id, e);
