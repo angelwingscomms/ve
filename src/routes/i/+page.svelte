@@ -1,9 +1,10 @@
 <script lang="ts">
+	import { untrack } from 'svelte';
 	import type { VideoModel } from '$lib/server/openrouter';
 	import type { Ve } from '$lib/types/ve';
 	let { data } = $props();
-	let models = $state(data.models);
-	let ves = $state(data.ves as Ve[]);
+	let models = $state(untrack(() => data.models));
+	let ves = $state(untrack(() => data.ves as Ve[]));
 	let prompt = $state('');
 	let model = $state('');
 	let resolution = $state('');
@@ -200,8 +201,8 @@
 				</label>
 			{/if}
 
-			<label>Schedule</label>
-			<div class="periods">
+		<span id="sched-lbl" class="lbl">Schedule</span>
+		<div class="periods" role="group" aria-labelledby="sched-lbl">
 				<button type="button" class={period === '3600000' ? 'btn-active' : 'btn-opt'} onclick={() => { period = '3600000'; use_custom = false; }}>Every hour</button>
 				<button type="button" class={period === '86400000' ? 'btn-active' : 'btn-opt'} onclick={() => { period = '86400000'; use_custom = false; }}>Daily</button>
 				<button type="button" class={period === '604800000' ? 'btn-active' : 'btn-opt'} onclick={() => { period = '604800000'; use_custom = false; }}>Weekly</button>
@@ -246,7 +247,7 @@
 						</div>
 						{#if v.w}
 							<div class="ve-video">
-								<video src="/api/ves/{v.i}/video" controls class="video-player"></video>
+								<video src="/api/ves/{v.i}/video" controls class="video-player"><track kind="captions" /></video>
 							</div>
 						{/if}
 					</div>
@@ -294,6 +295,7 @@
 	}
 	.input:focus { outline: none; border-color: #111; }
 	label { font-size: 0.8125rem; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem; color: #555; }
+	.lbl { font-size: 0.8125rem; font-weight: 600; display: block; margin-bottom: 0.25rem; color: #555; }
 	.sort-tabs { display: inline-flex; gap: 0; font-weight: 400; }
 	.st, .st-active {
 		font-size: 0.6875rem;

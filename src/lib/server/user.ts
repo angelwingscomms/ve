@@ -1,14 +1,7 @@
-import { QdrantClient } from '@qdrant/js-client-rest';
-import { QDRANT_KEY, QDRANT_URL } from '$env/static/private';
+import { client, upsert } from './qdrant';
 import type { User } from '$lib/types/user';
 
 const C = 'i';
-let q: QdrantClient | null = null;
-
-function client(): QdrantClient {
-	if (!q) q = new QdrantClient({ url: QDRANT_URL, apiKey: QDRANT_KEY, checkCompatibility: false });
-	return q;
-}
 
 export async function save_user(
 	_event: unknown,
@@ -24,12 +17,10 @@ export async function save_user(
 	if (r.points.length) {
 		const cur = r.points[0].payload as Record<string, unknown>;
 		cur.d = Date.now();
-		await client().upsert(C, { points: [{ id: r.points[0].id, vector: {}, payload: cur as unknown as Record<string, unknown> }] } as any);
+		await upsert(r.points[0].id as string, cur as unknown as Record<string, unknown>);
 		return;
 	}
-	await client().upsert(C, {
-		points: [{ id: crypto.randomUUID(), vector: {}, payload: { s: 'u', g: id, n: name, p: picture, m: email, d: Date.now() } as unknown as Record<string, unknown> }]
-	} as any);
+	await upsert(crypto.randomUUID(), { s: 'u', g: id, n: name, p: picture, m: email, d: Date.now() } as unknown as Record<string, unknown>);
 }
 
 export async function get_user(_event: unknown, id: string): Promise<User | null> {
@@ -52,7 +43,5 @@ export async function update_user_api_keys(
 		limit: 1
 	} as any);
 	if (!r.points.length) throw new Error('user not found');
-	await client().upsert(C, {
-		points: [{ id: r.points[0].id, vector: {}, payload: { ...r.points[0].payload as Record<string, unknown>, a: api_keys } as unknown as Record<string, unknown> }]
-	} as any);
+	await upsert(r.points[0].id as string, { ...r.points[0].payload as Record<string, unknown>, a: api_keys } as unknown as Record<string, unknown>);
 }

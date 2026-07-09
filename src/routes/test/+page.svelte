@@ -49,8 +49,8 @@
 			<label for="t">Title (optional)</label>
 			<input id="t" type="text" bind:value={title} class="input" placeholder={"Test upload at " + new Date().toISOString().slice(0, 19)} />
 
-			<label>Schedule</label>
-			<div class="periods">
+		<span id="test-sched-lbl" class="lbl">Schedule</span>
+		<div class="periods" role="group" aria-labelledby="test-sched-lbl">
 				<button type="button" class={period === '0' ? 'btn-active' : 'btn-opt'} onclick={() => { period = '0'; use_custom = false; }}>No schedule</button>
 				<button type="button" class={period === '3600000' ? 'btn-active' : 'btn-opt'} onclick={() => { period = '3600000'; use_custom = false; }}>Every hour</button>
 				<button type="button" class={period === '86400000' ? 'btn-active' : 'btn-opt'} onclick={() => { period = '86400000'; use_custom = false; }}>Daily</button>
@@ -107,6 +107,7 @@
 	}
 	.input:focus { outline: none; border-color: #111; }
 	label { font-size: 0.8125rem; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.25rem; color: #555; }
+	.lbl { font-size: 0.8125rem; font-weight: 600; display: block; margin-bottom: 0.25rem; color: #555; }
 	.periods { display: flex; gap: 0.5rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
 	.btn-opt, .btn-active {
 		padding: 0.375rem 0.75rem;

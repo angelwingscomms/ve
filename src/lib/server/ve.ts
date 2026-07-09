@@ -1,14 +1,7 @@
-import { QdrantClient } from '@qdrant/js-client-rest';
-import { QDRANT_KEY, QDRANT_URL } from '$env/static/private';
+import { client, upsert } from './qdrant';
 import type { Ve } from '$lib/types/ve';
 
 const C = 'i';
-let q: QdrantClient | null = null;
-
-function client(): QdrantClient {
-	if (!q) q = new QdrantClient({ url: QDRANT_URL, apiKey: QDRANT_KEY, checkCompatibility: false });
-	return q;
-}
 
 function from_payload(p: Record<string, unknown>): Ve | null {
 	if (p?.s !== 'e') return null;
@@ -17,7 +10,7 @@ function from_payload(p: Record<string, unknown>): Ve | null {
 
 export async function save_ve(id: string, u: string, prompt: string, model: string, period: number, duration?: number, resolution?: string, job_id?: string, yt?: number, test?: number): Promise<void> {
 	const v: Ve = { s: 'e', i: id, u, p: prompt, m: model, g: duration, z: resolution, r: period, t: 0, x: test, c: job_id ? 'sampling' : undefined, j: job_id, y: yt, d: Date.now() };
-	await client().upsert(C, { points: [{ id, vector: {}, payload: v as unknown as Record<string, unknown> }] } as any);
+	await upsert(id, v as unknown as Record<string, unknown>);
 }
 
 export async function update_ve_video_url(id: string, w: string): Promise<void> {
@@ -60,7 +53,7 @@ export async function increment_ve_retries(id: string): Promise<void> {
 	const v = await get_ve(id);
 	if (!v) return;
 	v.t = (v.t || 0) + 1;
-	await client().upsert(C, { points: [{ id, vector: {}, payload: v as unknown as Record<string, unknown> }] } as any);
+	await upsert(id, v as unknown as Record<string, unknown>);
 }
 
 export async function update_ve_pause(id: string, pause: boolean): Promise<void> {
@@ -76,5 +69,5 @@ export async function update_ve_pause(id: string, pause: boolean): Promise<void>
 		v.h = undefined;
 		v.c = 'active';
 	}
-	await client().upsert(C, { points: [{ id, vector: {}, payload: v as unknown as Record<string, unknown> }] } as any);
+	await upsert(id, v as unknown as Record<string, unknown>);
 }
