@@ -12,7 +12,7 @@ function client(): QdrantClient {
 
 function from_payload(p: Record<string, unknown>): Ve | null {
 	if (p?.s !== 'e') return null;
-	return { s: 'e', i: p.i as string, u: p.u as string, p: p.p as string, m: p.m as string, g: p.g as number | undefined, z: p.z as string | undefined, r: p.r as number, t: p.t as number, c: p.c as string | undefined, l: p.l as number | undefined, j: p.j as string | undefined, w: p.w as string | undefined, n: p.n as string | undefined, y: p.y as number | undefined, ys: p.ys as string | undefined, yv: p.yv as string | undefined, d: p.d as number };
+	return { s: 'e', i: p.i as string, u: p.u as string, p: p.p as string, m: p.m as string, g: p.g as number | undefined, z: p.z as string | undefined, r: p.r as number, t: p.t as number, c: p.c as string | undefined, l: p.l as number | undefined, j: p.j as string | undefined, w: p.w as string | undefined, n: p.n as string | undefined, h: p.h as number | undefined, y: p.y as number | undefined, ys: p.ys as string | undefined, yv: p.yv as string | undefined, d: p.d as number };
 }
 
 export async function save_ve(id: string, u: string, prompt: string, model: string, period: number, duration?: number, resolution?: string, job_id?: string, yt?: number): Promise<void> {
@@ -72,5 +72,21 @@ export async function increment_ve_retries(id: string): Promise<void> {
 	const v = await get_ve(id);
 	if (!v) return;
 	v.t = (v.t || 0) + 1;
+	await client().upsert(C, { points: [{ id, vector: {}, payload: v as unknown as Record<string, unknown> }] } as any);
+}
+
+export async function update_ve_pause(id: string, pause: boolean): Promise<void> {
+	const v = await get_ve(id);
+	if (!v) return;
+	if (pause) {
+		v.h = v.r;
+		v.r = 0;
+		v.c = 'paused';
+	} else {
+		if (!v.h) return;
+		v.r = v.h;
+		v.h = undefined;
+		v.c = 'active';
+	}
 	await client().upsert(C, { points: [{ id, vector: {}, payload: v as unknown as Record<string, unknown> }] } as any);
 }

@@ -1,6 +1,6 @@
 import { json } from '@sveltejs/kit';
 import type { RequestEvent } from '@sveltejs/kit';
-import { save_ve, list_ves, delete_ve, get_ve, add_ve_inst } from '$lib/server/ve';
+import { save_ve, list_ves, delete_ve, get_ve, add_ve_inst, update_ve_pause } from '$lib/server/ve';
 import { get_user } from '$lib/server/user';
 
 export async function GET(event: RequestEvent): Promise<Response> {
@@ -62,4 +62,50 @@ export async function DELETE(event: RequestEvent): Promise<Response> {
 	}
 	await delete_ve(body.id);
 	return json({ ok: true });
+}
+
+export async function PATCH(event: RequestEvent): Promise<Response> {
+	if (!event.locals.user) return json({ error: 'unauthorized' }, { status: 401 });
+	const body = await event.request.json() as { id: string; action: 'pause' | 'resume' };
+	if (!body.id || !body.action) return json({ error: 'missing id or action' }, { status: 400 });
+	const v = await get_ve(body.id);
+	if (!v || v.u !== event.locals.user.id) return json({ error: 'not found' }, { status: 404 });
+
+	if (body.action === 'pause') {
+		if (v.n) {
+			try {
+				const env = event.platform?.env as
+					| { VIDEO_WORKFLOW?: { get: (id: string) => { terminate: () => Promise<void> } } }
+					| undefined;
+				if (env?.VIDEO_WORKFLOW) {
+					await env.VIDEO_WORKFLOW.get(v.n).terminate();
+				}
+			} catch (e) {
+				console.error('workflow terminate failed', e);
+			}
+		}
+		await update_ve_pause(body.id, true);
+	} else {
+		await update_ve_pause(body.id, false);
+		if (v.h && v.h > 0) {
+			try {
+				const u = await get_user({}, event.locals.user.id);
+				const env = event.platform?.env as
+					| { VIDEO_WORKFLOW?: { create: (o: { id: string; params: { ve_id: string } }) => Promise<{ id: string }> } }
+					| undefined;
+				if (u?.a?.o && env?.VIDEO_WORKFLOW) {
+					const inst = await env.VIDEO_WORKFLOW.create({
+						id: `ve_${body.id}_${Date.now()}`,
+						params: { ve_id: body.id }
+					});
+					await add_ve_inst(body.id, inst.id);
+				}
+			} catch (e) {
+				console.error('workflow start failed', e);
+			}
+		}
+	}
+
+	const updated = await get_ve(body.id);
+	return json({ ve: updated });
 }

@@ -125,6 +125,12 @@
 		await fetch('/api/ves', { method: 'DELETE', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id }) });
 		location.reload();
 	}
+
+	async function pause_toggle(v: Ve) {
+		const action = v.c === 'paused' ? 'resume' : 'pause';
+		await fetch('/api/ves', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ id: v.i, action }) });
+		location.reload();
+	}
 </script>
 
 <svelte:head>
@@ -231,6 +237,9 @@
 								{/if}
 								{#if v.yv}
 									<a href="https://youtube.com/watch?v={v.yv}" target="_blank" class="yt-link">yt</a>
+								{/if}
+								{#if v.r > 0 || v.c === 'paused'}
+									<button onclick={() => pause_toggle(v)} class="btn-ghost-sm">{v.c === 'paused' ? '▶' : '⏸'}</button>
 								{/if}
 								<button onclick={() => del(v.i)} class="btn-ghost-sm">×</button>
 							</div>
@@ -367,6 +376,7 @@
 	.badge-done { background: #d1fae5; color: #059669; }
 	.badge-failed { background: #fee2e2; color: #dc2626; }
 	.badge-pending { background: #f3f4f6; color: #6b7280; }
+	.badge-paused { background: #fef3c7; color: #b45309; }
 	.btn-ghost-sm {
 		background: none;
 		border: none;
