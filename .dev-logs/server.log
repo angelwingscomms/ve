@@ -81,3 +81,13 @@ https://svelte.dev/e/a11y_media_has_caption
 7:20:30 PM [vite] (client) hmr update /src/routes/test/+page.svelte?svelte&type=style&lang.css
 7:20:39 PM [vite] (client) page reload src/app.html
 7:20:39 PM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+
+[1;31m[500] POST /api/test[0m
+Error: Bad Request
+    at Object.fun [as upsertPoints] (file:/home/ed/i/ve/node_modules/.pnpm/@qdrant+openapi-typescript-fetch@1.2.6/node_modules/@qdrant/openapi-typescript-fetch/dist/esm/fetcher.js:169:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async QdrantClient.upsert (file:/home/ed/i/ve/node_modules/.pnpm/@qdrant+js-client-rest@1.18.0_typescript@6.0.3/node_modules/@qdrant/js-client-rest/dist/esm/qdrant-client.js:622:26)
+    at async upsert (src/lib/server/qdrant.ts:25:2)
+    at async save_ve (src/lib/server/ve.ts:13:2)
+    at async POST (src/routes/api/test/+server.ts:26:2)
+7:34:14 PM [vite] (ssr) page reload src/lib/server/qdrant.ts

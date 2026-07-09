@@ -10,11 +10,21 @@ export function client(): QdrantClient {
 	return q;
 }
 
+function parse_size(v: unknown): number {
+	if (!v || typeof v !== 'object') return 0;
+	if (typeof (v as { size?: number }).size === 'number') return (v as { size: number }).size;
+	const named = v as Record<string, { size?: number }>;
+	for (const k of Object.keys(named)) {
+		if (typeof named[k]?.size === 'number') return named[k].size as number;
+	}
+	return 0;
+}
+
 async function vec_size(): Promise<number> {
 	if (size === null) {
-		const r = await client().getCollection(C);
-		const v = (r.config.params.vectors as { size?: number }) ?? {};
-		size = v.size ?? 0;
+		const r = await fetch(`${QDRANT_URL}/collections/${C}`, { headers: { 'api-key': QDRANT_KEY } });
+		const j = (await r.json()) as { result?: { config?: { params?: { vectors?: unknown } } } };
+		size = parse_size(j?.result?.config?.params?.vectors);
 	}
 	return size;
 }
