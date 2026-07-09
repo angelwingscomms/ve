@@ -48,7 +48,7 @@ export default defineConfig({
 					name: 'server',
 					environment: 'node',
 					include: ['src/**/*.{test,spec}.{js,ts}'],
-					exclude: ['src/**/*.svelte.{test,spec}.{js,ts}', 'src/workflows/**', 'src/**/*.e2e.test.ts']
+					exclude: ['src/**/*.svelte.{test,spec}.{js,ts}', 'src/workflows/**']
 				}
 			}
 		]
