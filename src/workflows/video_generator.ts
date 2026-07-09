@@ -100,9 +100,14 @@ export class VideoGeneratorWorkflow extends WorkflowEntrypoint<Env, Params> {
 			return d && d.r > 0 ? d : null;
 		});
 		if (next) {
-			await this.env.VIDEO_WORKFLOW.create({
+			const inst = await this.env.VIDEO_WORKFLOW.create({
 				id: `ve_${ve_id}_${Date.now()}`,
 				params: { ve_id }
+			});
+			await fetch(`${this.env.ORIGIN}/api/internal/ve/inst`, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json', 'x-internal-key': this.env.INTERNAL_KEY },
+				body: JSON.stringify({ i: ve_id, n: inst.id })
 			});
 		}
 	}

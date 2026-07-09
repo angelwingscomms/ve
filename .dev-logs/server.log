@@ -38,3 +38,39 @@ https://svelte.dev/e/state_referenced_locally
 https://svelte.dev/e/a11y_label_has_associated_control
 2:58:43 AM [vite-plugin-svelte] src/routes/i/+page.svelte:240:8 `<video>` elements must have a `<track kind="captions">`
 https://svelte.dev/e/a11y_media_has_caption
+3:13:22 AM [vite] (ssr) page reload src/lib/server/ve.ts
+3:13:26 AM [vite] (ssr) page reload src/lib/server/ve.ts
+⎔ Reloading local server...
+⎔ Local server updated and ready
+3:14:48 AM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+3:14:48 AM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+3:14:48 AM [vite] (client) page reload .svelte-kit/generated/client/nodes/5.js
+3:14:48 AM [vite] (client) page reload .svelte-kit/generated/client/app.js
+3:14:48 AM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+3:14:48 AM [vite] (ssr) page reload .svelte-kit/generated/shared/error-template.js
+3:14:48 AM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+3:14:48 AM [vite] (client) page reload .svelte-kit/generated/root.js
+3:14:48 AM [vite] (ssr) page reload .svelte-kit/generated/root.js
+⎔ Reloading local server...
+3:14:48 AM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
+⎔ Local server updated and ready
+3:14:51 AM [vite] (client) page reload .svelte-kit/generated/client/app.js
+3:14:51 AM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+3:14:51 AM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+3:14:51 AM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+3:14:51 AM [vite] (client) page reload .svelte-kit/generated/client/nodes/5.js
+3:14:51 AM [vite] (ssr) page reload .svelte-kit/generated/shared/error-template.js
+3:14:51 AM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+3:14:51 AM [vite] (client) page reload .svelte-kit/generated/root.js
+3:14:51 AM [vite] (ssr) page reload .svelte-kit/generated/root.js
+3:14:51 AM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
+3:14:55 AM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+3:14:55 AM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+3:14:55 AM [vite] (client) page reload .svelte-kit/generated/client/nodes/5.js
+3:14:55 AM [vite] (client) page reload .svelte-kit/generated/client/app.js
+3:14:55 AM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+3:14:55 AM [vite] (ssr) page reload .svelte-kit/generated/shared/error-template.js
+3:14:55 AM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+3:14:55 AM [vite] (client) page reload .svelte-kit/generated/root.js
+3:14:55 AM [vite] (ssr) page reload .svelte-kit/generated/root.js
+3:14:55 AM [vite] (ssr) page reload .svelte-kit/generated/root.svelte

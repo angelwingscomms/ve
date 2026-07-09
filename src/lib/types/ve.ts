@@ -12,6 +12,7 @@ export interface Ve {
 	l?: number   // last_run timestamp (epoch ms)
 	j?: string   // OpenRouter job id (for samples being polled)
 	w?: string   // video url (for completed samples)
+	n?: string   // current workflow instance id (for termination on delete)
 	y?: number   // youtube upload enabled: 1
 	ys?: string  // youtube upload status: 'pending' | 'uploading' | 'live' | 'yt_failed'
 	yv?: string  // youtube video id
