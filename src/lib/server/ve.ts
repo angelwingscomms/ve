@@ -21,20 +21,13 @@ export async function save_ve(id: string, u: string, prompt: string, model: stri
 }
 
 export async function update_ve_video_url(id: string, w: string): Promise<void> {
-	const v = await get_ve(id);
-	if (!v) return;
-	v.w = w;
-	v.c = 'done';
-	v.l = Date.now();
-	await client().upsert(C, { points: [{ id, vector: {}, payload: v as unknown as Record<string, unknown> }] } as any);
+	await client().setPayload(C, { payload: { w, c: 'done', l: Date.now() }, points: [id], wait: true });
 }
 
 export async function update_ve_yt(id: string, ys: string, yv?: string): Promise<void> {
-	const v = await get_ve(id);
-	if (!v) return;
-	v.ys = ys;
-	if (yv) v.yv = yv;
-	await client().upsert(C, { points: [{ id, vector: {}, payload: v as unknown as Record<string, unknown> }] } as any);
+	const p: Record<string, unknown> = { ys };
+	if (yv) p.yv = yv;
+	await client().setPayload(C, { payload: p, points: [id], wait: true });
 }
 
 export async function get_ve(id: string): Promise<Ve | null> {
@@ -50,10 +43,7 @@ export async function list_ves(user_id?: string): Promise<Ve[]> {
 }
 
 export async function add_ve_inst(id: string, n: string): Promise<void> {
-	const v = await get_ve(id);
-	if (!v) return;
-	v.n = n;
-	await client().upsert(C, { points: [{ id, vector: {}, payload: v as unknown as Record<string, unknown> }] } as any);
+	await client().setPayload(C, { payload: { n }, points: [id], wait: true });
 }
 
 export async function delete_ve(id: string): Promise<void> {
@@ -61,11 +51,9 @@ export async function delete_ve(id: string): Promise<void> {
 }
 
 export async function update_ve_status(id: string, c: string): Promise<void> {
-	const v = await get_ve(id);
-	if (!v) return;
-	v.c = c;
-	if (c === 'done') v.l = Date.now();
-	await client().upsert(C, { points: [{ id, vector: {}, payload: v as unknown as Record<string, unknown> }] } as any);
+	const p: Record<string, unknown> = { c };
+	if (c === 'done') p.l = Date.now();
+	await client().setPayload(C, { payload: p, points: [id], wait: true });
 }
 
 export async function increment_ve_retries(id: string): Promise<void> {

@@ -228,3 +228,78 @@ env.ORIGIN ("(hidden)")                          Environment Variable      local
         ╵ [32m^[0m
 
 
+4:11:51 AM [vite] (ssr) page reload src/lib/server/ve.ts
+4:11:55 AM [vite] (ssr) page reload src/lib/server/ve.ts
+4:11:59 AM [vite] (ssr) page reload src/lib/server/ve.ts
+4:12:06 AM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
+4:12:06 AM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
+4:12:06 AM [vite] (client) page reload .svelte-kit/generated/client/nodes/5.js
+4:12:06 AM [vite] (client) page reload .svelte-kit/generated/client/app.js
+4:12:06 AM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
+4:12:06 AM [vite] (ssr) page reload .svelte-kit/generated/shared/error-template.js
+4:12:06 AM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
+4:12:06 AM [vite] (client) page reload .svelte-kit/generated/root.js
+4:12:06 AM [vite] (ssr) page reload .svelte-kit/generated/root.js
+4:12:06 AM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
+Using secrets defined in .env
+Your Worker has access to the following bindings:
+Binding                                          Resource                  Mode
+env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)      Workflow                  local
+env.SECRET ("(hidden)")                          Environment Variable      local
+env.GOOGLE_ID ("(hidden)")                       Environment Variable      local
+env.GOOGLE_SECRET ("(hidden)")                   Environment Variable      local
+env.QDRANT_URL ("(hidden)")                      Environment Variable      local
+env.QDRANT_KEY ("(hidden)")                      Environment Variable      local
+env.INTERNAL_KEY ("(hidden)")                    Environment Variable      local
+env.OPENROUTER_KEY ("(hidden)")                  Environment Variable      local
+env.ORIGIN ("(hidden)")                          Environment Variable      local
+
+❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
+⎔ Reloading local server...
+Using secrets defined in .env
+Your Worker has access to the following bindings:
+Binding                                          Resource                  Mode
+env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)      Workflow                  local
+env.SECRET ("(hidden)")                          Environment Variable      local
+env.GOOGLE_ID ("(hidden)")                       Environment Variable      local
+env.GOOGLE_SECRET ("(hidden)")                   Environment Variable      local
+env.QDRANT_URL ("(hidden)")                      Environment Variable      local
+env.QDRANT_KEY ("(hidden)")                      Environment Variable      local
+env.INTERNAL_KEY ("(hidden)")                    Environment Variable      local
+env.OPENROUTER_KEY ("(hidden)")                  Environment Variable      local
+env.ORIGIN ("(hidden)")                          Environment Variable      local
+
+❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mValueExpected[0m
+
+    /home/ed/i/ve/.dev-worker-wrangler.jsonc:1:0:
+[37m      1 │ [32m[37m
+        ╵ [32m^[0m
+
+
+⎔ Local server updated and ready
+⎔ Reloading local server...
+Using secrets defined in .env
+Your Worker has access to the following bindings:
+Binding                                          Resource                  Mode
+env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)      Workflow                  local
+env.SECRET ("(hidden)")                          Environment Variable      local
+env.GOOGLE_ID ("(hidden)")                       Environment Variable      local
+env.GOOGLE_SECRET ("(hidden)")                   Environment Variable      local
+env.QDRANT_URL ("(hidden)")                      Environment Variable      local
+env.QDRANT_KEY ("(hidden)")                      Environment Variable      local
+env.INTERNAL_KEY ("(hidden)")                    Environment Variable      local
+env.OPENROUTER_KEY ("(hidden)")                  Environment Variable      local
+env.ORIGIN ("(hidden)")                          Environment Variable      local
+
+❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
+⎔ Local server updated and ready
+⎔ Reloading local server...
+⎔ Local server updated and ready
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mValueExpected[0m
+
+    /home/ed/i/ve/.dev-worker-wrangler.jsonc:1:0:
+[37m      1 │ [32m[37m
+        ╵ [32m^[0m
+
+
