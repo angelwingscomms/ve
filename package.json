@@ -13,7 +13,8 @@
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
 		"test:unit": "vitest",
-		"test": "npm run test:unit -- --run && npm run test:e2e",
+		"test:workflows": "vitest -c vitest.workflow.config.ts --run",
+		"test": "npm run test:unit -- --run && npm run test:workflows",
 		"test:e2e": "playwright install && playwright test",
 		"gen": "wrangler types"
 	},
@@ -23,10 +24,11 @@
 		"sqids": "^0.3.0"
 	},
 	"devDependencies": {
+		"@cloudflare/vitest-pool-workers": "^0.18.2",
 		"@eslint/js": "^10.0.1",
+		"@oselvar/sveltekit-add-worker-exports": "^2.1.1",
 		"@playwright/test": "^1.60.0",
 		"@sveltejs/adapter-cloudflare": "^7.2.8",
-		"@oselvar/sveltekit-add-worker-exports": "^2.1.1",
 		"@sveltejs/kit": "^2.63.0",
 		"@sveltejs/vite-plugin-svelte": "^7.1.2",
 		"@types/node": "^24",

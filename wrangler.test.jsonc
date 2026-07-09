@@ -1,0 +1,18 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "ve-test",
+	"main": "src/workflows/test-entry.ts",
+	"compatibility_date": "2026-07-08",
+	"compatibility_flags": ["nodejs_als"],
+	"vars": {
+		"ORIGIN": "http://localhost:8787",
+		"INTERNAL_KEY": "test-internal-key"
+	},
+	"workflows": [
+		{
+			"name": "video-generator",
+			"binding": "VIDEO_WORKFLOW",
+			"class_name": "VideoGeneratorWorkflow"
+		}
+	]
+}
