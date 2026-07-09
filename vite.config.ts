@@ -12,7 +12,11 @@ export default defineConfig({
 				runes: ({ filename }) =>
 					filename.split(/[/\\]/).includes('node_modules') ? undefined : true
 			},
-			adapter: adapter()
+			adapter: adapter({
+				platformProxy: {
+					configPath: '.platform-proxy-wrangler.jsonc'
+				}
+			})
 		}),
 		addWorkerExports({
 			entryPoint: 'src/workflows/video_generator.ts'

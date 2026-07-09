@@ -23,3 +23,7 @@ vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 # Playwright
 test-results
+
+# Plugin-generated
+.dev-worker-wrangler.jsonc
+.platform-proxy-wrangler.jsonc
