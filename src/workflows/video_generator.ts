@@ -116,3 +116,5 @@ export class VideoGeneratorWorkflow extends WorkflowEntrypoint<Env, Params> {
 		return d.a_o || null;
 	}
 }
+
+export default { async fetch() { return new Response(null, { status: 404 }) } };
