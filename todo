@@ -1,0 +1,1 @@
+- make videos public (change privacyStatus from 'private' to 'public' in src/lib/server/yt.ts)

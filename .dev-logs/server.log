@@ -1,311 +1,6 @@
 $ vite dev --port 5427
 Using secrets defined in .env
 Your Worker has access to the following bindings:
-Binding                                          Resource                  Mode
-env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)      Workflow                  local
-env.SECRET ("(hidden)")                          Environment Variable      local
-env.GOOGLE_ID ("(hidden)")                       Environment Variable      local
-env.GOOGLE_SECRET ("(hidden)")                   Environment Variable      local
-env.QDRANT_URL ("(hidden)")                      Environment Variable      local
-env.QDRANT_KEY ("(hidden)")                      Environment Variable      local
-env.INTERNAL_KEY ("(hidden)")                    Environment Variable      local
-env.OPENROUTER_KEY ("(hidden)")                  Environment Variable      local
-env.ORIGIN ("(hidden)")                          Environment Variable      local
-
-❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
-
-  VITE v8.1.3  ready in 3268 ms
-
-  ➜  Local:   http://localhost:5427/
-  ➜  Network: use --host to expose
-  ➜  press h + enter to show help
-⎔ Starting local server...
-[wrangler:info] Ready on http://localhost:8787
-Using secrets defined in .env
-3:46:09 AM [vite-plugin-svelte] src/routes/i/+page.svelte:5:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
-https://svelte.dev/e/state_referenced_locally
-3:46:09 AM [vite-plugin-svelte] src/routes/i/+page.svelte:6:18 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
-https://svelte.dev/e/state_referenced_locally
-3:46:09 AM [vite-plugin-svelte] src/routes/i/+page.svelte:197:3 A form label must be associated with a control
-https://svelte.dev/e/a11y_label_has_associated_control
-3:46:09 AM [vite-plugin-svelte] src/routes/i/+page.svelte:240:8 `<video>` elements must have a `<track kind="captions">`
-https://svelte.dev/e/a11y_media_has_caption
-3:46:10 AM [vite-plugin-svelte] src/routes/i/+page.svelte:5:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
-https://svelte.dev/e/state_referenced_locally
-3:46:10 AM [vite-plugin-svelte] src/routes/i/+page.svelte:6:18 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
-https://svelte.dev/e/state_referenced_locally
-3:46:10 AM [vite-plugin-svelte] src/routes/i/+page.svelte:197:3 A form label must be associated with a control
-https://svelte.dev/e/a11y_label_has_associated_control
-3:46:10 AM [vite-plugin-svelte] src/routes/i/+page.svelte:240:8 `<video>` elements must have a `<track kind="captions">`
-https://svelte.dev/e/a11y_media_has_caption
-4:06:16 AM [vite] (ssr) page reload src/lib/server/ve.ts
-4:06:20 AM [vite] (ssr) page reload src/lib/server/ve.ts
-4:06:24 AM [vite] (ssr) page reload src/routes/api/ves/+server.ts
-4:06:29 AM [vite] (ssr) page reload src/routes/api/ves/+server.ts
-4:06:34 AM [vite-plugin-svelte] src/routes/i/+page.svelte:5:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
-https://svelte.dev/e/state_referenced_locally
-4:06:34 AM [vite-plugin-svelte] src/routes/i/+page.svelte:6:18 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
-https://svelte.dev/e/state_referenced_locally
-4:06:34 AM [vite-plugin-svelte] src/routes/i/+page.svelte:203:3 A form label must be associated with a control
-https://svelte.dev/e/a11y_label_has_associated_control
-4:06:34 AM [vite-plugin-svelte] src/routes/i/+page.svelte:246:8 `<video>` elements must have a `<track kind="captions">`
-https://svelte.dev/e/a11y_media_has_caption
-4:06:34 AM [vite] (client) hmr update /src/routes/i/+page.svelte
-4:06:34 AM [vite] (ssr) page reload src/routes/i/+page.svelte
-4:06:34 AM [vite-plugin-svelte] src/routes/i/+page.svelte:5:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
-https://svelte.dev/e/state_referenced_locally
-4:06:34 AM [vite-plugin-svelte] src/routes/i/+page.svelte:6:18 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
-https://svelte.dev/e/state_referenced_locally
-4:06:34 AM [vite-plugin-svelte] src/routes/i/+page.svelte:203:3 A form label must be associated with a control
-https://svelte.dev/e/a11y_label_has_associated_control
-4:06:34 AM [vite-plugin-svelte] src/routes/i/+page.svelte:246:8 `<video>` elements must have a `<track kind="captions">`
-https://svelte.dev/e/a11y_media_has_caption
-4:06:38 AM [vite-plugin-svelte] src/routes/i/+page.svelte:5:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
-https://svelte.dev/e/state_referenced_locally
-4:06:38 AM [vite-plugin-svelte] src/routes/i/+page.svelte:6:18 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
-https://svelte.dev/e/state_referenced_locally
-4:06:38 AM [vite-plugin-svelte] src/routes/i/+page.svelte:203:3 A form label must be associated with a control
-https://svelte.dev/e/a11y_label_has_associated_control
-4:06:38 AM [vite-plugin-svelte] src/routes/i/+page.svelte:249:8 `<video>` elements must have a `<track kind="captions">`
-https://svelte.dev/e/a11y_media_has_caption
-4:06:38 AM [vite] (client) hmr update /src/routes/i/+page.svelte
-4:06:38 AM [vite] (ssr) page reload src/routes/i/+page.svelte
-4:06:38 AM [vite-plugin-svelte] src/routes/i/+page.svelte:5:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
-https://svelte.dev/e/state_referenced_locally
-4:06:38 AM [vite-plugin-svelte] src/routes/i/+page.svelte:6:18 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
-https://svelte.dev/e/state_referenced_locally
-4:06:38 AM [vite-plugin-svelte] src/routes/i/+page.svelte:203:3 A form label must be associated with a control
-https://svelte.dev/e/a11y_label_has_associated_control
-4:06:38 AM [vite-plugin-svelte] src/routes/i/+page.svelte:249:8 `<video>` elements must have a `<track kind="captions">`
-https://svelte.dev/e/a11y_media_has_caption
-4:06:42 AM [vite-plugin-svelte] src/routes/i/+page.svelte:5:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
-https://svelte.dev/e/state_referenced_locally
-4:06:42 AM [vite-plugin-svelte] src/routes/i/+page.svelte:6:18 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
-https://svelte.dev/e/state_referenced_locally
-4:06:42 AM [vite-plugin-svelte] src/routes/i/+page.svelte:203:3 A form label must be associated with a control
-https://svelte.dev/e/a11y_label_has_associated_control
-4:06:42 AM [vite-plugin-svelte] src/routes/i/+page.svelte:249:8 `<video>` elements must have a `<track kind="captions">`
-https://svelte.dev/e/a11y_media_has_caption
-4:06:42 AM [vite] (client) hmr update /src/routes/i/+page.svelte?svelte&type=style&lang.css
-4:06:42 AM [vite] (ssr) page reload src/routes/i/+page.svelte
-4:06:46 AM [vite-plugin-svelte] src/routes/i/+page.svelte:5:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
-https://svelte.dev/e/state_referenced_locally
-4:06:46 AM [vite-plugin-svelte] src/routes/i/+page.svelte:6:18 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
-https://svelte.dev/e/state_referenced_locally
-4:06:46 AM [vite-plugin-svelte] src/routes/i/+page.svelte:203:3 A form label must be associated with a control
-https://svelte.dev/e/a11y_label_has_associated_control
-4:06:46 AM [vite-plugin-svelte] src/routes/i/+page.svelte:249:8 `<video>` elements must have a `<track kind="captions">`
-https://svelte.dev/e/a11y_media_has_caption
-4:06:46 AM [vite] (client) hmr update /src/routes/i/+page.svelte
-4:06:46 AM [vite] (ssr) page reload src/routes/i/+page.svelte
-4:06:46 AM [vite-plugin-svelte] src/routes/i/+page.svelte:5:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
-https://svelte.dev/e/state_referenced_locally
-4:06:46 AM [vite-plugin-svelte] src/routes/i/+page.svelte:6:18 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
-https://svelte.dev/e/state_referenced_locally
-4:06:46 AM [vite-plugin-svelte] src/routes/i/+page.svelte:203:3 A form label must be associated with a control
-https://svelte.dev/e/a11y_label_has_associated_control
-4:06:46 AM [vite-plugin-svelte] src/routes/i/+page.svelte:249:8 `<video>` elements must have a `<track kind="captions">`
-https://svelte.dev/e/a11y_media_has_caption
-4:07:17 AM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
-4:07:17 AM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
-4:07:17 AM [vite] (client) page reload .svelte-kit/generated/client/nodes/5.js
-4:07:17 AM [vite] (client) page reload .svelte-kit/generated/client/app.js
-4:07:17 AM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
-4:07:17 AM [vite] (ssr) page reload .svelte-kit/generated/shared/error-template.js
-4:07:17 AM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
-4:07:17 AM [vite] (client) page reload .svelte-kit/generated/root.js
-4:07:17 AM [vite] (ssr) page reload .svelte-kit/generated/root.js
-4:07:17 AM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
-Using secrets defined in .env
-Your Worker has access to the following bindings:
-Binding                                          Resource                  Mode
-env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)      Workflow                  local
-env.SECRET ("(hidden)")                          Environment Variable      local
-env.GOOGLE_ID ("(hidden)")                       Environment Variable      local
-env.GOOGLE_SECRET ("(hidden)")                   Environment Variable      local
-env.QDRANT_URL ("(hidden)")                      Environment Variable      local
-env.QDRANT_KEY ("(hidden)")                      Environment Variable      local
-env.INTERNAL_KEY ("(hidden)")                    Environment Variable      local
-env.OPENROUTER_KEY ("(hidden)")                  Environment Variable      local
-env.ORIGIN ("(hidden)")                          Environment Variable      local
-
-❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
-⎔ Reloading local server...
-Using secrets defined in .env
-Your Worker has access to the following bindings:
-Binding                                          Resource                  Mode
-env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)      Workflow                  local
-env.SECRET ("(hidden)")                          Environment Variable      local
-env.GOOGLE_ID ("(hidden)")                       Environment Variable      local
-env.GOOGLE_SECRET ("(hidden)")                   Environment Variable      local
-env.QDRANT_URL ("(hidden)")                      Environment Variable      local
-env.QDRANT_KEY ("(hidden)")                      Environment Variable      local
-env.INTERNAL_KEY ("(hidden)")                    Environment Variable      local
-env.OPENROUTER_KEY ("(hidden)")                  Environment Variable      local
-env.ORIGIN ("(hidden)")                          Environment Variable      local
-
-❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
-⎔ Local server updated and ready
-⎔ Reloading local server...
-⎔ Local server updated and ready
-[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mValueExpected[0m
-
-    /home/ed/i/ve/.dev-worker-wrangler.jsonc:1:0:
-[37m      1 │ [32m[37m
-        ╵ [32m^[0m
-
-
-Using secrets defined in .env
-Your Worker has access to the following bindings:
-Binding                                          Resource                  Mode
-env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)      Workflow                  local
-env.SECRET ("(hidden)")                          Environment Variable      local
-env.GOOGLE_ID ("(hidden)")                       Environment Variable      local
-env.GOOGLE_SECRET ("(hidden)")                   Environment Variable      local
-env.QDRANT_URL ("(hidden)")                      Environment Variable      local
-env.QDRANT_KEY ("(hidden)")                      Environment Variable      local
-env.INTERNAL_KEY ("(hidden)")                    Environment Variable      local
-env.OPENROUTER_KEY ("(hidden)")                  Environment Variable      local
-env.ORIGIN ("(hidden)")                          Environment Variable      local
-
-❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
-⎔ Reloading local server...
-⎔ Local server updated and ready
-4:07:24 AM [vite-plugin-svelte] src/routes/i/+page.svelte:5:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
-https://svelte.dev/e/state_referenced_locally
-4:07:24 AM [vite-plugin-svelte] src/routes/i/+page.svelte:6:18 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
-https://svelte.dev/e/state_referenced_locally
-4:07:24 AM [vite-plugin-svelte] src/routes/i/+page.svelte:203:3 A form label must be associated with a control
-https://svelte.dev/e/a11y_label_has_associated_control
-4:07:24 AM [vite-plugin-svelte] src/routes/i/+page.svelte:249:8 `<video>` elements must have a `<track kind="captions">`
-https://svelte.dev/e/a11y_media_has_caption
-4:07:51 AM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
-4:07:51 AM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
-4:07:51 AM [vite] (client) page reload .svelte-kit/generated/client/nodes/5.js
-4:07:51 AM [vite] (client) page reload .svelte-kit/generated/client/app.js
-4:07:51 AM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
-4:07:51 AM [vite] (ssr) page reload .svelte-kit/generated/shared/error-template.js
-4:07:51 AM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
-4:07:51 AM [vite] (client) page reload .svelte-kit/generated/root.js
-4:07:51 AM [vite] (ssr) page reload .svelte-kit/generated/root.js
-4:07:51 AM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
-Using secrets defined in .env
-Your Worker has access to the following bindings:
-Binding                                          Resource                  Mode
-env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)      Workflow                  local
-env.SECRET ("(hidden)")                          Environment Variable      local
-env.GOOGLE_ID ("(hidden)")                       Environment Variable      local
-env.GOOGLE_SECRET ("(hidden)")                   Environment Variable      local
-env.QDRANT_URL ("(hidden)")                      Environment Variable      local
-env.QDRANT_KEY ("(hidden)")                      Environment Variable      local
-env.INTERNAL_KEY ("(hidden)")                    Environment Variable      local
-env.OPENROUTER_KEY ("(hidden)")                  Environment Variable      local
-env.ORIGIN ("(hidden)")                          Environment Variable      local
-
-❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
-⎔ Reloading local server...
-⎔ Local server updated and ready
-Using secrets defined in .env
-Your Worker has access to the following bindings:
-Binding                                          Resource                  Mode
-env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)      Workflow                  local
-env.SECRET ("(hidden)")                          Environment Variable      local
-env.GOOGLE_ID ("(hidden)")                       Environment Variable      local
-env.GOOGLE_SECRET ("(hidden)")                   Environment Variable      local
-env.QDRANT_URL ("(hidden)")                      Environment Variable      local
-env.QDRANT_KEY ("(hidden)")                      Environment Variable      local
-env.INTERNAL_KEY ("(hidden)")                    Environment Variable      local
-env.OPENROUTER_KEY ("(hidden)")                  Environment Variable      local
-env.ORIGIN ("(hidden)")                          Environment Variable      local
-
-❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
-⎔ Reloading local server...
-⎔ Local server updated and ready
-[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mValueExpected[0m
-
-    /home/ed/i/ve/.dev-worker-wrangler.jsonc:1:0:
-[37m      1 │ [32m[37m
-        ╵ [32m^[0m
-
-
-4:11:51 AM [vite] (ssr) page reload src/lib/server/ve.ts
-4:11:55 AM [vite] (ssr) page reload src/lib/server/ve.ts
-4:11:59 AM [vite] (ssr) page reload src/lib/server/ve.ts
-4:12:06 AM [vite] (client) page reload .svelte-kit/generated/client/nodes/0.js
-4:12:06 AM [vite] (client) page reload .svelte-kit/generated/client/nodes/1.js
-4:12:06 AM [vite] (client) page reload .svelte-kit/generated/client/nodes/5.js
-4:12:06 AM [vite] (client) page reload .svelte-kit/generated/client/app.js
-4:12:06 AM [vite] (client) page reload .svelte-kit/generated/client/matchers.js
-4:12:06 AM [vite] (ssr) page reload .svelte-kit/generated/shared/error-template.js
-4:12:06 AM [vite] (ssr) page reload .svelte-kit/generated/server/internal.js
-4:12:06 AM [vite] (client) page reload .svelte-kit/generated/root.js
-4:12:06 AM [vite] (ssr) page reload .svelte-kit/generated/root.js
-4:12:06 AM [vite] (ssr) page reload .svelte-kit/generated/root.svelte
-Using secrets defined in .env
-Your Worker has access to the following bindings:
-Binding                                          Resource                  Mode
-env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)      Workflow                  local
-env.SECRET ("(hidden)")                          Environment Variable      local
-env.GOOGLE_ID ("(hidden)")                       Environment Variable      local
-env.GOOGLE_SECRET ("(hidden)")                   Environment Variable      local
-env.QDRANT_URL ("(hidden)")                      Environment Variable      local
-env.QDRANT_KEY ("(hidden)")                      Environment Variable      local
-env.INTERNAL_KEY ("(hidden)")                    Environment Variable      local
-env.OPENROUTER_KEY ("(hidden)")                  Environment Variable      local
-env.ORIGIN ("(hidden)")                          Environment Variable      local
-
-❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
-⎔ Reloading local server...
-Using secrets defined in .env
-Your Worker has access to the following bindings:
-Binding                                          Resource                  Mode
-env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)      Workflow                  local
-env.SECRET ("(hidden)")                          Environment Variable      local
-env.GOOGLE_ID ("(hidden)")                       Environment Variable      local
-env.GOOGLE_SECRET ("(hidden)")                   Environment Variable      local
-env.QDRANT_URL ("(hidden)")                      Environment Variable      local
-env.QDRANT_KEY ("(hidden)")                      Environment Variable      local
-env.INTERNAL_KEY ("(hidden)")                    Environment Variable      local
-env.OPENROUTER_KEY ("(hidden)")                  Environment Variable      local
-env.ORIGIN ("(hidden)")                          Environment Variable      local
-
-❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
-[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mValueExpected[0m
-
-    /home/ed/i/ve/.dev-worker-wrangler.jsonc:1:0:
-[37m      1 │ [32m[37m
-        ╵ [32m^[0m
-
-
-⎔ Local server updated and ready
-⎔ Reloading local server...
-Using secrets defined in .env
-Your Worker has access to the following bindings:
-Binding                                          Resource                  Mode
-env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)      Workflow                  local
-env.SECRET ("(hidden)")                          Environment Variable      local
-env.GOOGLE_ID ("(hidden)")                       Environment Variable      local
-env.GOOGLE_SECRET ("(hidden)")                   Environment Variable      local
-env.QDRANT_URL ("(hidden)")                      Environment Variable      local
-env.QDRANT_KEY ("(hidden)")                      Environment Variable      local
-env.INTERNAL_KEY ("(hidden)")                    Environment Variable      local
-env.OPENROUTER_KEY ("(hidden)")                  Environment Variable      local
-env.ORIGIN ("(hidden)")                          Environment Variable      local
-
-❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
-⎔ Local server updated and ready
-⎔ Reloading local server...
-⎔ Local server updated and ready
-[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mValueExpected[0m
-
-    /home/ed/i/ve/.dev-worker-wrangler.jsonc:1:0:
-[37m      1 │ [32m[37m
-        ╵ [32m^[0m
-
-
-4:22:12 AM [vite] vite.config.ts changed, restarting server...
-Using secrets defined in .env
-Your Worker has access to the following bindings:
 Binding                                           Resource                  Mode
 env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)       Workflow                  local
 env.TEST_WORKFLOW (VideoUploadTestWorkflow)       Workflow                  local
@@ -319,54 +14,6 @@ env.INTERNAL_KEY ("(hidden)")                     Environment Variable      loca
 env.OPENROUTER_KEY ("(hidden)")                   Environment Variable      local
 env.ORIGIN ("(hidden)")                           Environment Variable      local
 
-Using secrets defined in .env
-Your Worker has access to the following bindings:
-Binding                                           Resource                  Mode
-env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)       Workflow                  local
-env.TEST_WORKFLOW (VideoUploadTestWorkflow)       Workflow                  local
-env.TEST_BUCKET (ve-test)                         R2 Bucket                 local
-env.SECRET ("(hidden)")                           Environment Variable      local
-env.GOOGLE_ID ("(hidden)")                        Environment Variable      local
-env.GOOGLE_SECRET ("(hidden)")                    Environment Variable      local
-env.QDRANT_URL ("(hidden)")                       Environment Variable      local
-env.QDRANT_KEY ("(hidden)")                       Environment Variable      local
-env.INTERNAL_KEY ("(hidden)")                     Environment Variable      local
-env.OPENROUTER_KEY ("(hidden)")                   Environment Variable      local
-env.ORIGIN ("(hidden)")                           Environment Variable      local
-
-❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
-❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
-Using secrets defined in .env
-Your Worker has access to the following bindings:
-Binding                                           Resource                  Mode
-env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)       Workflow                  local
-env.TEST_WORKFLOW (VideoUploadTestWorkflow)       Workflow                  local
-env.TEST_BUCKET (ve-test)                         R2 Bucket                 local
-env.SECRET ("(hidden)")                           Environment Variable      local
-env.GOOGLE_ID ("(hidden)")                        Environment Variable      local
-env.GOOGLE_SECRET ("(hidden)")                    Environment Variable      local
-env.QDRANT_URL ("(hidden)")                       Environment Variable      local
-env.QDRANT_KEY ("(hidden)")                       Environment Variable      local
-env.INTERNAL_KEY ("(hidden)")                     Environment Variable      local
-env.OPENROUTER_KEY ("(hidden)")                   Environment Variable      local
-env.ORIGIN ("(hidden)")                           Environment Variable      local
-
-Using secrets defined in .env
-Your Worker has access to the following bindings:
-Binding                                           Resource                  Mode
-env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)       Workflow                  local
-env.TEST_WORKFLOW (VideoUploadTestWorkflow)       Workflow                  local
-env.TEST_BUCKET (ve-test)                         R2 Bucket                 local
-env.SECRET ("(hidden)")                           Environment Variable      local
-env.GOOGLE_ID ("(hidden)")                        Environment Variable      local
-env.GOOGLE_SECRET ("(hidden)")                    Environment Variable      local
-env.QDRANT_URL ("(hidden)")                       Environment Variable      local
-env.QDRANT_KEY ("(hidden)")                       Environment Variable      local
-env.INTERNAL_KEY ("(hidden)")                     Environment Variable      local
-env.OPENROUTER_KEY ("(hidden)")                   Environment Variable      local
-env.ORIGIN ("(hidden)")                           Environment Variable      local
-
-❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
 ❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
 Using secrets defined in .env
 Your Worker has access to the following bindings:
@@ -384,19 +31,33 @@ env.OPENROUTER_KEY ("(hidden)")                   Environment Variable      loca
 env.ORIGIN ("(hidden)")                           Environment Variable      local
 
 ❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
-⎔ Shutting down local server...
+Using secrets defined in .env
+Your Worker has access to the following bindings:
+Binding                                           Resource                  Mode
+env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)       Workflow                  local
+env.TEST_WORKFLOW (VideoUploadTestWorkflow)       Workflow                  local
+env.TEST_BUCKET (ve-test)                         R2 Bucket                 local
+env.SECRET ("(hidden)")                           Environment Variable      local
+env.GOOGLE_ID ("(hidden)")                        Environment Variable      local
+env.GOOGLE_SECRET ("(hidden)")                    Environment Variable      local
+env.QDRANT_URL ("(hidden)")                       Environment Variable      local
+env.QDRANT_KEY ("(hidden)")                       Environment Variable      local
+env.INTERNAL_KEY ("(hidden)")                     Environment Variable      local
+env.OPENROUTER_KEY ("(hidden)")                   Environment Variable      local
+env.ORIGIN ("(hidden)")                           Environment Variable      local
+
+❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
 [31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mYour Worker depends on the following Workflows, which are not exported in your entrypoint file: VideoUploadTestWorkflow.[0m
 
   You should export these objects from your entrypoint, src/workflows/video_generator.ts.
 
 
-4:22:13 AM [vite] (client) Re-optimizing dependencies because vite config has changed
-4:22:13 AM [vite] (ssr) Re-optimizing dependencies because vite config has changed
-[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mYour Worker depends on the following Workflows, which are not exported in your entrypoint file: VideoGeneratorWorkflow.[0m
 
-  You should export these objects from your entrypoint, src/workflows/video_upload_test.ts.
+  VITE v8.1.3  ready in 3382 ms
 
-
+  ➜  Local:   http://localhost:5427/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
 [31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mYour Worker depends on the following Workflows, which are not exported in your entrypoint file: VideoGeneratorWorkflow.[0m
 
   You should export these objects from your entrypoint, src/workflows/video_upload_test.ts.
@@ -404,122 +65,39 @@ env.ORIGIN ("(hidden)")                           Environment Variable      loca
 
 *** Fatal uncaught kj::Exception: kj/async-io-unix.c++:941: failed: ::bind(sockfd, &addr.generic, addrlen): Address already in use; toString() = 127.0.0.1:9229
 stack: /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.1/node_modules/@cloudflare/workerd-linux-64/bin/workerd@53d8306 /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.1/node_modules/@cloudflare/workerd-linux-64/bin/workerd@53d80d9 /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.1/node_modules/@cloudflare/workerd-linux-64/bin/workerd@53d642c /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.1/node_modules/@cloudflare/workerd-linux-64/bin/workerd@2050b9c /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.1/node_modules/@cloudflare/workerd-linux-64/bin/workerd@2051501 /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.1/node_modules/@cloudflare/workerd-linux-64/bin/workerd@205202d /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.1/node_modules/@cloudflare/workerd-linux-64/bin/workerd@20536aa /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.1/node_modules/@cloudflare/workerd-linux-64/bin/workerd@1f99339 /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.1/node_modules/@cloudflare/workerd-linux-64/bin/workerd@540d085 /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.1/node_modules/@cloudflare/workerd-linux-64/bin/workerd@540d5a8 /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.1/node_modules/@cloudflare/workerd-linux-64/bin/workerd@540b05e /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.1/node_modules/@cloudflare/workerd-linux-64/bin/workerd@540ae5e /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.1/node_modules/@cloudflare/workerd-linux-64/bin/workerd@1f80d17 /usr/lib/libc.so.6@2abfb /usr/lib/libc.so.6@2acb4 /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.1/node_modules/@cloudflare/workerd-linux-64/bin/workerd@1f80024
-4:22:14 AM [vite] (ssr) [optimizer] bundling dependencies...
-4:22:14 AM [vite] server restarted.
-[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mCould not read entrypoint "/home/ed/i/ve/.wrangler/tmp/dev-ukOOEX/video_generator.js": ENOENT: no such file or directory, open '/home/ed/i/ve/.wrangler/tmp/dev-ukOOEX/video_generator.js'[0m
-
-
-⎔ Starting local server...
-Using secrets defined in .env
-Your Worker has access to the following bindings:
-Binding                                           Resource                  Mode
-env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)       Workflow                  local
-env.TEST_WORKFLOW (VideoUploadTestWorkflow)       Workflow                  local
-env.TEST_BUCKET (ve-test)                         R2 Bucket                 local
-env.SECRET ("(hidden)")                           Environment Variable      local
-env.GOOGLE_ID ("(hidden)")                        Environment Variable      local
-env.GOOGLE_SECRET ("(hidden)")                    Environment Variable      local
-env.QDRANT_URL ("(hidden)")                       Environment Variable      local
-env.QDRANT_KEY ("(hidden)")                       Environment Variable      local
-env.INTERNAL_KEY ("(hidden)")                     Environment Variable      local
-env.OPENROUTER_KEY ("(hidden)")                   Environment Variable      local
-env.ORIGIN ("(hidden)")                           Environment Variable      local
-
-❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
-Using secrets defined in .env
-Your Worker has access to the following bindings:
-Binding                                           Resource                  Mode
-env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)       Workflow                  local
-env.TEST_WORKFLOW (VideoUploadTestWorkflow)       Workflow                  local
-env.TEST_BUCKET (ve-test)                         R2 Bucket                 local
-env.SECRET ("(hidden)")                           Environment Variable      local
-env.GOOGLE_ID ("(hidden)")                        Environment Variable      local
-env.GOOGLE_SECRET ("(hidden)")                    Environment Variable      local
-env.QDRANT_URL ("(hidden)")                       Environment Variable      local
-env.QDRANT_KEY ("(hidden)")                       Environment Variable      local
-env.INTERNAL_KEY ("(hidden)")                     Environment Variable      local
-env.OPENROUTER_KEY ("(hidden)")                   Environment Variable      local
-env.ORIGIN ("(hidden)")                           Environment Variable      local
-
-❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
 [31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mYour Worker depends on the following Workflows, which are not exported in your entrypoint file: VideoGeneratorWorkflow.[0m
 
   You should export these objects from your entrypoint, src/workflows/video_upload_test.ts.
 
 
-[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mYour Worker depends on the following Workflows, which are not exported in your entrypoint file: VideoGeneratorWorkflow.[0m
-
-  You should export these objects from your entrypoint, src/workflows/video_upload_test.ts.
-
-
-[ve-dev-worker] Worker "workflows:video-upload-test"'s binding "USER_WORKFLOW" refers to service "core:user:ve-dev-worker" with a named entrypoint "VideoUploadTestWorkflow", but "core:user:ve-dev-worker" has no such named entrypoint.
-[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mValueExpected[0m
-
-    /home/ed/i/ve/.dev-worker-wrangler.jsonc:1:0:
-[37m      1 │ [32m[37m
-        ╵ [32m^[0m
-
-
 Using secrets defined in .env
-Your Worker has access to the following bindings:
-Binding                                           Resource                  Mode
-env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)       Workflow                  local
-env.TEST_WORKFLOW (VideoUploadTestWorkflow)       Workflow                  local
-env.TEST_BUCKET (ve-test)                         R2 Bucket                 local
-env.SECRET ("(hidden)")                           Environment Variable      local
-env.GOOGLE_ID ("(hidden)")                        Environment Variable      local
-env.GOOGLE_SECRET ("(hidden)")                    Environment Variable      local
-env.QDRANT_URL ("(hidden)")                       Environment Variable      local
-env.QDRANT_KEY ("(hidden)")                       Environment Variable      local
-env.INTERNAL_KEY ("(hidden)")                     Environment Variable      local
-env.OPENROUTER_KEY ("(hidden)")                   Environment Variable      local
-env.ORIGIN ("(hidden)")                           Environment Variable      local
-
-❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
-[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mYour Worker depends on the following Workflows, which are not exported in your entrypoint file: VideoUploadTestWorkflow.[0m
-
-  You should export these objects from your entrypoint, src/workflows/video_generator.ts.
-
-
-Using secrets defined in .env
-Your Worker has access to the following bindings:
-Binding                                           Resource                  Mode
-env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)       Workflow                  local
-env.TEST_WORKFLOW (VideoUploadTestWorkflow)       Workflow                  local
-env.TEST_BUCKET (ve-test)                         R2 Bucket                 local
-env.SECRET ("(hidden)")                           Environment Variable      local
-env.GOOGLE_ID ("(hidden)")                        Environment Variable      local
-env.GOOGLE_SECRET ("(hidden)")                    Environment Variable      local
-env.QDRANT_URL ("(hidden)")                       Environment Variable      local
-env.QDRANT_KEY ("(hidden)")                       Environment Variable      local
-env.INTERNAL_KEY ("(hidden)")                     Environment Variable      local
-env.OPENROUTER_KEY ("(hidden)")                   Environment Variable      local
-env.ORIGIN ("(hidden)")                           Environment Variable      local
-
-Using secrets defined in .env
-Your Worker has access to the following bindings:
-Binding                                           Resource                  Mode
-env.VIDEO_WORKFLOW (VideoGeneratorWorkflow)       Workflow                  local
-env.TEST_WORKFLOW (VideoUploadTestWorkflow)       Workflow                  local
-env.TEST_BUCKET (ve-test)                         R2 Bucket                 local
-env.SECRET ("(hidden)")                           Environment Variable      local
-env.GOOGLE_ID ("(hidden)")                        Environment Variable      local
-env.GOOGLE_SECRET ("(hidden)")                    Environment Variable      local
-env.QDRANT_URL ("(hidden)")                       Environment Variable      local
-env.QDRANT_KEY ("(hidden)")                       Environment Variable      local
-env.INTERNAL_KEY ("(hidden)")                     Environment Variable      local
-env.OPENROUTER_KEY ("(hidden)")                   Environment Variable      local
-env.ORIGIN ("(hidden)")                           Environment Variable      local
-
-❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
-❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
-[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mYour Worker depends on the following Workflows, which are not exported in your entrypoint file: VideoGeneratorWorkflow.[0m
-
-  You should export these objects from your entrypoint, src/workflows/video_upload_test.ts.
-
-
-[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mYour Worker depends on the following Workflows, which are not exported in your entrypoint file: VideoGeneratorWorkflow.[0m
-
-  You should export these objects from your entrypoint, src/workflows/video_upload_test.ts.
-
-
+4:31:00 AM [vite-plugin-svelte] src/routes/i/+page.svelte:5:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+4:31:00 AM [vite-plugin-svelte] src/routes/i/+page.svelte:6:18 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+4:31:00 AM [vite-plugin-svelte] src/routes/i/+page.svelte:203:3 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+4:31:00 AM [vite-plugin-svelte] src/routes/i/+page.svelte:249:8 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+4:31:02 AM [vite-plugin-svelte] src/routes/i/+page.svelte:5:21 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+4:31:02 AM [vite-plugin-svelte] src/routes/i/+page.svelte:6:18 This reference only captures the initial value of `data`. Did you mean to reference it inside a derived instead?
+https://svelte.dev/e/state_referenced_locally
+4:31:02 AM [vite-plugin-svelte] src/routes/i/+page.svelte:203:3 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+4:31:02 AM [vite-plugin-svelte] src/routes/i/+page.svelte:249:8 `<video>` elements must have a `<track kind="captions">`
+https://svelte.dev/e/a11y_media_has_caption
+4:31:04 AM [vite-plugin-svelte] src/routes/test/+page.svelte:52:3 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+4:31:04 AM [vite-plugin-svelte] src/routes/test/+page.svelte:52:3 A form label must be associated with a control
+https://svelte.dev/e/a11y_label_has_associated_control
+workflow terminate failed TypeError: env.VIDEO_WORKFLOW.get(...).terminate is not a function
+    at PATCH (/home/ed/i/ve/src/routes/api/ves/+server.ts:77:40)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async render_endpoint (/home/ed/i/ve/node_modules/.pnpm/@sveltejs+kit@2.69.1_@sveltejs+vite-plugin-svelte@7.1.4_svelte@5.56.4_@typescript-eslin_9faab3ec08401660d6d5ecd450a22ac2/node_modules/@sveltejs/kit/src/runtime/server/endpoint.js?v=8f821331:55:20)
+    at async resolve (/home/ed/i/ve/node_modules/.pnpm/@sveltejs+kit@2.69.1_@sveltejs+vite-plugin-svelte@7.1.4_svelte@5.56.4_@typescript-eslin_9faab3ec08401660d6d5ecd450a22ac2/node_modules/@sveltejs/kit/src/runtime/server/respond.js?v=8f821331:530:17)
+    at async fn (/home/ed/i/ve/node_modules/.pnpm/@sveltejs+kit@2.69.1_@sveltejs+vite-plugin-svelte@7.1.4_svelte@5.56.4_@typescript-eslin_9faab3ec08401660d6d5ecd450a22ac2/node_modules/@sveltejs/kit/src/runtime/server/respond.js?v=8f821331:394:12)
+    at async handle (/home/ed/i/ve/node_modules/.pnpm/@sveltejs+kit@2.69.1_@sveltejs+vite-plugin-svelte@7.1.4_svelte@5.56.4_@typescript-eslin_9faab3ec08401660d6d5ecd450a22ac2/node_modules/@sveltejs/kit/src/runtime/server/respond.js?v=8f821331:376:20)
+    at async Object.before_handle (file:///home/ed/i/ve/node_modules/.pnpm/@sveltejs+kit@2.69.1_@sveltejs+vite-plugin-svelte@7.1.4_svelte@5.56.4_@typescript-eslin_9faab3ec08401660d6d5ecd450a22ac2/node_modules/@sveltejs/kit/src/exports/vite/dev/index.js:574:14)
+    at async internal_respond (/home/ed/i/ve/node_modules/.pnpm/@sveltejs+kit@2.69.1_@sveltejs+vite-plugin-svelte@7.1.4_svelte@5.56.4_@typescript-eslin_9faab3ec08401660d6d5ecd450a22ac2/node_modules/@sveltejs/kit/src/runtime/server/respond.js?v=8f821331:354:13)
+    at async file:///home/ed/i/ve/node_modules/.pnpm/@sveltejs+kit@2.69.1_@sveltejs+vite-plugin-svelte@7.1.4_svelte@5.56.4_@typescript-eslin_9faab3ec08401660d6d5ecd450a22ac2/node_modules/@sveltejs/kit/src/exports/vite/dev/index.js:558:22
