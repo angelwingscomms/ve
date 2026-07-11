@@ -22,7 +22,7 @@ export async function POST(event: RequestEvent): Promise<Response> {
 	const buf = await file.arrayBuffer();
 	await env.TEST_BUCKET?.put(r2_key, buf, { httpMetadata: { contentType: file.type || 'video/mp4' } });
 
-	const ve_id = `ve_${crypto.randomUUID()}`;
+	const ve_id = crypto.randomUUID();
 	await save_ve(ve_id, event.locals.user.id, 'test upload', '', period, undefined, undefined, r2_key, undefined, 1);
 
 	if (period > 0) {
