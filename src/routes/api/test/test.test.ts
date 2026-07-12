@@ -11,10 +11,12 @@ vi.mock('$lib/server/user', () => ({
 
 vi.mock('$lib/server/ve', () => ({
 	save_ve: vi.fn(),
+	update_ve_yt: vi.fn(),
 }));
 
+import { upload_bytes_to_youtube } from '$lib/server/yt';
 import { get_user } from '$lib/server/user';
-import { save_ve } from '$lib/server/ve';
+import { save_ve, update_ve_yt } from '$lib/server/ve';
 
 const mockUser = (yt_token?: string) => ({
 	s: 'u', n: 'Test', d: Date.now(),
@@ -103,8 +105,9 @@ describe('POST /api/test', () => {
 		expect(b.error).toBe('no video');
 	});
 
-	it('creates VE and returns ve_id for one-shot', async () => {
+	it('creates VE and uploads to YT for one-shot', async () => {
 		vi.mocked(get_user).mockResolvedValue(mockUser(mockToken()) as any);
+		vi.mocked(upload_bytes_to_youtube).mockResolvedValue('yt123');
 		const fd = makeForm({
 			video: { name: 'test.mp4', type: 'video/mp4', data: new Uint8Array([0, 1, 2]) },
 		});
@@ -115,8 +118,10 @@ describe('POST /api/test', () => {
 		const b = await r.json();
 		expect(b.ok).toBe(true);
 		expect(b.ve_id).toBeTruthy();
-		expect(b.workflow_id).toBeUndefined();
-		expect(save_ve).toHaveBeenCalledWith(expect.any(String), 'user1', 'test upload', '', 0, undefined, undefined, expect.any(String), undefined, 1);
+		expect(b.yv).toBe('yt123');
+		expect(update_ve_yt).toHaveBeenCalledWith(b.ve_id, 'uploading');
+		expect(update_ve_yt).toHaveBeenCalledWith(b.ve_id, 'live', 'yt123');
+		expect(save_ve).toHaveBeenCalledWith(expect.any(String), 'user1', expect.any(String), '', 0, undefined, undefined, undefined, undefined, 1);
 	});
 
 	it('creates VE and starts workflow when period set', async () => {

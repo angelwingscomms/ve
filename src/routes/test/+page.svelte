@@ -68,10 +68,13 @@
 	{#if result}
 		<section class="card result">
 			{#if result.ok}
-				<p class="success">✅ Uploaded to YouTube!</p>
-				<a href="https://youtube.com/watch?v={result.yv}" target="_blank" class="yt-link-lg">Watch on YouTube →</a>
-				{#if result.next_upload_at}
-					<p class="meta">Next upload: {new Date(result.next_upload_at).toLocaleString()}</p>
+				{#if result.yv}
+					<p class="success">✅ Uploaded to YouTube!</p>
+					<a href="https://youtube.com/watch?v={result.yv}" target="_blank" class="yt-link-lg">Watch on YouTube →</a>
+				{:else if result.workflow_id}
+					<p class="success">✅ Job created — will upload on schedule</p>
+				{:else}
+					<p class="success">✅ Job created</p>
 				{/if}
 			{:else}
 				<p class="error">❌ {result.error || 'Upload failed'}</p>
