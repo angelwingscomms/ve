@@ -35,6 +35,11 @@ export async function list_ves(user_id?: string): Promise<Ve[]> {
 	return r.points.map(p => from_payload(p.payload as Record<string, unknown>)).filter(Boolean) as Ve[];
 }
 
+export async function list_test_ves(user_id: string): Promise<Ve[]> {
+	const r = await client().scroll(C, { filter: { must: [{ key: 's', match: { value: 'e' } }, { key: 'u', match: { value: user_id } }, { key: 'x', match: { value: 1 } }] }, limit: 100 } as any);
+	return r.points.map(p => from_payload(p.payload as Record<string, unknown>)).filter(Boolean) as Ve[];
+}
+
 export async function add_ve_inst(id: string, n: string): Promise<void> {
 	await client().setPayload(C, { payload: { n }, points: [id], wait: true });
 }

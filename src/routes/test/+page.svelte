@@ -1,4 +1,6 @@
 <script lang="ts">
+	import type { Ve } from '$lib/types/ve';
+
 	let { data } = $props();
 	let file = $state<File | null>(null);
 	let title = $state('');
@@ -6,6 +8,7 @@
 	let use_custom = $state(false);
 	let uploading = $state(false);
 	let result = $state<{ ok?: boolean; yv?: string; workflow_id?: string; next_upload_at?: number; error?: string } | null>(null);
+	let test_ves = $state<Ve[]>(data.test_ves);
 
 	async function submit(e: Event) {
 		e.preventDefault();
@@ -19,6 +22,7 @@
 		const r = await fetch('/api/test', { method: 'POST', body: fd });
 		result = await r.json();
 		uploading = false;
+		if (result.ok) test_ves = await (await fetch('/api/test/list')).json();
 	}
 </script>
 
@@ -81,6 +85,38 @@
 			{/if}
 		</section>
 	{/if}
+
+	<section class="card">
+		<h2>Test Jobs</h2>
+		{#if test_ves.length === 0}
+			<p class="empty">No test jobs yet.</p>
+		{:else}
+			<div class="tbl-wrap">
+				<table>
+					<thead>
+						<tr>
+							<th>Title</th>
+							<th>Created</th>
+							<th>YT Status</th>
+							<th>YT ID</th>
+							<th>Schedule</th>
+						</tr>
+					</thead>
+					<tbody>
+						{#each test_ves as v (v.i)}
+							<tr>
+								<td class="ttl">{v.p}</td>
+								<td class="dt">{new Date(v.d).toLocaleString()}</td>
+								<td>{v.ys || '—'}</td>
+								<td>{#if v.yv}<a href="https://youtube.com/watch?v={v.yv}" target="_blank">{v.yv}</a>{:else}—{/if}</td>
+								<td>{v.r > 0 ? `${(v.r / 3600000).toFixed(1)}h` : 'one-shot'}</td>
+							</tr>
+						{/each}
+					</tbody>
+				</table>
+			</div>
+		{/if}
+	</section>
 </main>
 
 <style>
@@ -151,4 +187,13 @@
 		text-decoration: none;
 		font-weight: 600;
 	}
+	.tbl-wrap { overflow-x: auto; }
+	table { width: 100%; border-collapse: collapse; font-size: 0.8125rem; }
+	th { text-align: left; padding: 0.5rem 0.75rem; border-bottom: 2px solid #e5e7eb; font-weight: 600; color: #555; white-space: nowrap; }
+	td { padding: 0.5rem 0.75rem; border-bottom: 1px solid #e5e7eb; }
+	.ttl { max-width: 240px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+	.dt { white-space: nowrap; }
+	.empty { font-size: 0.875rem; color: #999; }
+	td a { color: #ff0000; text-decoration: none; font-weight: 500; }
+	td a:hover { text-decoration: underline; }
 </style>
