@@ -56,3 +56,15 @@ stack: /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.
 6:44:25 PM [vite] (ssr) page reload src/routes/i/+page.svelte
 6:58:37 PM [vite] (client) hmr update /src/routes/i/+page.svelte
 6:58:37 PM [vite] (ssr) page reload src/routes/i/+page.svelte
+6:59:23 PM [vite] (client) hmr update /src/routes/i/+page.svelte
+6:59:23 PM [vite] (ssr) page reload src/routes/i/+page.svelte
+6:59:57 PM [vite] (client) hmr update /src/routes/i/+page.svelte
+6:59:57 PM [vite] (ssr) page reload src/routes/i/+page.svelte
+7:00:06 PM [vite] (client) hmr update /src/routes/i/+page.svelte
+7:00:06 PM [vite] (ssr) page reload src/routes/i/+page.svelte
+7:00:35 PM [vite] (client) hmr update /src/routes/i/+page.svelte?svelte&type=style&lang.css
+7:00:35 PM [vite] (ssr) page reload src/routes/i/+page.svelte
+7:01:08 PM [vite] (client) hmr update /src/routes/i/+page.svelte, /src/routes/i/+page.svelte?svelte&type=style&lang.css
+7:01:08 PM [vite] (ssr) page reload src/routes/i/+page.svelte
+7:01:19 PM [vite] (client) hmr update /src/routes/i/+page.svelte
+7:01:19 PM [vite] (ssr) page reload src/routes/i/+page.svelte

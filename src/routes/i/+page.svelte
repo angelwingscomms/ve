@@ -18,6 +18,7 @@
 	}
 	let key = $state('');
 	let key_msg = $state('');
+	let key_err = $state('');
 	let create_msg = $state('');
 	let use_custom = $state(false);
 
@@ -95,10 +96,12 @@
 		});
 		if (r.ok) {
 			key_msg = 'Saved!';
+			key_err = '';
 			setTimeout(() => location.reload(), 500);
 		} else {
 			const err = await r.json().catch(() => null);
-			key_msg = err?.error || 'Failed to save';
+			key_err = err?.error || 'Failed to save';
+			key_msg = '';
 		}
 	}
 
@@ -184,8 +187,16 @@
 	<section class="card">
 		<h2>OpenRouter API key</h2>
 		<p>Enter or update your OpenRouter API key to enable model selection and generation.</p>
-		<input bind:value={key} type="password" placeholder="sk-or-v1-..." class="input" />
+		<input
+			bind:value={key}
+			oninput={() => (key_err = '')}
+			type="password"
+			placeholder="sk-or-v1-..."
+			class="input"
+			class:input-err={key_err}
+		/>
 		<button onclick={save_key} class="btn">Save</button>
+		{#if key_err}<p class="msg-err">{key_err}</p>{/if}
 		{#if key_msg}<p class="msg">{key_msg}</p>{/if}
 	</section>
 
@@ -447,6 +458,12 @@
 		outline: none;
 		border-color: #111;
 	}
+	.input-err {
+		border-color: #dc2626;
+	}
+	.input-err:focus {
+		border-color: #dc2626;
+	}
 	label {
 		font-size: 0.8125rem;
 		font-weight: 600;
@@ -559,6 +576,11 @@
 	.msg {
 		font-size: 0.8125rem;
 		color: #059669;
+		margin-top: 0.5rem;
+	}
+	.msg-err {
+		font-size: 0.8125rem;
+		color: #dc2626;
 		margin-top: 0.5rem;
 	}
 	.ves {
