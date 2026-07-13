@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import type { Ve } from '$lib/types/ve';
 
 	let { data } = $props();
@@ -8,7 +9,9 @@
 	let use_custom = $state(false);
 	let uploading = $state(false);
 	let result = $state<{ ok?: boolean; yv?: string; workflow_id?: string; next_upload_at?: number; error?: string } | null>(null);
-	let test_ves = $state<Ve[]>(data.test_ves);
+	let test_ves = $state<Ve[]>([]);
+
+	onMount(() => { test_ves = data.test_ves; });
 
 	async function submit(e: Event) {
 		e.preventDefault();
@@ -176,7 +179,6 @@
 	.result { text-align: center; }
 	.success { font-size: 1rem; font-weight: 600; color: #059669; }
 	.error { font-size: 1rem; font-weight: 600; color: #dc2626; }
-	.meta { font-size: 0.8125rem; color: #999; margin-top: 0.5rem; }
 	.yt-link-lg {
 		display: inline-block;
 		margin-top: 0.75rem;

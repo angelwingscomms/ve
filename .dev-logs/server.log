@@ -15,24 +15,10 @@ env.ORIGIN ("(hidden)")                          Environment Variable      local
 
 ❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
 
-  VITE v8.1.3  ready in 3091 ms
+  VITE v8.1.3  ready in 2672 ms
 
   ➜  Local:   http://localhost:5427/
   ➜  Network: use --host to expose
   ➜  press h + enter to show help
 ⎔ Starting local server...
 [wrangler:info] Ready on http://localhost:8787
-Using secrets defined in .env
-Using secrets defined in .env
-
-[1;31m[404] GET /favicon.png[0m
-
-[1;31m[500] POST /api/test[0m
-Error: Bad Request
-    at Object.fun [as upsertPoints] (file:/home/ed/i/ve/node_modules/.pnpm/@qdrant+openapi-typescript-fetch@1.2.6/node_modules/@qdrant/openapi-typescript-fetch/dist/esm/fetcher.js:169:23)
-    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at async QdrantClient.upsert (file:/home/ed/i/ve/node_modules/.pnpm/@qdrant+js-client-rest@1.18.0_typescript@6.0.3/node_modules/@qdrant/js-client-rest/dist/esm/qdrant-client.js:622:26)
-    at async upsert (src/lib/server/qdrant.ts:35:2)
-    at async save_ve (src/lib/server/ve.ts:13:2)
-    at async POST (src/routes/api/test/+server.ts:26:2)
-5:25:15 PM [vite] (ssr) page reload src/routes/api/test/+server.ts
