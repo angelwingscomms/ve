@@ -9,7 +9,6 @@
 	let prompt = $state('');
 	let model = $state('');
 	let resolution = $state('');
-	let aspect = $state('');
 	let period = $state('86400000');
 	let duration = $state('');
 	let mode = $state('v');
@@ -132,7 +131,7 @@
 		create_msg = '';
 		const body: Record<string, unknown> = { p: prompt, m: model, k: mode };
 		if (mode === 'p') {
-			if (aspect) body.ar = aspect;
+			if (resolution) body.z = resolution;
 		} else {
 			if (duration) body.g = parseInt(duration);
 			if (resolution) body.z = resolution;
@@ -261,26 +260,16 @@
 			{/if}
 
 			{#if model}
-				{#if mode === 'p'}
-					<label for="ar">Aspect ratio</label>
-					<select id="ar" bind:value={aspect} class="input">
+				<label for="z">Resolution</label>
+				{#if selected_model()?.supported_resolutions?.length}
+					<select id="z" bind:value={resolution} class="input">
 						<option value="">Auto</option>
-						{#each ['1:1', '16:9', '9:16', '4:3', '3:4', '21:9'] as r}
+						{#each selected_model()!.supported_resolutions! as r}
 							<option value={r}>{r}</option>
 						{/each}
 					</select>
 				{:else}
-					<label for="z">Resolution</label>
-					{#if selected_model()?.supported_resolutions?.length}
-						<select id="z" bind:value={resolution} class="input">
-							<option value="">Auto</option>
-							{#each selected_model()!.supported_resolutions! as r}
-								<option value={r}>{r}</option>
-							{/each}
-						</select>
-					{:else}
-						<input id="z" bind:value={resolution} class="input" placeholder="e.g. 720p" />
-					{/if}
+					<input id="z" bind:value={resolution} class="input" placeholder="e.g. 720p" />
 				{/if}
 			{/if}
 
@@ -296,7 +285,7 @@
 				/>
 			{/if}
 
-			{#if data.user_data?.a?.y}
+			{#if data.user_data?.a?.y && mode === 'v'}
 				<label class="chk-lbl">
 					<input type="checkbox" bind:checked={yt_upload} class="chk" />
 					Upload to YouTube when done

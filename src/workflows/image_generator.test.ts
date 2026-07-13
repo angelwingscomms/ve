@@ -9,7 +9,7 @@ describe('ImageGeneratorWorkflow', () => {
 		try {
 			await instance.modify(async (m) => {
 				await m.disableSleeps();
-				await m.mockStepResult({ name: 'load' }, { p: 'cat', m: 'or/img', k: 'p', ar: '16:9' });
+				await m.mockStepResult({ name: 'load' }, { p: 'cat', m: 'or/img', k: 'p', z: '1K' });
 				await m.mockStepResult({ name: 'active' }, true);
 				await m.mockStepResult({ name: 'gen' }, 'https://example.com/i.png');
 				await m.mockStepResult({ name: 'save' }, true);

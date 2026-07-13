@@ -10,6 +10,7 @@ export interface ImageModel {
 	id: string;
 	name: string;
 	description?: string;
+	supported_resolutions?: string[];
 }
 
 const cache = new Map<string, { models: VideoModel[]; ts: number }>();
@@ -37,6 +38,12 @@ export async function get_image_models(api_key: string): Promise<ImageModel[]> {
 	});
 	if (!r.ok) throw new Error(`OpenRouter API error: ${r.status}`);
 	const data = (await r.json()) as { data: ImageModel[] };
-	img_cache.set(api_key, { models: data.data, ts: Date.now() });
-	return data.data;
+	const models = data.data.map((m) => ({
+		...m,
+		supported_resolutions: (
+			m as unknown as { supported_parameters?: { resolution?: { values?: string[] } } }
+		).supported_parameters?.resolution?.values
+	}));
+	img_cache.set(api_key, { models, ts: Date.now() });
+	return models;
 }

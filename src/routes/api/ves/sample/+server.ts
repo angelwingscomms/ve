@@ -12,7 +12,6 @@ export async function POST(event: RequestEvent): Promise<Response> {
 		g?: number;
 		z?: string;
 		k?: string;
-		ar?: string;
 	};
 	if (!body.p || !body.m) return json({ error: 'missing fields' }, { status: 400 });
 
@@ -30,12 +29,11 @@ export async function POST(event: RequestEvent): Promise<Response> {
 			body.m,
 			0,
 			undefined,
+			body.z,
 			undefined,
 			undefined,
 			undefined,
-			undefined,
-			'p',
-			body.ar
+			'p'
 		);
 		const env = event.platform?.env as
 			| {

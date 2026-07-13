@@ -3,7 +3,7 @@ import { NonRetryableError } from 'cloudflare:workflows';
 
 type Params = { ve_id: string };
 
-type Cfg = { p: string; m: string; k?: string; ar?: string };
+type Cfg = { p: string; m: string; k?: string; z?: string };
 
 export class ImageGeneratorWorkflow extends WorkflowEntrypoint<Env, Params> {
 	async run(event: WorkflowEvent<Params>, step: WorkflowStep) {
@@ -32,7 +32,7 @@ export class ImageGeneratorWorkflow extends WorkflowEntrypoint<Env, Params> {
 				const key = await this.or_key(ve_id);
 				if (!key) throw new NonRetryableError('no openrouter key');
 				const body: Record<string, unknown> = { model: cfg.m, prompt: cfg.p };
-				if (cfg.ar) body.aspect_ratio = cfg.ar;
+				if (cfg.z) body.resolution = cfg.z;
 				const r = await fetch('https://openrouter.ai/api/v1/images', {
 					method: 'POST',
 					headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
