@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { untrack } from 'svelte';
-	import type { VideoModel } from '$lib/server/openrouter';
+	import type { VideoModel, ImageModel } from '$lib/server/openrouter';
 	import type { Ve } from '$lib/types/ve';
 	let { data } = $props();
 	let models = $state(untrack(() => data.models));
+	let image_models = $state(untrack(() => data.image_models));
 	let ves = $state(untrack(() => data.ves as Ve[]));
 	let prompt = $state('');
 	let model = $state('');
@@ -12,6 +13,10 @@
 	let period = $state('86400000');
 	let duration = $state('');
 	let mode = $state('v');
+
+	function current_models(): (VideoModel | ImageModel)[] {
+		return mode === 'p' ? (image_models as ImageModel[]) || [] : (models as VideoModel[]) || [];
+	}
 	let key = $state('');
 	let key_msg = $state('');
 	let create_msg = $state('');
@@ -40,7 +45,7 @@
 		return () => clearInterval(i);
 	});
 
-	function min_cost(m: VideoModel): number {
+	function min_cost(m: VideoModel | ImageModel): number {
 		if (!m.pricing_skus) return Infinity;
 		const vals = Object.entries(m.pricing_skus)
 			.filter(([k]) => k.includes('second'))
@@ -49,17 +54,18 @@
 		return vals.length ? Math.min(...vals) : Infinity;
 	}
 
-	function model_cost(m: VideoModel): string {
+	function model_cost(m: VideoModel | ImageModel): string {
 		const c = min_cost(m);
 		if (!Number.isFinite(c)) return '';
 		const s = c < 0.01 ? c.toFixed(4) : c < 1 ? c.toFixed(3) : c.toFixed(2);
 		return `$${s}/s`;
 	}
 
-	function sorted_models(): VideoModel[] {
-		if (!models) return [];
+	function sorted_models(): (VideoModel | ImageModel)[] {
+		const ms = current_models();
+		if (!ms.length) return [];
 		const dir = sort_dir === 'asc' ? 1 : -1;
-		return [...models].sort((a, b) => {
+		return [...ms].sort((a, b) => {
 			if (sort_by === 'cost') {
 				const ca = min_cost(a),
 					cb = min_cost(b);
@@ -69,8 +75,8 @@
 		});
 	}
 
-	function selected_model(): VideoModel | undefined {
-		return models?.find((m: VideoModel) => m.id === model);
+	function selected_model(): VideoModel | ImageModel | undefined {
+		return current_models().find((m) => m.id === model);
 	}
 
 	function fmt(t: number) {
@@ -186,11 +192,21 @@
 	<section class="card">
 		<h2>Create a ve</h2>
 		<div class="switch" role="tablist" aria-label="media type">
-			<button type="button" class={mode === 'v' ? 'sw-active' : 'sw'} onclick={() => (mode = 'v')}
-				>Vids</button
+			<button
+				type="button"
+				class={mode === 'v' ? 'sw-active' : 'sw'}
+				onclick={() => {
+					mode = 'v';
+					model = '';
+				}}>Vids</button
 			>
-			<button type="button" class={mode === 'p' ? 'sw-active' : 'sw'} onclick={() => (mode = 'p')}
-				>Pics</button
+			<button
+				type="button"
+				class={mode === 'p' ? 'sw-active' : 'sw'}
+				onclick={() => {
+					mode = 'p';
+					model = '';
+				}}>Pics</button
 			>
 			<span class="sw-slider" class:sw-p={mode === 'p'}></span>
 		</div>
@@ -206,7 +222,7 @@
 
 			<label for="m"
 				>Model
-				{#if data.models?.length}
+				{#if current_models().length}
 					<span class="sort-tabs">
 						<button
 							type="button"
@@ -227,7 +243,7 @@
 					</span>
 				{/if}
 			</label>
-			{#if data.models?.length}
+			{#if current_models().length}
 				<select id="m" bind:value={model} class="input" required>
 					<option value="">Select a model...</option>
 					{#each sorted_models() as m}
