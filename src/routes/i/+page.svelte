@@ -16,7 +16,7 @@
 	function current_models(): (VideoModel | ImageModel)[] {
 		return mode === 'p' ? (image_models as ImageModel[]) || [] : (models as VideoModel[]) || [];
 	}
-	let key = $state('');
+	let key = $state(untrack(() => data.user_data?.a?.o || ''));
 	let key_msg = $state('');
 	let key_err = $state('');
 	let create_msg = $state('');
