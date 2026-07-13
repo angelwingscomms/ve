@@ -21,14 +21,21 @@ export class ImageGeneratorWorkflow extends WorkflowEntrypoint<Env, Params> {
 
 		try {
 			await step.do('active', async () => {
-				await fetch(`${this.env.ORIGIN}/api/ves/status`, {
-					method: 'POST',
-					headers: { 'Content-Type': 'application/json', 'x-internal-key': this.env.INTERNAL_KEY },
-					body: JSON.stringify({ id: ve_id, c: 'active' })
-				});
+				try {
+					await fetch(`${this.env.ORIGIN}/api/ves/status`, {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+							'x-internal-key': this.env.INTERNAL_KEY
+						},
+						body: JSON.stringify({ id: ve_id, c: 'active' })
+					});
+				} catch {
+					/* best-effort status update */
+				}
 			});
 
-			const w = await step.do('gen', async () => {
+			const w = await step.do('gen', { timeout: '5 minutes' }, async () => {
 				const key = await this.or_key(ve_id);
 				if (!key) throw new NonRetryableError('no openrouter key');
 				const body: Record<string, unknown> = { model: cfg.m, prompt: cfg.p };
@@ -62,11 +69,15 @@ export class ImageGeneratorWorkflow extends WorkflowEntrypoint<Env, Params> {
 			});
 		} catch (e) {
 			console.error('image generation failed', ve_id, e);
-			await fetch(`${this.env.ORIGIN}/api/internal/ve/status`, {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json', 'x-internal-key': this.env.INTERNAL_KEY },
-				body: JSON.stringify({ id: ve_id, c: 'failed' })
-			});
+			try {
+				await fetch(`${this.env.ORIGIN}/api/internal/ve/status`, {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json', 'x-internal-key': this.env.INTERNAL_KEY },
+					body: JSON.stringify({ id: ve_id, c: 'failed' })
+				});
+			} catch {
+				/* best-effort status update */
+			}
 		}
 	}
 

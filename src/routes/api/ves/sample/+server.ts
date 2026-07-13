@@ -35,6 +35,7 @@ export async function POST(event: RequestEvent): Promise<Response> {
 			undefined,
 			'p'
 		);
+		await update_ve_status(ve_id, 'active');
 		const env = event.platform?.env as
 			| {
 					IMAGE_WORKFLOW?: {

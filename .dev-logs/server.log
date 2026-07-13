@@ -82,3 +82,4 @@ stack: /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.
 7:19:07 PM [vite] (ssr) page reload src/routes/i/+page.svelte
 7:19:26 PM [vite] (client) hmr update /src/routes/i/+page.svelte
 7:19:26 PM [vite] (ssr) page reload src/routes/i/+page.svelte
+7:26:55 PM [vite] (ssr) page reload src/routes/api/ves/sample/+server.ts
