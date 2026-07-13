@@ -181,15 +181,13 @@
 <main class="dash">
 	<h1>Dashboard</h1>
 
-	{#if !data.user_data?.a?.o}
-		<section class="card">
-			<h2>Set OpenRouter API key</h2>
-			<p>Enter your OpenRouter API key to enable video model selection.</p>
-			<input bind:value={key} type="password" placeholder="sk-or-v1-..." class="input" />
-			<button onclick={save_key} class="btn">Save</button>
-			{#if key_msg}<p class="msg">{key_msg}</p>{/if}
-		</section>
-	{/if}
+	<section class="card">
+		<h2>OpenRouter API key</h2>
+		<p>Enter or update your OpenRouter API key to enable model selection and generation.</p>
+		<input bind:value={key} type="password" placeholder="sk-or-v1-..." class="input" />
+		<button onclick={save_key} class="btn">Save</button>
+		{#if key_msg}<p class="msg">{key_msg}</p>{/if}
+	</section>
 
 	<section class="card">
 		<h2>Create a ve</h2>
