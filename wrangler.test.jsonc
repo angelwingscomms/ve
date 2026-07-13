@@ -13,6 +13,11 @@
 			"name": "video-generator",
 			"binding": "VIDEO_WORKFLOW",
 			"class_name": "VideoGeneratorWorkflow"
+		},
+		{
+			"name": "image-generator",
+			"binding": "IMAGE_WORKFLOW",
+			"class_name": "ImageGeneratorWorkflow"
 		}
 	]
 }

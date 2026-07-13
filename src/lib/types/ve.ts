@@ -6,12 +6,14 @@ export interface Ve {
 	m: string    // model id (from OpenRouter)
 	g?: number   // video duration in seconds
 	z?: string   // resolution
+	ar?: string  // aspect ratio (images)
 	r: number    // period (ms between generates, 0 = sample)
 	t: number    // retries count
 	c?: string   // status: 'sampling' | 'active' | 'done' | 'failed' | 'paused'
 	l?: number   // last_run timestamp (epoch ms)
 	j?: string   // OpenRouter job id (for samples being polled)
-	w?: string   // video url (for completed samples)
+	k?: string   // kind: 'v' video (default) | 'p' image
+	w?: string   // video/image url (for completed samples)
 	n?: string   // current workflow instance id (for termination on delete)
 	h?: number   // holds original r when paused (restored on resume)
 	y?: number   // youtube upload enabled: 1

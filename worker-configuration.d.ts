@@ -13,6 +13,7 @@ interface __BaseEnv_Env {
 	OPENROUTER_KEY: string;
 	ORIGIN: string;
 	VIDEO_WORKFLOW: Workflow /* VideoGeneratorWorkflow */;
+	IMAGE_WORKFLOW: Workflow /* ImageGeneratorWorkflow */;
 }
 declare namespace Cloudflare {
 	interface GlobalProps {

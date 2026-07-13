@@ -19,7 +19,7 @@ export default defineConfig({
 			})
 		}),
 		addWorkerExports({
-			entryPoint: 'src/workflows/video_generator.ts'
+			entryPoint: 'src/workflows/exports.ts'
 		}),
 	],
 	test: {
