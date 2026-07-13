@@ -70,3 +70,15 @@ stack: /home/ed/i/ve/node_modules/.pnpm/@cloudflare+workerd-linux-64@1.20260701.
 7:01:19 PM [vite] (ssr) page reload src/routes/i/+page.svelte
 7:10:10 PM [vite] (client) hmr update /src/routes/i/+page.svelte
 7:10:10 PM [vite] (ssr) page reload src/routes/i/+page.svelte
+7:17:58 PM [vite] (client) hmr update /src/routes/i/+page.svelte
+7:17:58 PM [vite] (ssr) page reload src/routes/i/+page.svelte
+7:18:07 PM [vite] (client) hmr update /src/routes/i/+page.svelte
+7:18:07 PM [vite] (ssr) page reload src/routes/i/+page.svelte
+7:18:15 PM [vite] (client) hmr update /src/routes/i/+page.svelte
+7:18:15 PM [vite] (ssr) page reload src/routes/i/+page.svelte
+7:18:48 PM [vite] (client) hmr update /src/routes/i/+page.svelte
+7:18:48 PM [vite] (ssr) page reload src/routes/i/+page.svelte
+7:19:07 PM [vite] (client) hmr update /src/routes/i/+page.svelte
+7:19:07 PM [vite] (ssr) page reload src/routes/i/+page.svelte
+7:19:26 PM [vite] (client) hmr update /src/routes/i/+page.svelte
+7:19:26 PM [vite] (ssr) page reload src/routes/i/+page.svelte

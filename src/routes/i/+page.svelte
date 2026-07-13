@@ -35,7 +35,7 @@
 	$effect(() => {
 		if (!has_sampling()) return;
 		const i = setInterval(async () => {
-			const r = await fetch('/api/ves');
+			const r = await fetch('/api/ves', { credentials: 'include' });
 			if (r.ok) {
 				const d = await r.json();
 				ves = d.ves;
@@ -92,7 +92,8 @@
 		const r = await fetch('/api/me', {
 			method: 'PATCH',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ a: { o: key } })
+			body: JSON.stringify({ a: { o: key } }),
+			credentials: 'include'
 		});
 		if (r.ok) {
 			key_msg = 'Saved!';
@@ -119,7 +120,8 @@
 		const r = await fetch('/api/ves', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(body)
+			body: JSON.stringify(body),
+			credentials: 'include'
 		});
 		if (r.ok) {
 			create_msg = 'Created!';
@@ -145,7 +147,8 @@
 		const r = await fetch('/api/ves/sample', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(body)
+			body: JSON.stringify(body),
+			credentials: 'include'
 		});
 		if (r.ok) {
 			create_msg = 'Sample queued! It will appear below once ready.';
@@ -161,7 +164,8 @@
 		await fetch('/api/ves', {
 			method: 'DELETE',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ id })
+			body: JSON.stringify({ id }),
+			credentials: 'include'
 		});
 		location.reload();
 	}
@@ -171,7 +175,8 @@
 		await fetch('/api/ves', {
 			method: 'PATCH',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ id: v.i, action })
+			body: JSON.stringify({ id: v.i, action }),
+			credentials: 'include'
 		});
 		location.reload();
 	}
