@@ -96,7 +96,10 @@
 		if (r.ok) {
 			key_msg = 'Saved!';
 			setTimeout(() => location.reload(), 500);
-		} else key_msg = 'Failed to save';
+		} else {
+			const err = await r.json().catch(() => null);
+			key_msg = err?.error || 'Failed to save';
+		}
 	}
 
 	async function create_ve(e: Event) {
