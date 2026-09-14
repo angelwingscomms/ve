@@ -5,11 +5,21 @@ type Params = { ve_id: string };
 
 type Cfg = { p: string; m: string; g?: number; z?: string; r: number; y?: number; x?: number; j?: string };
 
+type OrEvent = {
+	type?: string;
+	data?: { status?: string; unsigned_urls?: string[] };
+};
+
 export class VideoGeneratorWorkflow extends WorkflowEntrypoint<Env, Params> {
 	async run(event: WorkflowEvent<Params>, step: WorkflowStep) {
 		const ve_id = event.payload.ve_id;
 
 		const cfg = await step.do('load', async () => {
+			await fetch(`${this.env.ORIGIN}/api/internal/ve`, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json', 'x-internal-key': this.env.INTERNAL_KEY },
+				body: JSON.stringify({ i: ve_id, n: event.instanceId })
+			});
 			const r = await fetch(`${this.env.ORIGIN}/api/internal/ve?i=${ve_id}`, {
 				headers: { 'x-internal-key': this.env.INTERNAL_KEY }
 			});
@@ -24,7 +34,7 @@ export class VideoGeneratorWorkflow extends WorkflowEntrypoint<Env, Params> {
 				await fetch(`${this.env.ORIGIN}/api/ves/status`, {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json', 'x-internal-key': this.env.INTERNAL_KEY },
-					body: JSON.stringify({ id: ve_id, c: 'active' })
+					body: JSON.stringify({ id: ve_id, c: 'sampling' })
 				});
 			});
 
@@ -38,10 +48,14 @@ export class VideoGeneratorWorkflow extends WorkflowEntrypoint<Env, Params> {
 					if (!r.ok) throw new Error('test yt upload failed');
 				});
 			} else {
-				const job = await step.do('submit', async () => {
+				await step.do('submit', async () => {
 					const key = await this.or_key(ve_id);
 					if (!key) throw new NonRetryableError('no openrouter key');
-					const body: Record<string, unknown> = { model: cfg.m, prompt: cfg.p };
+					const body: Record<string, unknown> = {
+						model: cfg.m,
+						prompt: cfg.p,
+						callback_url: `${this.env.ORIGIN}/api/internal/ve/hook?k=${this.env.INTERNAL_KEY}`
+					};
 					if (cfg.g) body.duration = cfg.g;
 					if (cfg.z) body.resolution = cfg.z;
 					const r = await fetch('https://openrouter.ai/api/v1/videos', {
@@ -54,31 +68,29 @@ export class VideoGeneratorWorkflow extends WorkflowEntrypoint<Env, Params> {
 						if (r.status === 429 || r.status >= 500) throw new Error(t);
 						throw new NonRetryableError(t);
 					}
-					return (await r.json()) as { id: string; polling_url?: string };
+					const job = (await r.json()) as { id: string };
+					await fetch(`${this.env.ORIGIN}/api/internal/ve`, {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json', 'x-internal-key': this.env.INTERNAL_KEY },
+						body: JSON.stringify({ i: ve_id, j: job.id })
+					});
+					return job;
 				});
 
-				const w = await step.do('poll', async () => {
-					const key = await this.or_key(ve_id);
-					if (!key) throw new NonRetryableError('no openrouter key');
-					const url = job.polling_url || `https://openrouter.ai/api/v1/videos/${job.id}`;
-					let n = 0;
-					while (n < 35) {
-						n++;
-						await new Promise((res) => setTimeout(res, 60_000));
-						try {
-							const r = await fetch(url, { headers: { Authorization: `Bearer ${key}` } });
-							if (!r.ok) continue;
-							const s = (await r.json()) as { status?: string; unsigned_urls?: string[] };
-							if (s.status === 'completed') return (s.unsigned_urls?.[0] as string) || '';
-							if (s.status === 'failed' || s.status === 'expired' || s.status === 'cancelled')
-								throw new Error(`gen ${s.status}`);
-						} catch (e) {
-							if (e instanceof NonRetryableError) throw e;
-						}
-					}
-					throw new Error('poll timeout');
-				});
+				const ev = await step.waitForEvent<OrEvent>('wait', { type: 'or', timeout: '2 hours' });
+				const status = ev?.data?.status;
+				if (status !== 'completed') {
+					await step.do('fail', async () => {
+						await fetch(`${this.env.ORIGIN}/api/ves/status`, {
+							method: 'POST',
+							headers: { 'Content-Type': 'application/json', 'x-internal-key': this.env.INTERNAL_KEY },
+							body: JSON.stringify({ id: ve_id, c: 'failed' })
+						});
+					});
+					return;
+				}
 
+				const w = ev.data?.unsigned_urls?.[0] || '';
 				await step.do('save', async () => {
 					await fetch(`${this.env.ORIGIN}/api/internal/ve/done`, {
 						method: 'POST',
@@ -99,27 +111,12 @@ export class VideoGeneratorWorkflow extends WorkflowEntrypoint<Env, Params> {
 			}
 		} catch (e) {
 			console.error('ve generation failed', ve_id, e);
-		}
-
-		await step.sleep('wait', cfg.r);
-
-		const next = await step.do('recheck', async () => {
-			const r = await fetch(`${this.env.ORIGIN}/api/internal/ve?i=${ve_id}`, {
-				headers: { 'x-internal-key': this.env.INTERNAL_KEY }
-			});
-			if (!r.ok) return null;
-			const d = (await r.json()) as { r: number } | null;
-			return d && d.r > 0 ? d : null;
-		});
-		if (next) {
-			const inst = await this.env.VIDEO_WORKFLOW.create({
-				id: `ve_${ve_id}_${Date.now()}`,
-				params: { ve_id }
-			});
-			await fetch(`${this.env.ORIGIN}/api/internal/ve/inst`, {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json', 'x-internal-key': this.env.INTERNAL_KEY },
-				body: JSON.stringify({ i: ve_id, n: inst.id })
+			await step.do('failed', async () => {
+				await fetch(`${this.env.ORIGIN}/api/ves/status`, {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json', 'x-internal-key': this.env.INTERNAL_KEY },
+					body: JSON.stringify({ id: ve_id, c: 'failed' })
+				});
 			});
 		}
 	}

@@ -11,6 +11,7 @@
 	},
 	"workers_dev": true,
 	"preview_urls": true,
+	"triggers": { "crons": ["0 * * * *"] },
 	"r2_buckets": [
 		{
 			"binding": "TEST_BUCKET",

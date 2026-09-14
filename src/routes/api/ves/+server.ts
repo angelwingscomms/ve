@@ -1,7 +1,6 @@
 import { json } from '@sveltejs/kit';
 import type { RequestEvent } from '@sveltejs/kit';
-import { save_ve, list_ves, delete_ve, get_ve, add_ve_inst, update_ve_pause } from '$lib/server/ve';
-import { get_user } from '$lib/server/user';
+import { save_ve, list_ves, delete_ve, get_ve, update_ve_pause } from '$lib/server/ve';
 
 export async function GET(event: RequestEvent): Promise<Response> {
 	if (!event.locals.user) return json({ error: 'unauthorized' }, { status: 401 });
@@ -20,24 +19,6 @@ export async function POST(event: RequestEvent): Promise<Response> {
 	const body = await event.request.json() as { id: string; p: string; m: string; g?: number; r: number; z?: string; y?: number; local?: boolean };
 	if (!body.id || !body.p || !body.m) return json({ error: 'missing fields' }, { status: 400 });
 	await save_ve(body.id, event.locals.user.id, body.p, body.m, body.r || 86400000, body.g, body.z, undefined, body.y);
-
-if (body.r > 0 && !body.local) {
-			try {
-				const u = await get_user({}, event.locals.user.id);
-				const env = event.platform?.env as
-					| { VIDEO_WORKFLOW?: { create: (o: { id: string; params: { ve_id: string } }) => Promise<{ id: string }> } }
-					| undefined;
-				if (u?.a?.o && env?.VIDEO_WORKFLOW) {
-					const inst = await env.VIDEO_WORKFLOW.create({
-						id: `ve_${body.id}_${Date.now()}`,
-						params: { ve_id: body.id }
-					});
-					await add_ve_inst(body.id, inst.id);
-				}
-			} catch (e) {
-				console.error('workflow start failed', e);
-			}
-		}
 
 	const v = await get_ve(body.id);
 	return json({ ve: v });
@@ -87,23 +68,6 @@ export async function PATCH(event: RequestEvent): Promise<Response> {
 		await update_ve_pause(body.id, true);
 	} else {
 		await update_ve_pause(body.id, false);
-		if (v.h && v.h > 0) {
-			try {
-				const u = await get_user({}, event.locals.user.id);
-				const env = event.platform?.env as
-					| { VIDEO_WORKFLOW?: { create: (o: { id: string; params: { ve_id: string } }) => Promise<{ id: string }> } }
-					| undefined;
-				if (u?.a?.o && env?.VIDEO_WORKFLOW) {
-					const inst = await env.VIDEO_WORKFLOW.create({
-						id: `ve_${body.id}_${Date.now()}`,
-						params: { ve_id: body.id }
-					});
-					await add_ve_inst(body.id, inst.id);
-				}
-			} catch (e) {
-				console.error('workflow start failed', e);
-			}
-		}
 	}
 
 	const updated = await get_ve(body.id);

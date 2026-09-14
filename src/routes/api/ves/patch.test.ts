@@ -18,7 +18,6 @@ vi.mock('$lib/server/user', () => ({
 }));
 
 import { get_ve, update_ve_pause, add_ve_inst } from '$lib/server/ve';
-import { get_user } from '$lib/server/user';
 import type { Ve } from '$lib/types/ve';
 
 const mockVe = (overrides?: Partial<Ve>): Ve => ({
@@ -161,31 +160,17 @@ describe('PATCH /api/ves (pause/resume)', () => {
 		expect(update_ve_pause).toHaveBeenCalledWith('ve123', true);
 	});
 
-	it('resume calls update_ve_pause(false) and starts new workflow when r>0 and OR key present', async () => {
+	it('resume only flips pause and does not start a workflow', async () => {
 		const ve = mockVe({ h: 60000, r: 0, c: 'paused' });
 		vi.mocked(get_ve).mockResolvedValue(ve);
-		vi.mocked(get_user).mockResolvedValue({ a: { o: 'sk-or-v1-xxx' } } as any);
-		const { event, createMock } = mockEvent('resume', { ve });
-		vi.mocked(get_ve).mockResolvedValueOnce(ve).mockResolvedValueOnce(ve).mockResolvedValueOnce(ve);
+		const { event } = mockEvent('resume', { ve });
+		vi.mocked(get_ve).mockResolvedValueOnce(ve).mockResolvedValueOnce(ve);
 		const { PATCH } = await import('./+server');
 		const r = await PATCH(event);
 		expect(r.status).toBe(200);
 		expect(update_ve_pause).toHaveBeenCalledWith('ve123', false);
 		const env = (event.platform as any).env;
-		expect(env.VIDEO_WORKFLOW.create).toHaveBeenCalled();
-		expect(add_ve_inst).toHaveBeenCalled();
-	});
-
-	it('resume does not start workflow when OR key missing', async () => {
-		const ve = mockVe({ h: 60000, r: 0, c: 'paused' });
-		vi.mocked(get_ve).mockResolvedValue(ve);
-		vi.mocked(get_user).mockResolvedValue({ a: {} } as any);
-		const { event } = mockEvent('resume', { ve });
-		vi.mocked(get_ve).mockResolvedValueOnce(ve).mockResolvedValueOnce(ve).mockResolvedValueOnce(ve);
-		const { PATCH } = await import('./+server');
-		const r = await PATCH(event);
-		expect(r.status).toBe(200);
-		const env = (event.platform as any).env;
 		expect(env.VIDEO_WORKFLOW.create).not.toHaveBeenCalled();
+		expect(add_ve_inst).not.toHaveBeenCalled();
 	});
 });

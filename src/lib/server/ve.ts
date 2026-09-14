@@ -58,6 +58,14 @@ export async function update_ve_job(id: string, j: string): Promise<void> {
 	await client().setPayload(C, { payload: { j }, points: [id], wait: true });
 }
 
+export async function get_ve_by_job(j: string): Promise<Ve | null> {
+	const r = await client().scroll(C, {
+		filter: { must: [{ key: 's', match: { value: 'e' } }, { key: 'j', match: { value: j } }] },
+		limit: 1
+	} as any);
+	return from_payload(r.points[0]?.payload as Record<string, unknown>);
+}
+
 export async function update_ve_retries(id: string): Promise<void> {
 	const v = await get_ve(id);
 	if (!v) return;
