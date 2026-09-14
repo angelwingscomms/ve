@@ -45,8 +45,6 @@ function mockEvent(opts?: {
 	const platform = opts?.platform ?? {
 		env: {
 			TEST_BUCKET: { put: vi.fn().mockResolvedValue(undefined) },
-			VIDEO_WORKFLOW: { create: vi.fn().mockResolvedValue({ id: 'wf123' }) },
-			ORIGIN: 'http://localhost',
 		},
 		ctx: {} as any,
 		caches: {} as any,
@@ -124,7 +122,7 @@ describe('POST /api/test', () => {
 		expect(save_ve).toHaveBeenCalledWith(expect.any(String), 'user1', expect.any(String), '', 0, undefined, undefined, undefined, undefined, 1);
 	});
 
-	it('creates VE and starts workflow when period set', async () => {
+	it('saves a repeating test ve without starting a workflow', async () => {
 		vi.mocked(get_user).mockResolvedValue(mockUser(mockToken()) as any);
 		const fd = makeForm({
 			video: { name: 'test.mp4', type: 'video/mp4', data: new Uint8Array([3, 4, 5]) },
@@ -137,6 +135,7 @@ describe('POST /api/test', () => {
 		const b = await r.json();
 		expect(b.ok).toBe(true);
 		expect(b.ve_id).toBeTruthy();
-		expect(b.workflow_id).toBe('wf123');
+		expect(b.workflow_id).toBeUndefined();
+		expect(save_ve).toHaveBeenCalledWith(expect.any(String), 'user1', expect.any(String), '', 3600000, undefined, undefined, expect.any(String), undefined, 1);
 	});
 });

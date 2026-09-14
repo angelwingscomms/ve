@@ -37,6 +37,10 @@ describe('is_due', () => {
 		expect(is_due(ve({ c: 'sampling' }), 1_000)).toBe(false);
 	});
 
+	it('is true for a due test ve even if marked sampling', () => {
+		expect(is_due(ve({ c: 'sampling', x: 1 }), 1_000)).toBe(true);
+	});
+
 	it('is true for an enabled ve that has never run', () => {
 		expect(is_due(ve({ c: 'active' }), 1_000)).toBe(true);
 	});

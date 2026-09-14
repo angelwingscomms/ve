@@ -40,10 +40,6 @@ export async function list_test_ves(user_id: string): Promise<Ve[]> {
 	return r.points.map(p => from_payload(p.payload as Record<string, unknown>)).filter(Boolean).filter(v => v.x === 1) as Ve[];
 }
 
-export async function add_ve_inst(id: string, n: string): Promise<void> {
-	await client().setPayload(C, { payload: { n }, points: [id], wait: true });
-}
-
 export async function delete_ve(id: string): Promise<void> {
 	await client().delete(C, { points: [id] });
 }

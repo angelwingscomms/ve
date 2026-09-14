@@ -28,19 +28,6 @@ export async function DELETE(event: RequestEvent): Promise<Response> {
 	if (!event.locals.user) return json({ error: 'unauthorized' }, { status: 401 });
 	const body = await event.request.json() as { id: string };
 	if (!body.id) return json({ error: 'missing id' }, { status: 400 });
-	const v = await get_ve(body.id);
-	if (v?.n) {
-		try {
-			const env = event.platform?.env as
-				| { VIDEO_WORKFLOW?: { get: (id: string) => { terminate: () => Promise<void> } } }
-				| undefined;
-			if (env?.VIDEO_WORKFLOW) {
-				await env.VIDEO_WORKFLOW.get(v.n).terminate();
-			}
-		} catch (e) {
-			console.error('workflow terminate failed', e);
-		}
-	}
 	await delete_ve(body.id);
 	return json({ ok: true });
 }
@@ -52,23 +39,7 @@ export async function PATCH(event: RequestEvent): Promise<Response> {
 	const v = await get_ve(body.id);
 	if (!v || v.u !== event.locals.user.id) return json({ error: 'not found' }, { status: 404 });
 
-	if (body.action === 'pause') {
-		if (v.n) {
-			try {
-				const env = event.platform?.env as
-					| { VIDEO_WORKFLOW?: { get: (id: string) => { terminate: () => Promise<void> } } }
-					| undefined;
-				if (env?.VIDEO_WORKFLOW) {
-					await env.VIDEO_WORKFLOW.get(v.n).terminate();
-				}
-			} catch (e) {
-				console.error('workflow terminate failed', e);
-			}
-		}
-		await update_ve_pause(body.id, true);
-	} else {
-		await update_ve_pause(body.id, false);
-	}
+	await update_ve_pause(body.id, body.action === 'pause');
 
 	const updated = await get_ve(body.id);
 	return json({ ve: updated });
