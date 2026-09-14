@@ -54,7 +54,11 @@ export async function update_ve_status(id: string, c: string): Promise<void> {
 	await client().setPayload(C, { payload: p, points: [id], wait: true });
 }
 
-export async function increment_ve_retries(id: string): Promise<void> {
+export async function update_ve_job(id: string, j: string): Promise<void> {
+	await client().setPayload(C, { payload: { j }, points: [id], wait: true });
+}
+
+export async function update_ve_retries(id: string): Promise<void> {
 	const v = await get_ve(id);
 	if (!v) return;
 	v.t = (v.t || 0) + 1;

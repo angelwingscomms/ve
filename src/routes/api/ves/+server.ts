@@ -17,11 +17,11 @@ export async function GET(event: RequestEvent): Promise<Response> {
 
 export async function POST(event: RequestEvent): Promise<Response> {
 	if (!event.locals.user) return json({ error: 'unauthorized' }, { status: 401 });
-	const body = await event.request.json() as { id: string; p: string; m: string; g?: number; r: number; z?: string; y?: number };
+	const body = await event.request.json() as { id: string; p: string; m: string; g?: number; r: number; z?: string; y?: number; local?: boolean };
 	if (!body.id || !body.p || !body.m) return json({ error: 'missing fields' }, { status: 400 });
 	await save_ve(body.id, event.locals.user.id, body.p, body.m, body.r || 86400000, body.g, body.z, undefined, body.y);
 
-if (body.r > 0) {
+if (body.r > 0 && !body.local) {
 			try {
 				const u = await get_user({}, event.locals.user.id);
 				const env = event.platform?.env as

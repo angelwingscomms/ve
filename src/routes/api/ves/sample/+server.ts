@@ -12,14 +12,35 @@ export async function POST(event: RequestEvent): Promise<Response> {
 		g?: number;
 		z?: string;
 		k?: string;
+		local?: boolean;
 	};
 	if (!body.p || !body.m) return json({ error: 'missing fields' }, { status: 400 });
+
+	const ve_id = crypto.randomUUID();
+
+	// Local/BYOK mode: create the record and let the browser service worker
+	// run the generation client-side (no server-side Workflow).
+	if (body.local) {
+		await save_ve(
+			ve_id,
+			event.locals.user.id,
+			body.p,
+			body.m,
+			0,
+			undefined,
+			body.z,
+			undefined,
+			undefined,
+			undefined,
+			body.k
+		);
+		await update_ve_status(ve_id, 'active');
+		return json({ id: ve_id, local: true });
+	}
 
 	const u = await get_user({}, event.locals.user.id);
 	const api_key = u?.a?.o;
 	if (!api_key) return json({ error: 'set your OpenRouter API key first' }, { status: 400 });
-
-	const ve_id = crypto.randomUUID();
 
 	if (body.k === 'p') {
 		await save_ve(

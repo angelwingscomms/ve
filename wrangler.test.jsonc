@@ -1,7 +1,7 @@
 {
 	"$schema": "./node_modules/wrangler/config-schema.json",
 	"name": "ve-test",
-	"main": "src/workflows/test-entry.ts",
+	"main": "src/workflows/exports.ts",
 	"compatibility_date": "2026-07-08",
 	"compatibility_flags": ["nodejs_als"],
 	"vars": {

@@ -1,6 +1,6 @@
 import { json } from '@sveltejs/kit';
 import type { RequestEvent } from '@sveltejs/kit';
-import { update_ve_status, increment_ve_retries } from '$lib/server/ve';
+import { update_ve_status } from '$lib/server/ve';
 import { INTERNAL_KEY } from '$env/static/private';
 
 export async function POST(event: RequestEvent): Promise<Response> {

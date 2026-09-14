@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { untrack } from 'svelte';
+	import { untrack, onMount } from 'svelte';
 	import type { VideoModel, ImageModel } from '$lib/server/openrouter';
 	import type { Ve } from '$lib/types/ve';
+	import { generate, addLocalVe, pingGen, setGenKey, onGen } from '$lib/client/gen';
 	let { data } = $props();
 	let models = $state(untrack(() => data.models));
 	let image_models = $state(untrack(() => data.image_models));
@@ -26,6 +27,11 @@
 	let sort_by = $state('cost');
 	let sort_dir = $state('asc');
 	let yt_upload = $state(false);
+	let local_mode = $state(false);
+
+	$effect(() => {
+		if (local_mode && key) setGenKey(key);
+	});
 
 	function has_sampling() {
 		return ves.some((v: Ve) => v.c === 'sampling');
@@ -43,6 +49,18 @@
 			}
 		}, 3000);
 		return () => clearInterval(i);
+	});
+
+	onMount(() => {
+		const unsub = onGen(async () => {
+			const r = await fetch('/api/ves', { credentials: 'include' });
+			if (r.ok) {
+				const d = await r.json();
+				ves = d.ves;
+			}
+		});
+		if (local_mode) pingGen();
+		return unsub;
 	});
 
 	function min_cost(m: VideoModel | ImageModel): number {
@@ -124,12 +142,29 @@
 			credentials: 'include'
 		});
 		if (r.ok) {
-			create_msg = 'Created!';
+			if (local_mode) {
+				const d = (await r.json()) as { id: string };
+				setGenKey(key);
+				generate(
+					{
+						id: d.id,
+						kind: 'v',
+						model,
+						prompt,
+						resolution: resolution || undefined,
+						duration: duration ? parseInt(duration) : undefined
+					},
+					key
+				);
+				create_msg = 'Created locally — generating via service worker.';
+			} else {
+				create_msg = 'Created!';
+				setTimeout(() => location.reload(), 300);
+			}
 			prompt = '';
 			model = '';
 			duration = '';
 			resolution = '';
-			setTimeout(() => location.reload(), 300);
 		} else create_msg = 'Failed to create';
 	}
 
@@ -151,8 +186,25 @@
 			credentials: 'include'
 		});
 		if (r.ok) {
-			create_msg = 'Sample queued! It will appear below once ready.';
-			setTimeout(() => location.reload(), 1000);
+			const d = (await r.json()) as { id: string; local?: boolean };
+			if (local_mode && d.local) {
+				addLocalVe(d.id);
+				generate(
+					{
+						id: d.id,
+						kind: mode === 'p' ? 'p' : 'v',
+						model,
+						prompt,
+						resolution: resolution || undefined,
+						duration: duration ? parseInt(duration) : undefined
+					},
+					key
+				);
+				create_msg = 'Queued locally — generating in your browser…';
+			} else {
+				create_msg = 'Sample queued! It will appear below once ready.';
+				setTimeout(() => location.reload(), 1000);
+			}
 		} else {
 			const err = await r.json();
 			create_msg = err?.error || 'Failed';
@@ -207,6 +259,16 @@
 
 	<section class="card">
 		<h2>Create a ve</h2>
+		<label class="chk-lbl">
+			<input type="checkbox" bind:checked={local_mode} class="chk" />
+			Local generation (BYOK) — run in your browser via service worker
+		</label>
+		{#if local_mode}
+			<p class="msg">
+				Generation runs on your device with your OpenRouter key — no Cloudflare Workers
+				needed. Repeating ves are fired by the service worker when due.
+			</p>
+		{/if}
 		<div class="switch" role="tablist" aria-label="media type">
 			<button
 				type="button"

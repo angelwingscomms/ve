@@ -27,3 +27,6 @@ test-results
 # Plugin-generated
 .dev-worker-wrangler.jsonc
 .platform-proxy-wrangler.jsonc
+
+# Dev logs
+.dev-logs

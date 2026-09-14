@@ -70,7 +70,7 @@ export class ImageGeneratorWorkflow extends WorkflowEntrypoint<Env, Params> {
 		} catch (e) {
 			console.error('image generation failed', ve_id, e);
 			try {
-				await fetch(`${this.env.ORIGIN}/api/internal/ve/status`, {
+				await fetch(`${this.env.ORIGIN}/api/ves/status`, {
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json', 'x-internal-key': this.env.INTERNAL_KEY },
 					body: JSON.stringify({ id: ve_id, c: 'failed' })

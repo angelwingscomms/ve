@@ -1,4 +1,5 @@
-import { google_client } from '$lib/server/oauth';
+import { Google } from 'arctic';
+import { GOOGLE_ID, GOOGLE_SECRET } from '$env/static/private';
 import { encode_session } from '$lib/server/session';
 import { save_user } from '$lib/server/user';
 import type { RequestEvent } from '@sveltejs/kit';
@@ -15,7 +16,8 @@ export async function GET(event: RequestEvent): Promise<Response> {
 
 	let tokens: any;
 	try {
-		tokens = await google_client(event.url.origin).validateAuthorizationCode(code, stored_verifier);
+		const google = new Google(GOOGLE_ID, GOOGLE_SECRET, new URL('/google', event.url.origin).toString());
+		tokens = await google.validateAuthorizationCode(code, stored_verifier);
 	} catch {
 		return new Response(null, { status: 400 });
 	}

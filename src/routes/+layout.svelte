@@ -1,5 +1,11 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+	import { initGen } from '$lib/client/gen';
 	let { children, data } = $props();
+
+	onMount(() => {
+		initGen();
+	});
 </script>
 
 <svelte:head>
