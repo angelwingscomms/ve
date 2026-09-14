@@ -1,6 +1,6 @@
 import { get_user } from './user';
 import { list_ves, update_ve_job, update_ve_status, update_ve_video_url, update_ve_yt } from './ve';
-import { upload_bytes_to_youtube, upload_to_youtube } from './yt';
+import { upload_bytes_to_youtube } from './yt';
 import { is_due } from './due';
 import type { Ve } from '$lib/types/ve';
 
@@ -82,22 +82,34 @@ async function poll_one(v: Ve): Promise<boolean> {
 async function upload_one(v: Ve): Promise<boolean> {
 	if (!v.w) return false;
 	const u = await get_user({}, v.u);
-	if (!u?.a?.y) return false;
-	let tok: { refresh_token?: string };
-	try {
-		tok = JSON.parse(u.a.y);
-	} catch {
-		await update_ve_yt(v.i, 'yt_failed');
-		return false;
-	}
-	if (!tok.refresh_token) {
-		await update_ve_yt(v.i, 'yt_failed');
-		return false;
-	}
+	if (!u?.a?.b || !u.a.c) return false;
 	await update_ve_yt(v.i, 'uploading');
 	try {
-		const yv = await upload_to_youtube(tok.refresh_token, v.w, v.p.slice(0, 100), v.p, u.a?.o);
-		await update_ve_yt(v.i, 'live', yv);
+		const r = await fetch('https://api.buffer.com', {
+			method: 'POST',
+			headers: { Authorization: `Bearer ${u.a.b}`, 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				query: 'mutation($input: CreatePostInput!) { createPost(input: $input) { ... on PostActionSuccess { post { id } } ... on MutationError { message } } }',
+				variables: {
+					input: {
+						text: v.p,
+						channelId: u.a.c,
+						schedulingType: 'automatic',
+						mode: 'shareNow',
+						needsApproval: false,
+						assets: [{ video: { url: v.w } }],
+						metadata: { youtube: { title: v.p.slice(0, 100), privacy: 'public', categoryId: '22', madeForKids: false } }
+					}
+				}
+			})
+		});
+		const j = (await r.json()) as { errors?: unknown; data?: { createPost?: { post?: { id?: string }; message?: string } } };
+		const id = j.data?.createPost?.post?.id;
+		if (!r.ok || j.errors || !id || j.data?.createPost?.message) {
+			await update_ve_yt(v.i, 'yt_failed');
+			return false;
+		}
+		await update_ve_yt(v.i, 'live', id);
 		return true;
 	} catch {
 		await update_ve_yt(v.i, 'yt_failed');

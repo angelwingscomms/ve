@@ -43,5 +43,7 @@ export async function update_user_api_keys(
 		limit: 1
 	} as any);
 	if (!r.points.length) throw new Error('user not found');
-	await upsert(r.points[0].id as string, { ...r.points[0].payload as Record<string, unknown>, a: api_keys } as unknown as Record<string, unknown>);
+	const cur = r.points[0].payload as Record<string, unknown>;
+	const old = (cur.a as Record<string, unknown> | undefined) || {};
+	await upsert(r.points[0].id as string, { ...cur, a: { ...old, ...api_keys } } as unknown as Record<string, unknown>);
 }

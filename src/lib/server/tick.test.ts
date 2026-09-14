@@ -41,7 +41,9 @@ describe('run_tick', () => {
 	beforeEach(() => {
 		vi.clearAllMocks();
 		vi.unstubAllGlobals();
-		vi.mocked(get_user).mockResolvedValue({ a: { o: 'or-key', y: JSON.stringify({ refresh_token: 'rt' }) } } as any);
+		vi.mocked(get_user).mockResolvedValue({
+			a: { o: 'or-key', b: 'buf_key', c: 'ch_yt', y: JSON.stringify({ refresh_token: 'rt' }) }
+		} as any);
 	});
 
 	it('submits due ves, polls open jobs, uploads ready youtube', async () => {
@@ -62,17 +64,26 @@ describe('run_tick', () => {
 					{ status: 200 }
 				);
 			}
+			if (url === 'https://api.buffer.com') {
+				return new Response(
+					JSON.stringify({ data: { createPost: { post: { id: 'bp1' } } } }),
+					{ status: 200 }
+				);
+			}
 			return new Response('no', { status: 404 });
 		});
 		vi.stubGlobal('fetch', fetch_mock);
-		vi.mocked(upload_to_youtube).mockResolvedValue('yt1');
 
 		const n = await run_tick({ ORIGIN: 'https://ve.example' }, 10_000);
 		expect(n).toEqual({ submitted: 1, polled: 1, uploaded: 1 });
 		expect(update_ve_job).toHaveBeenCalledWith('due-new', 'job-new');
 		expect(update_ve_video_url).toHaveBeenCalledWith('cooking', 'https://done.mp4');
-		expect(upload_to_youtube).toHaveBeenCalledOnce();
-		expect(update_ve_yt).toHaveBeenCalledWith('ready', 'live', 'yt1');
+		expect(upload_to_youtube).not.toHaveBeenCalled();
+		expect(fetch_mock).toHaveBeenCalledWith(
+			'https://api.buffer.com',
+			expect.objectContaining({ method: 'POST' })
+		);
+		expect(update_ve_yt).toHaveBeenCalledWith('ready', 'live', 'bp1');
 	});
 
 	it('uploads a due test ve from r2', async () => {

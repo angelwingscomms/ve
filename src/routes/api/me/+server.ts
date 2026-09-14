@@ -31,6 +31,16 @@ export async function PATCH(event: RequestEvent): Promise<Response> {
 					return json({ error: 'Invalid OpenRouter API key' }, { status: 400 });
 			} catch {}
 		}
+		if (trimmed.b) {
+			try {
+				const vr = await fetch('https://api.buffer.com', {
+					method: 'POST',
+					headers: { Authorization: `Bearer ${trimmed.b}`, 'Content-Type': 'application/json' },
+					body: JSON.stringify({ query: '{ account { id } }' })
+				});
+				if (vr.status === 401) return json({ error: 'Invalid Buffer API key' }, { status: 400 });
+			} catch {}
+		}
 		await update_user_api_keys(event, event.locals.user.id, trimmed as any);
 	}
 	const u = await get_user(event, event.locals.user.id);

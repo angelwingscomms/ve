@@ -20,6 +20,10 @@
 	let key = $state(untrack(() => data.user_data?.a?.o || ''));
 	let key_msg = $state('');
 	let key_err = $state('');
+	let buf_key = $state(untrack(() => data.user_data?.a?.b || ''));
+	let buf_ch = $state(untrack(() => data.user_data?.a?.c || ''));
+	let buf_msg = $state('');
+	let buf_err = $state('');
 	let create_msg = $state('');
 	let use_custom = $state(false);
 
@@ -121,6 +125,24 @@
 			const err = await r.json().catch(() => null);
 			key_err = err?.error || 'Failed to save';
 			key_msg = '';
+		}
+	}
+
+	async function save_buf() {
+		const r = await fetch('/api/me', {
+			method: 'PATCH',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ a: { b: buf_key, c: buf_ch } }),
+			credentials: 'include'
+		});
+		if (r.ok) {
+			buf_msg = 'Saved!';
+			buf_err = '';
+			setTimeout(() => location.reload(), 500);
+		} else {
+			const err = await r.json().catch(() => null);
+			buf_err = err?.error || 'Failed to save';
+			buf_msg = '';
 		}
 	}
 
@@ -364,7 +386,7 @@
 				/>
 			{/if}
 
-			{#if data.user_data?.a?.y && mode === 'v'}
+			{#if data.user_data?.a?.b && data.user_data?.a?.c && mode === 'v'}
 				<label class="chk-lbl">
 					<input type="checkbox" bind:checked={yt_upload} class="chk" />
 					Upload to YouTube when done
@@ -474,17 +496,32 @@
 		{/if}
 	</section>
 
-	{#if data.user_data?.a?.y}
-		<section class="card yt-card">
-			<p class="yt-ok">YouTube connected ✓</p>
-		</section>
-	{:else}
-		<section class="card yt-card">
-			<h2>YouTube</h2>
-			<p>Connect your YouTube channel to automatically upload videos when they're generated.</p>
-			<a href="/yt/auth" class="btn yt-btn">Connect YouTube</a>
-		</section>
-	{/if}
+	<section class="card">
+		<h2>Buffer</h2>
+		<p>API key from Buffer settings → API, plus the YouTube channel id from Buffer. Videos post through Buffer, not Google.</p>
+		<label for="buf-key">Buffer API key</label>
+		<input
+			id="buf-key"
+			bind:value={buf_key}
+			oninput={() => (buf_err = '')}
+			type="password"
+			placeholder="buf_..."
+			class="input"
+			class:input-err={buf_err}
+		/>
+		<label for="buf-ch">YouTube channel id</label>
+		<input
+			id="buf-ch"
+			bind:value={buf_ch}
+			oninput={() => (buf_err = '')}
+			type="text"
+			placeholder="channel id from Buffer"
+			class="input"
+		/>
+		<button onclick={save_buf} class="btn">Save</button>
+		{#if buf_err}<p class="msg-err">{buf_err}</p>{/if}
+		{#if buf_msg}<p class="msg">{buf_msg}</p>{/if}
+	</section>
 </main>
 
 <style>
